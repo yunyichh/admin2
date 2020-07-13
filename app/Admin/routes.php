@@ -35,5 +35,7 @@ Route::group([
     $router->resource('control-players', controlPlayerController::class);
     $router->resource('control-win-loses', controlWinLoseController::class);
     $router->resource('control-win-lose-logs', controlWinLoseLogControlller::class);
+    $router->resource('public-managements', publicManagementController::class);
+
 
 });
