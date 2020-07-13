@@ -17,6 +17,11 @@ class SiteController extends AdminController
      */
     protected $title = '站长管理';
 
+    public function __construct()
+    {
+        $this->title = _i('站长管理');
+    }
+
     /**
      * Make a grid builder.
      *
@@ -25,13 +30,13 @@ class SiteController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new User());
-        $grid->model()->where('type','=','1');
+        $grid->model()->where('type', '=', '1');
         $grid->column('id', 'ID');
         $grid->column('name', '站长名称');
         $grid->column('money', '总余额');
-        $grid->column('day_money','日余额');
-        $grid->column('week_money','周余额');
-        $grid->column('month_money','月余额');
+        $grid->column('day_money', '日余额');
+        $grid->column('week_money', '周余额');
+        $grid->column('month_money', '月余额');
         $grid->column('x_money', '下线余额');
         $grid->column('deduction', '扣量');
         $grid->column('status', '状态');
