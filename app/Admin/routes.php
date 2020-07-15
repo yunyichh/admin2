@@ -36,6 +36,17 @@ Route::group([
     $router->resource('control-win-loses', controlWinLoseController::class);
     $router->resource('control-win-lose-logs', controlWinLoseLogControlller::class);
     $router->resource('public-managements', publicManagementController::class);
-
+    $router->resource('active-datas', activeDataController::class);
+    $router->resource('gold-consumptions', goldConsumptionController::class);
+    $router->resource('win-lose-rank-lists', winLoseRankListController::class);
+    $router->resource('email-managements', emailManagementController::class);
+    $router->resource('promote-details', promoteDetailController::class);
+    $router->resource('commission-give-outs', commissionGiveOutController::class);
+    $router->resource('commission-gets', commissionGetController::class);
+    $router->resource('commission-divides', commissionDivideController::class);
+    $router->resource('championships-configurations', championshipsConfigurationController::class);
+    $router->resource('agent-users', agentUserController::class);
+    $router->resource('admin-homes', adminHomeController::class);
+    $router->resource('recharges', rechargeController::class);
 
 });

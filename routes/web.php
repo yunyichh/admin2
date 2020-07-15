@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 Route::get('test','testController@test');
 Route::get('testApi','Api\testController@test');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

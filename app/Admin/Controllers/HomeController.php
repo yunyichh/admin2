@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index(Content $content)
     {
 
-        return $content
-            ->body(Dashboard::environment());
+        redirect(url('admin/admin-homes'));
+        return $content->body(Dashboard::environment());
     }
 }

@@ -12,8 +12,10 @@
     "encore/laravel-admin": "^1.7",
     "fideloper/proxy": "^4.0",
     "guzzlehttp/guzzle": "^6.5",
+    "laravel-admin-ext/chartjs": "^1.0",
     "laravel/framework": "^6.2",
     "laravel/tinker": "^2.0",
+    "laravel/ui": "^1.2",
     "overtrue/laravel-lang": "~3.0"
   },
   "require-dev": {
