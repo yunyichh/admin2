@@ -30,6 +30,7 @@ class PlayerCheckGradeController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new PlayerCheckGrade());
+        $grid->disableCreateButton();
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
             $filter->like('gameId',___('GameId'));

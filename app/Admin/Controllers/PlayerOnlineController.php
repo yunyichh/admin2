@@ -30,6 +30,7 @@ class PlayerOnlineController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new PlayerOnline());
+        $grid->disableCreateButton();
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
             $filter->like('gameId',___('GameId'));

@@ -30,10 +30,11 @@ class PlayerPasswordController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new PlayerPassword());
+        $grid->disableCreateButton();
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
-            $filter->like('accountId',___('accountId'));
-            $filter->like('gameId',___('gameId'));
+            $filter->like('accountId', ___('accountId'));
+            $filter->like('gameId', ___('gameId'));
         });
 //        $grid->column('id', ___('Id'));
         $grid->column('accountId', ___('AccountId'));
