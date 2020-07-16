@@ -23,4 +23,7 @@ use Encore\Admin\Grid;
 
 Grid::init(function (Grid $grid) {
     $grid->disableExport();
+    $grid->filter(function($filter){
+       $filter->disableIdFilter();
+    });
 });

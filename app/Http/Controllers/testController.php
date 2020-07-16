@@ -15,5 +15,7 @@ class testController extends Controller
             echo "params need";
         else
             $sign = md5($a . $b . $c);
+
+        session('aa');
     }
 }

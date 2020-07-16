@@ -31,6 +31,7 @@ class commissionGetController extends AdminController
     {
         $grid = new Grid(new commissionGet());
 
+        $grid->disableCreateButton();
         $grid->column('id', ___('Id'));
         $grid->column('orderId', ___('OrderId'));
         $grid->column('accountName', ___('AccountName'));

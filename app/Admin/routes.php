@@ -48,5 +48,9 @@ Route::group([
     $router->resource('agent-users', agentUserController::class);
     $router->resource('admin-homes', adminHomeController::class);
     $router->resource('recharges', rechargeController::class);
+    $router->resource('recharge-onlines', rechargeOnlineController::class);
+    $router->resource('withdrawal-approvals', withdrawalApprovalController::class);
+    $router->resource('withdrawal-logs', withdrawalLogController::class);
+    $router->resource('withdrawal-checks', withdrawalCheckController::class);
 
 });

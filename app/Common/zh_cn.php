@@ -238,4 +238,39 @@ return [
     'rechargeAt' => '充值时间',
 
 
+    'orderNo' => '订单号',
+
+    'rechargeWay' => '充值渠道',
+    'rechargeTime' => '发起充值时间',
+    'rechargeSource' => '充值来源',
+    'rechargeStatus' => '充值状态',
+    'rechargeSubsidy' => '充值补助',
+    'payWay' => '支付渠道',
+    'orderStatus' => '订单状态',
+    'orderDesc' => '订单描述',
+    'orderTime' => '订单时间',
+    'orderCompleteTime' => '完成时间',
+
+    'withdrawalAmount' => '提现金额',
+    'accountChannel' => '渠道账号',
+    'withdrawalChannel' => '提现渠道',
+    'source' => '来源',
+    'applyTime' => '申请时间',
+
+
+    'withdrawAmount' => '提现金额',
+    'levyProportion' => '抽税比例',
+    'taxCredits' => '计税额度',
+    'tax' => '本次税款',
+    'freeTaxWithdraw' => '提现前剩余免税金额',
+    'freeTaxAfterWithdraw' => '提现后剩余金额',
+
+    'totalWithdraw' => '当前累计提现金额',
+    'curWithdraw' => '本次累计提现金额',
+
+    'withdrawChannel' => '提现渠道',
+
+    'completeTime' => '完成时间',
+
+
 ];

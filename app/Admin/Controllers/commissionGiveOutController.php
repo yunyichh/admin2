@@ -30,6 +30,7 @@ class commissionGiveOutController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new commissionGiveOut());
+        $grid->disableCreateButton();
         $grid->filter(function ($filter) {
             $filter->disabledIdFilter();
             $filter->like('accountName', ___('AccountName'));
