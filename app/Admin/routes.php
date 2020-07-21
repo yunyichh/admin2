@@ -14,12 +14,14 @@ Route::group([
     $router->get('/index', 'IndexController@index')->name('admin.index');
     $router->resource('site', SiteController::class);
     $router->resource('advertiser', AdvertiserController::class);
-    $router->resource('players', PlayerController::class);
+//    $router->resource('players', PlayerController::class);
+    $router->resource('players', Remote\PlayerController::class);
+
     $router->resource('vipList', VipListController::class);
-    $router->resource('game-logs', GameLogConroller::class);
+    $router->resource('game-logs', Remote\gameLog2Controller::class);
     $router->resource('vault-logs', VaultLogConroller::class);
     $router->resource('lotteries', LotteryConroller::class);
-    $router->resource('player-onlines', PlayerOnlineController::class);
+    $router->resource('player-onlines', Remote\PlayerOnlineController::class);
     $router->resource('player-check-grades', PlayerCheckGradeController::class);
     $router->resource('player-passwords', PlayerPasswordController::class);
     $router->resource('inventory-configurations', inventoryConfigurationController::class);

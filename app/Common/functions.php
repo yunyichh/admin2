@@ -42,4 +42,39 @@ function _i($text)
     return iconv('gbk', 'utf-8', $text);
 }
 
-//echo getValue('findAllUser');
+
+//多数据库多sql联合查询
+function getResultsFromSqls($db, $sqls, $more = false)
+{
+    $config = $db;
+    $conn = new mysqli($config['host'], $config['username'], $config['password'], $config['database']);
+
+    if ($conn->connect_error) {
+        return 0;
+    }
+    $data = null;
+    foreach ($sqls as $key => $sql) {
+        $result[$key] = $conn->query($sql);
+        if (isset($result[$key]->num_rows) && $result[$key]->num_rows > 0) {
+            // 输出数据
+            while ($row = $result[$key]->fetch_assoc()) {
+                if ($more) {
+                    $data[$key][] = $row;
+                } else {
+                    $data[$key] = $row;
+                    break;
+                }
+            }
+        } else {
+            $data[$key] = '';
+            if (strpos(strtolower($sql), 'insert') !== false) {
+                $data[$key] = mysqli_insert_id($conn);
+            }
+            if (strpos(strtolower($sql), 'update') !== false || strpos(strtolower($sql), 'delete') !== false) {
+                $data[$key] = $result[$key];
+            }
+        }
+    }
+    $conn->close();
+    return $data;
+}
