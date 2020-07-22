@@ -32,6 +32,7 @@ class PlayerController extends AdminController
     {
         $grid = new Grid(new Player());
         $grid->filter(function ($filter) {
+            $filter->like('accountId', ___('AccountId'));
             $filter->like('starNO', ___('StarNO'));
             $filter->like('accountName', ___('AccountName'));
             $filter->like('', ___('regSource'));

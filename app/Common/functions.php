@@ -81,14 +81,18 @@ function getResultsFromSqls($db, $sqls, $more = false)
 
 function getColumnData($gameLog, $accountId)
 {
-   $gameLog = json_decode($gameLog,true);
+    $gameLog = json_decode($gameLog, true);
     $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
     $data = null;
     foreach ($column_target as $column) {
-        if (isset($gameLog[0][$column]) && strpos($gameLog[0][$column], $accountId) !== false) {
-            $data = json_decode($gameLog[0][$column], true);
-            break;
+        $data[] = @json_decode($gameLog[0][$column], true);
+    }
+    $target = null;
+    foreach ($data as $key=>$item){
+        if(isset($item['accountId'])&&$item['accountId']==$accountId){
+            $target = $item;
         }
     }
-    return $data;
+
+    return $target;
 }

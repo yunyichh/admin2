@@ -35,7 +35,7 @@ class gameLog2Controller extends AdminController
         $grid = new Grid(new gameLog2());
         $grid->model()->orderBy('time', 'desc');
         $grid->filter(function ($filter) {
-            $filter->like('gameId', ___('gameId'));
+            $filter->like('gameId', ___('gameName'));
             $filter->like('account.accountName', ___('accountName'));
             $filter->where(function ($query) {
                 $time = strtotime($this->input) * 1000 - 8 * 60 * 60 * 1000;
@@ -52,7 +52,7 @@ class gameLog2Controller extends AdminController
             $account = @$this->account[0]['accountName'];
             return $account;
         });
-        $grid->column('gameId', ___('GameId'));
+        $grid->column('gameId', ___('gameName'));
         //{"accountId":281543696188447,"bGamed":true,"winOrLoseMoney":-30,"betMoney":30,"money":138,"integral":0,"cbHandData":"[ºÚÌÒK,ºÚÌÒ2,]","seatId":1,"actState":2}
         $grid->column('oldMoney', ___('scoreBeforeGame'));
 

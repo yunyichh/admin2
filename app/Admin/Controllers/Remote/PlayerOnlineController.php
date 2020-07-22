@@ -35,7 +35,7 @@ class PlayerOnlineController extends AdminController
             $actions->disableEdit();
             $actions->disableView();
         });
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             $filter->like('starNO', ___('StarNO'));
             $filter->like('accountName', ___('AccountName'));
         });
@@ -57,9 +57,12 @@ class PlayerOnlineController extends AdminController
         $grid->column('wLScore', ___('wLScore'));
         $grid->column('leftGold', ___('leftGold'))->display(function () {
             if ($this->track == -1 || $this->track == 0) {
-                return @json_decode($this->wallet,true)[0]['goldMoney'];
+                return @json_decode($this->wallet, true)[0]['goldMoney'];
             } elseif ($this->track == 1) {
-                return @json_decode($this->player2,true)[0]['money'];
+                $money = @json_decode($this->player2, true)[0]['money'];
+                if ($money == 0)
+                    $money = json_decode($this->wallet, true)[0]['goldMoney'];
+                return $money;
             }
         });
 //        $grid->column('lockTime', ___('LockTime'));
@@ -75,7 +78,7 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));
 //        $grid->column('state', ___('State'));
-//        $grid->column('track', ___('Track'));
+        $grid->column('track', ___('Track'));
 //        $grid->column('matchID', ___('MatchID'));
 
         return $grid;
