@@ -99,4 +99,5 @@ class AdminController extends Controller
             ->description($this->description['create'] ?? trans('admin.create'))
             ->body($this->form());
     }
+
 }
