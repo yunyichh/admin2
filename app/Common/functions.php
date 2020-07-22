@@ -81,7 +81,7 @@ function getResultsFromSqls($db, $sqls, $more = false)
 
 function getColumnData($gameLog, $accountId)
 {
-    file_put_contents(__DIR__.'/log.txt',json_encode($gameLog)."\r\n",FILE_APPEND);
+//    file_put_contents(__DIR__.'/log.txt',json_encode($gameLog)."\r\n",FILE_APPEND);
     $gameLog = json_decode($gameLog, true);
     $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
     $data = null;
