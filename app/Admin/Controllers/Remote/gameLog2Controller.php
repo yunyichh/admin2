@@ -33,6 +33,7 @@ class gameLog2Controller extends AdminController
         $account = null;
 
         $grid = new Grid(new gameLog2());
+        $grid->model()->orderBy('time', 'desc');
         $grid->filter(function ($filter) {
             $filter->like('gameId', ___('gameId'));
             $filter->like('account.accountName', ___('accountName'));
@@ -46,7 +47,7 @@ class gameLog2Controller extends AdminController
             $actions->disableView();
             $actions->disableEdit();
         });
-
+//        $grid->column('id', ___('Id'));
         $grid->column('accountName', ___('accountName'))->display(function () {
             $account = @$this->account[0]['accountName'];
             return $account;
@@ -54,73 +55,22 @@ class gameLog2Controller extends AdminController
         $grid->column('gameId', ___('GameId'));
         //{"accountId":281543696188447,"bGamed":true,"winOrLoseMoney":-30,"betMoney":30,"money":138,"integral":0,"cbHandData":"[黑桃K,黑桃2,]","seatId":1,"actState":2}
         $grid->column('oldMoney', ___('scoreBeforeGame'));
+
         $grid->column('scoreAfterGame', ___('scoreAfterGame'))->display(function () {
-            $gameLog = $this->gameLog;
-            $data = null;
-            $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
-            foreach ($column_target as $column) {
-                if (@strpos($gameLog[0][$column], $this->accountId) !== false) {
-                    $data = json_decode($gameLog[0][$column], true);
-                    break;
-                }
-            }
-//           {"accountId":281543696190488,"bGamed":true,"winOrLoseMoney":-20,"betMoney":20,"money":9910,"integral":0,"cbHandData":"[梅花5,方块J,]","seatId":5,"actState":2}
-            return intval($data['money']);
+            return intval(getColumnData($this->gamelog, $this->accountId)['money']);
         });
         $grid->column('scoreBet', ___('scoreBet'))->display(function () {
-            $gameLog = $this->gameLog;
-            $data = null;
-            $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
-            foreach ($column_target as $column) {
-                if (@strpos($gameLog[0][$column], $this->accountId) !== false) {
-                    $data = json_decode($gameLog[0][$column], true);
-                    break;
-                }
-            }
-//           {"accountId":281543696190488,"bGamed":true,"winOrLoseMoney":-20,"betMoney":20,"money":9910,"integral":0,"cbHandData":"[梅花5,方块J,]","seatId":5,"actState":2}
-            return intval($data['betMoney']);
+            return intval(getColumnData($this->gamelog, $this->accountId)['betMoney']);
         });
         $grid->column('scoreWin', ___('scoreWin'))->display(function () {
-            $gameLog = $this->gameLog;
-            $data = null;
-            $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
-            foreach ($column_target as $column) {
-                if (@strpos($gameLog[0][$column], $this->accountId) !== false) {
-                    $data = json_decode($gameLog[0][$column], true);
-                    break;
-                }
-            }
-//           {"accountId":281543696190488,"bGamed":true,"winOrLoseMoney":-20,"betMoney":20,"money":9910,"integral":0,"cbHandData":"[梅花5,方块J,]","seatId":5,"actState":2}
-            return intval($data['winOrLoseMoney']);
+            return intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
         });
         $grid->column('scoreLose', ___('scoreLose'))->display(function () {
-            $gameLog = $this->gameLog;
-            $data = null;
-            $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
-            foreach ($column_target as $column) {
-                if (@strpos($gameLog[0][$column], $this->accountId) !== false) {
-                    $data = json_decode($gameLog[0][$column], true);
-                    break;
-                }
-            }
-//           {"accountId":281543696190488,"bGamed":true,"winOrLoseMoney":-20,"betMoney":20,"money":9910,"integral":0,"cbHandData":"[梅花5,方块J,]","seatId":5,"actState":2}
-            return -intval($data['winOrLoseMoney']);
+            return -intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
         });
-//        $grid->column('id', ___('Id'));
 
-
-        $grid->column('scoreAfterGame', ___('inventory'))->display(function () {
-            $gameLog = $this->gameLog;
-            $data = null;
-            $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
-            foreach ($column_target as $column) {
-                if (@strpos($gameLog[0][$column], $this->accountId) !== false) {
-                    $data = json_decode($gameLog[0][$column], true);
-                    break;
-                }
-            }
-//           {"accountId":281543696190488,"bGamed":true,"winOrLoseMoney":-20,"betMoney":20,"money":9910,"integral":0,"cbHandData":"[梅花5,方块J,]","seatId":5,"actState":2}
-            return $data['money'];
+        $grid->column('inventory', ___('inventory'))->display(function () {
+            return intval(getColumnData($this->gamelog, $this->accountId)['money']);
         });
         $grid->column('time', ___('Time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10) + 8 * 60 * 60);
@@ -167,4 +117,7 @@ class gameLog2Controller extends AdminController
 
         return $form;
     }
+
+
+
 }

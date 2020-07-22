@@ -78,3 +78,17 @@ function getResultsFromSqls($db, $sqls, $more = false)
     $conn->close();
     return $data;
 }
+
+function getColumnData($gameLog, $accountId)
+{
+   $gameLog = json_decode($gameLog,true);
+    $column_target = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
+    $data = null;
+    foreach ($column_target as $column) {
+        if (isset($gameLog[0][$column]) && strpos($gameLog[0][$column], $accountId) !== false) {
+            $data = json_decode($gameLog[0][$column], true);
+            break;
+        }
+    }
+    return $data;
+}
