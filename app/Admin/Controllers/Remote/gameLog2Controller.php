@@ -42,7 +42,7 @@ class gameLog2Controller extends AdminController
                 $query->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000));
             }, ___('time'))->date();
         });
-//        $grid->model()->account()->where('robotFlag',0);
+        $grid->model()->leftJoin('accountentity','gamerecordentity.accountId','=','accountentity.accountId')->where('accountentity.robotFlag',0);
         $grid->disableCreateButton();
         $grid->actions(function ($actions) {
             $actions->disableView();
