@@ -15,6 +15,6 @@ class gameLog2 extends Model
     }
     public function account()
     {
-        return $this->hasMany('App\Remote\Player', 'accountId', 'accountId');
+        return $this->belongsTo('App\Remote\Player', 'accountId', 'accountId');
     }
 }

@@ -13,14 +13,18 @@ class Player extends Model
 
     public function orderBuy()
     {
-        return $this->hasMany('App\Remote\orderBuy', 'orderAccountId', 'accountId');
+        return $this->hasOne('App\Remote\orderBuy', 'orderAccountId', 'accountId');
     }
 
     public function wallet(){
-        return $this->hasMany('App\Remote\wallet', 'accountId', 'accountId');
+        return $this->hasOne('App\Remote\wallet', 'accountId', 'accountId');
     }
 
     public function player2(){
-        return $this->hasMany('App\Remote\player2', 'accountId', 'accountId');
+        return $this->hasOne('App\Remote\player2', 'accountId', 'accountId');
+    }
+
+    public function gameLog2(){
+        return $this->hasMany('App\Remote\gameLog2', 'accountId', 'accountId');
     }
 }

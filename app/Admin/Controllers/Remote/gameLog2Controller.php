@@ -33,7 +33,7 @@ class gameLog2Controller extends AdminController
         $account = null;
 
         $grid = new Grid(new gameLog2());
-        $grid->model()->orderBy('time', 'desc');
+
         $grid->filter(function ($filter) {
             $filter->like('gameId', ___('gameName'));
             $filter->like('account.accountName', ___('accountName'));
@@ -42,6 +42,7 @@ class gameLog2Controller extends AdminController
                 $query->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000));
             }, ___('time'))->date();
         });
+//        $grid->model()->account()->where('robotFlag',0);
         $grid->disableCreateButton();
         $grid->actions(function ($actions) {
             $actions->disableView();
@@ -49,7 +50,7 @@ class gameLog2Controller extends AdminController
         });
 //        $grid->column('id', ___('Id'));
         $grid->column('accountName', ___('accountName'))->display(function () {
-            $account = @$this->account[0]['accountName'];
+            $account = @$this->account['accountName'];
             return $account;
         });
         $grid->column('gameId', ___('gameName'));
@@ -117,7 +118,6 @@ class gameLog2Controller extends AdminController
 
         return $form;
     }
-
 
 
 }

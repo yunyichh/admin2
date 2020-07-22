@@ -47,6 +47,7 @@ class PlayerController extends AdminController
             $actions->disableEdit();
         });
         $grid->disableCreateButton();
+        $grid->model()->where('robotFlag', 0);
         $grid->column('accountId', ___('AccountId'));
         $grid->column('starNO', ___('StarNO'));
         $grid->column('accountName', ___('AccountName'));
@@ -67,8 +68,16 @@ class PlayerController extends AdminController
 //        $grid->column('expCalculateTime', ___('ExpCalculateTime'));
 //        $grid->column('headImg', ___('HeadImg'));
         $grid->column('level', ___('vipGrade'));
-        $grid->column('', ___('winLoseToday'));
-        $grid->column('', ___('totalWinLose'));
+        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
+            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $winLoseToday = $this->gameLog2()->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000))->sum('money');
+            return $winLoseToday;
+        });
+        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
+            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $winLoseToday = $this->gameLog2()->sum('money');
+            return $winLoseToday;
+        });
 //        $grid->column('lockTime', ___('LockTime'));
 
 //        $grid->column('phone', ___('Phone'));

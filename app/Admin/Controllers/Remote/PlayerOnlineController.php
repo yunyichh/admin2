@@ -39,7 +39,7 @@ class PlayerOnlineController extends AdminController
             $filter->like('starNO', ___('StarNO'));
             $filter->like('accountName', ___('AccountName'));
         });
-        $grid->model()->where('track', '>', 0)->orderBy('loginTime', 'desc');
+        $grid->model()->where('track', '>', 0)->where('robotFlag', 0)->orderBy('loginTime', 'desc');
         $grid->column('starNO', ___('StarNO'));
 //        $grid->column('accountId', ___('AccountId'));
         $grid->column('accountName', ___('AccountName'));
@@ -53,15 +53,23 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('expCalculateTime', ___('ExpCalculateTime'));
 //        $grid->column('headImg', ___('HeadImg'));
 
-        $grid->column('wLSocreToday', ___('wLSocreToday'));
-        $grid->column('wLScore', ___('wLScore'));
+        $grid->column('wLSocreToday', ___('wLSocreToday'))->display(function () {
+            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $winLoseToday = $this->gameLog2()->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000))->sum('money');
+            return $winLoseToday;
+        });
+        $grid->column('wLScore', ___('wLScore'))->display(function () {
+            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $winLoseToday = $this->gameLog2()->sum('money');
+            return $winLoseToday;
+        });
         $grid->column('leftGold', ___('leftGold'))->display(function () {
             if ($this->track == -1 || $this->track == 0) {
-                return @json_decode($this->wallet, true)[0]['goldMoney'];
+                return @json_decode($this->wallet, true)['goldMoney'];
             } elseif ($this->track == 1) {
-                $money = @json_decode($this->player2, true)[0]['money'];
+                $money = @json_decode($this->player2, true)['money'];
                 if ($money == 0)
-                    $money = json_decode($this->wallet, true)[0]['goldMoney'];
+                    $money = json_decode($this->wallet, true)['goldMoney'];
                 return $money;
             }
         });
