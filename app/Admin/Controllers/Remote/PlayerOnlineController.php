@@ -39,7 +39,8 @@ class PlayerOnlineController extends AdminController
             $filter->like('starNO', ___('StarNO'));
             $filter->like('accountName', ___('AccountName'));
         });
-        $grid->model()->where('track', '>', 0)->where('robotFlag', 0)->orderBy('loginTime', 'desc');
+        //track没有实时更新
+        $grid->model()->where('robotFlag', 0)->where('track', '>', 0)->orderBy('loginTime', 'desc');
         $grid->column('starNO', ___('StarNO'));
 //        $grid->column('accountId', ___('AccountId'));
         $grid->column('accountName', ___('AccountName'));
@@ -86,7 +87,7 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));
 //        $grid->column('state', ___('State'));
-        $grid->column('track', ___('Track'));
+//        $grid->column('track', ___('Track'));
 //        $grid->column('matchID', ___('MatchID'));
 
         return $grid;

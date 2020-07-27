@@ -42,13 +42,13 @@ class gameLog2Controller extends AdminController
                 $query->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000));
             }, ___('time'))->date();
         });
-        $grid->model()->leftJoin('accountentity','gamerecordentity.accountId','=','accountentity.accountId')->where('accountentity.robotFlag',0);
         $grid->disableCreateButton();
         $grid->actions(function ($actions) {
             $actions->disableView();
             $actions->disableEdit();
         });
 //        $grid->column('id', ___('Id'));
+        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0);
         $grid->column('accountName', ___('accountName'))->display(function () {
             $account = @$this->account['accountName'];
             return $account;
@@ -118,6 +118,5 @@ class gameLog2Controller extends AdminController
 
         return $form;
     }
-
 
 }

@@ -79,6 +79,7 @@ function getResultsFromSqls($db, $sqls, $more = false)
     return $data;
 }
 
+//游戏记录获取数据
 function getColumnData($gameLog, $accountId)
 {
 //    file_put_contents(__DIR__.'/log.txt',json_encode($gameLog)."\r\n",FILE_APPEND);
@@ -89,8 +90,8 @@ function getColumnData($gameLog, $accountId)
         $data[] = @json_decode($gameLog[0][$column], true);
     }
     $target = null;
-    foreach ($data as $key=>$item){
-        if(isset($item['accountId'])&&$item['accountId']==$accountId){
+    foreach ($data as $key => $item) {
+        if (isset($item['accountId']) && $item['accountId'] == $accountId) {
             $target = $item;
         }
     }
