@@ -2,7 +2,6 @@
 
 namespace App\Admin\Controllers;
 
-use App\Admin\Actions\Event\Add;
 use App\eventManagement;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -10,6 +9,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Support\Facades\DB;
 use App\Admin\Actions\Event\Add as eAdd;
+use App\Admin\Actions\Event\Delete as eDelete;
 
 class eventManagementController extends AdminController
 {
@@ -19,6 +19,7 @@ class eventManagementController extends AdminController
      * @var string
      */
     protected $title = 'App\eventManagement';
+    public static $base_uri = 'http://192.168.1.23:8004';
 
     function __construct()
     {
@@ -39,12 +40,12 @@ class eventManagementController extends AdminController
 //            'null' => 'null',
 //        ];
 
-        $url = "http://192.168.1.23:8001/selectGame";
+        $url = self::$base_uri . "/selectGame";
         $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $url);
 
-        $result = json_decode($response->getBody(), true);
 
+        $result = json_decode($response->getBody(), true);
         if (!empty($result)) {
             DB::table('event_management')->truncate();
             DB::table('event_management')->insert($result);
@@ -60,21 +61,20 @@ class eventManagementController extends AdminController
     {
         $grid = new Grid(new eventManagement());
         $grid->disableCreateButton();
-        $grid->actions(function($action){
-           $action->disableEdit();
-           $action->disableView();
-           $action->disableDelete();
-        });
-        $grid->tools(function(Grid\Tools $tools){
+        $grid->disableColumnSelector();
+        $grid->disableActions();
+
+        $grid->tools(function (Grid\Tools $tools) {
+            $tools->append(new eDelete());
             $tools->append(new eAdd());
         });
-//        $grid->column('_id', ___(' id'));
-        $grid->column('id', ___('Id'))->hide();
+
+        $grid->column('id', ___('gameId'));
         $grid->column('apply_time', ___('Apply time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
         $grid->column('end_time', ___('End time'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
         $grid->column('game_id', ___('Game id'));
         $grid->column('apply_cost', ___('Apply cost'));
@@ -96,7 +96,6 @@ class eventManagementController extends AdminController
     {
         $show = new Show(eventManagement::findOrFail($id));
 
-        $show->field('_id', ___(' id'));
         $show->field('id', ___('Id'));
         $show->field('apply_time', ___('Apply time'));
         $show->field('end_time', ___('End time'));
@@ -119,7 +118,6 @@ class eventManagementController extends AdminController
     {
         $form = new Form(new eventManagement());
 
-        $form->number('_id', ___(' id'));
         $form->datetime('apply_time', ___('Apply time'))->default(date('Y-m-d H:i:s'));
         $form->datetime('end_time', ___('End time'))->default(date('Y-m-d H:i:s'));
         $form->number('game_id', ___('Game id'));

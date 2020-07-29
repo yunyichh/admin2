@@ -119,6 +119,9 @@ class changeGoldRecordController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new changeGoldRecord());
+        $grid->disableCreateButton();
+        $grid->disableColumnSelector();
+        $grid->disableActions();
         $grid->actions(function ($action) {
             $action->disableEdit();
             $action->disableView();

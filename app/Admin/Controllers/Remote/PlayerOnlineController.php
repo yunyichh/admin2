@@ -31,6 +31,8 @@ class PlayerOnlineController extends AdminController
     {
         $grid = new Grid(new Player());
         $grid->disableCreateButton();
+        $grid->disableColumnSelector();
+        $grid->disableActions();
         $grid->actions(function ($actions) {
             $actions->disableEdit();
             $actions->disableView();

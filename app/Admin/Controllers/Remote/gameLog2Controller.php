@@ -33,7 +33,9 @@ class gameLog2Controller extends AdminController
         $account = null;
 
         $grid = new Grid(new gameLog2());
-
+        $grid->disableCreateButton();
+        $grid->disableColumnSelector();
+        $grid->disableActions();
         $grid->filter(function ($filter) {
             $filter->like('gameId', ___('gameName'));
             $filter->like('account.accountName', ___('accountName'));
