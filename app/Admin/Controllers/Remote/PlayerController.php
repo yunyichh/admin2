@@ -7,7 +7,8 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use App\Admin\Actions\Player\Edit;
+use App\Admin\Actions\Player\DistributionGold;
+use App\Admin\Actions\Player\EditPhone;
 
 class PlayerController extends AdminController
 {
@@ -37,7 +38,7 @@ class PlayerController extends AdminController
             $filter->like('accountName', ___('AccountName'));
             $filter->like('', ___('regSource'));
             $filter->where(function ($query) {
-                $time = strtotime($this->input) * 1000 - 8 * 60 * 60 * 1000;
+                $time = strtotime($this->input) * 1000 ;
                 $query->where('createTime', '>', $time)->where('createTime', '<', (($time) + (24 * 60 * 60) * 1000));
             }, ___('CreateTime'))->date();
             $filter->like('recommended', ___('Recommended'));
@@ -45,6 +46,9 @@ class PlayerController extends AdminController
         $grid->actions(function ($actions) {
             $actions->disableView();
             $actions->disableEdit();
+            $actions->disableDelete();
+            $actions->add(new DistributionGold());
+            $actions->add(new EditPhone());
         });
         $grid->disableCreateButton();
         $grid->model()->where('robotFlag', 0);
@@ -69,12 +73,12 @@ class PlayerController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
         $grid->column('level', ___('vipGrade'));
         $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
-            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $time = time() * 1000;
             $winLoseToday = $this->gameLog2()->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000))->sum('money');
             return $winLoseToday;
         });
         $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
-            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $time = time() * 1000 ;
             $winLoseToday = $this->gameLog2()->sum('money');
             return $winLoseToday;
         });
@@ -85,10 +89,10 @@ class PlayerController extends AdminController
 //        $grid->column('robotFlag', ___('RobotFlag'));
 //        $grid->column('serviceGameId', ___('ServiceGameId'));
         $grid->column('createTime', ___('CreateTime'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) + 8 * 60 * 60);
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
         })->sortable();
         $grid->column('loginTime', ___('LoginTime'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) + 8 * 60 * 60);
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
         })->sortable();
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));

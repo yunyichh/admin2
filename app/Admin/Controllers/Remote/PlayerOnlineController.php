@@ -34,6 +34,7 @@ class PlayerOnlineController extends AdminController
         $grid->actions(function ($actions) {
             $actions->disableEdit();
             $actions->disableView();
+            $actions->disableDelete();
         });
         $grid->filter(function ($filter) {
             $filter->like('starNO', ___('StarNO'));
@@ -55,12 +56,12 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
 
         $grid->column('wLSocreToday', ___('wLSocreToday'))->display(function () {
-            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $time = time() * 1000 ;
             $winLoseToday = $this->gameLog2()->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000))->sum('money');
             return $winLoseToday;
         });
         $grid->column('wLScore', ___('wLScore'))->display(function () {
-            $time = time() * 1000 - 8 * 60 * 60 * 1000;
+            $time = time() * 1000 ;
             $winLoseToday = $this->gameLog2()->sum('money');
             return $winLoseToday;
         });
@@ -82,7 +83,7 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('serviceGameId', ___('ServiceGameId'));
 
         $grid->column('loginTime', ___('LoginTime'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) + 8 * 60 * 60);
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
         })->sortable();
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));

@@ -37,6 +37,8 @@ return [
     'vip' => 'vip等级',
     'vaildTime' => '到期时间',
     'kickUsedNum' => '踢人次数',
+    'gameStartTime' => '游戏开始时间',
+    'gameEndTime' => '游戏结束时间',
 
     'registSource' => '注册来源',
     'totalRecharge' => '总充值额',
@@ -91,6 +93,17 @@ return [
     'jettonBeforeGame' => '游戏前筹码',
     'jettonAfterGame' => '游戏后筹码',
     'amountOfPoints' => '上分数额',
+
+
+    'changeMoney' => '变化金币',
+    'nowMoney' => '变化后金币',
+    'oldMoney' => '变化前金币',
+    'source' => '变化原因',
+    'changeReason' => '变化原因',
+    'startTimes' => '开始时间',
+    'endTimes' => '结束时间',
+
+
     'serverId' => '服务器标识',
     'serverName' => '服务器名称',
     'inventoryAttenuation' => '库存衰减率',
@@ -194,6 +207,17 @@ return [
     'obtainGold' => '玩家获得金币',
     'profitAmount' => '系统总盈利',
     'ranking' => '名次',
+
+
+    'apply_time' => '开始报名时间',
+    'end_time' => '截止时间',
+    'game_id' => '游戏ID',
+    'apply_cost' => '报名费',
+    'open_num' => '开启次数',
+    'differ_hour' => '间隔时间',
+    'award' => '奖励',
+    'charge' => '手续费',
+
 
     'totalWin' => '累计下注',
     'totalLose' => '累计输钱',

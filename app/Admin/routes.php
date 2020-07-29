@@ -24,6 +24,10 @@ Route::group([
     $router->resource('player-onlines', Remote\PlayerOnlineController::class);
     $router->resource('player-check-grades', PlayerCheckGradeController::class);
     $router->resource('player-passwords', PlayerPasswordController::class);
+    $router->resource('change-gold-records', Remote\changeGoldRecordController::class);
+
+
+
     $router->resource('inventory-configurations', inventoryConfigurationController::class);
     $router->resource('inventory-configuration-steps', inventoryConfigurationStepController::class);
     $router->resource('inventory-configuration-jackpots', inventoryConfigurationjackpotController::class);
@@ -37,6 +41,11 @@ Route::group([
     $router->resource('control-players', controlPlayerController::class);
     $router->resource('control-win-loses', controlWinLoseController::class);
     $router->resource('control-win-lose-logs', controlWinLoseLogControlller::class);
+    $router->resource('championships-configurations', championshipsConfigurationController::class);
+    $router->resource('event-managements', eventManagementController::class);
+
+
+
     $router->resource('public-managements', publicManagementController::class);
     $router->resource('active-datas', activeDataController::class);
     $router->resource('gold-consumptions', goldConsumptionController::class);
@@ -46,7 +55,7 @@ Route::group([
     $router->resource('commission-give-outs', commissionGiveOutController::class);
     $router->resource('commission-gets', commissionGetController::class);
     $router->resource('commission-divides', commissionDivideController::class);
-    $router->resource('championships-configurations', championshipsConfigurationController::class);
+
     $router->resource('agent-users', agentUserController::class);
     $router->resource('admin-homes', adminHomeController::class);
     $router->resource('recharges', rechargeController::class);

@@ -38,14 +38,19 @@ class gameLog2Controller extends AdminController
             $filter->like('gameId', ___('gameName'));
             $filter->like('account.accountName', ___('accountName'));
             $filter->where(function ($query) {
-                $time = strtotime($this->input) * 1000 - 8 * 60 * 60 * 1000;
-                $query->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000));
-            }, ___('time'))->date();
+                $time = strtotime($this->input) * 1000 ;
+                $query->where('time', '>', $time);
+            }, ___('gameStartTime'))->datetime();
+            $filter->where(function ($query) {
+                $time = strtotime($this->input) * 1000 ;
+                $query->where('time', '<', $time);
+            }, ___('gameEndTime'))->datetime();
         });
         $grid->disableCreateButton();
-        $grid->actions(function ($actions) {
-            $actions->disableView();
-            $actions->disableEdit();
+        $grid->actions(function($action){
+            $action->disableEdit();
+            $action->disableView();
+            $action->disableDelete();
         });
 //        $grid->column('id', ___('Id'));
         $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0);
@@ -74,7 +79,7 @@ class gameLog2Controller extends AdminController
             return intval(getColumnData($this->gamelog, $this->accountId)['money']);
         });
         $grid->column('time', ___('Time'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) + 8 * 60 * 60);
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
         return $grid;
     }

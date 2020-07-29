@@ -1,4 +1,17 @@
 <style type="text/css">
+    html, body {
+        overflow-y: scroll;
+    }
+
+    html, body {
+        overflow: scroll;
+        min-height: 101%;
+    }
+
+    html {
+        overflow: -moz-scrollbars-vertical;
+    }
+
     .board {
         width: 100%;
         display: flex;
@@ -71,7 +84,7 @@
                             // 'rgba(255, 159, 64, 0.2)',
                             // 'rgba(255, 99, 132, 0.2)',
                             // 'rgba(54, 162, 235, 0.2)'
-                            'rgba(54, 162, 235, 0.2)',  'rgba(54, 162, 235, 0.2)',  'rgba(54, 162, 235, 0.2)',  'rgba(54, 162, 235, 0.2)',  'rgba(54, 162, 235, 0.2)',  'rgba(54, 162, 235, 0.2)',  'rgba(54, 162, 235, 0.2)',
+                            'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)',
                         ],
                         borderColor: [
                             // 'rgba(255, 99, 132, 1)',
