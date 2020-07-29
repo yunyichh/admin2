@@ -41,11 +41,7 @@ class eventManagementController extends AdminController
 //        ];
 
         $url = self::$base_uri . "/selectGame";
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', $url);
-
-
-        $result = json_decode($response->getBody(), true);
+        $result = json_decode(getHttpResponseGET($url), true);
         if (!empty($result)) {
             DB::table('event_management')->truncate();
             DB::table('event_management')->insert($result);
