@@ -19,7 +19,7 @@ class eventManagementController extends AdminController
      * @var string
      */
     protected $title = 'App\eventManagement';
-    public static $base_uri = 'http://192.168.1.23:8004';
+    public static $base_uri = 'http://121.89.193.124:18001';
 
     function __construct()
     {
@@ -30,15 +30,6 @@ class eventManagementController extends AdminController
             $start = ($page - 1) * $per_page;
             $limit = $per_page;
         }
-
-//        $params = [
-//            'queryType' => 2,
-//            'start' => (empty($start)) ? 0 : $start,
-//            'length' => (empty($limit)) ? 20 : $limit,
-//            'sortId' => 1,
-//            'sort' => 1,
-//            'null' => 'null',
-//        ];
 
         $url = self::$base_uri . "/selectGame";
         $result = json_decode(getHttpResponseGET($url), true);
