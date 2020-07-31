@@ -5,19 +5,10 @@ namespace App\Admin\Actions\Event;
 use Encore\Admin\Actions\Action;
 use Encore\Admin\Grid;
 use Illuminate\Http\Request;
-use App\Admin\Controllers\eventManagementController;
 
 class Add extends Action
 {
     protected $selector = '.add';
-    protected $base_uri = null;
-
-    function __construct()
-    {
-        parent::__construct();
-        $this->base_uri = eventManagementController::$base_uri;
-
-    }
 
     public function handle(Request $request)
     {
@@ -40,8 +31,11 @@ class Add extends Action
         }
         $data['charge'] = (int)$request->get('charge');
 
-        $url = $this->base_uri . "/addGame";
+        $url = getUrl('eventManagementAdd');
+        logTxt($url);
+        logTxt($data);
         $result = getHttpResponseGET($url, $data);
+        logTxt($result);
         if ($result == 'succ') {
             return $this->response()->success('Success')->refresh();
         } else {
@@ -51,16 +45,16 @@ class Add extends Action
 
     public function form()
     {
-        $this->datetime('apply_time', ___('Apply time'))->default(date('Y-m-d H:i:s'));
-        $this->datetime('end_time', ___('End time'))->default(date('Y-m-d H:i:s', time() + 7 * 24 * 60 * 60));
-        $this->text('game_id', ___('Game id'))->default(1);
-        $this->text('apply_cost', ___('Apply cost'));
-        $this->text('open_num', ___('Open num'));
-        $this->text('differ_hour', ___('Differ hour'));
-        $this->multipleSelect('award1', ___('ranking'))->options(['1,1' => _i('第一名'), '2,2' => _i('第二名'), '3,3' => _i('第三名'), '4,4' => _i('第四名'), '5,5' => _i('第五名'), '6,6' => _i('第六名'), '7,7' => _i('第七名'), '8,8' => _i('第八名'), '9,9' => _i('第九名'), '10,10' => _i('第五名'), '4,5' => _i('第四到五名'), '6,10' => _i('第六到十名'), '3,50' => _i('第三到五十'), '4,50' => _i('第四到五十'), '5,50' => _i('第五到五十')]);
-        $this->multipleSelect('award2', ___('Award') . _i('（与名次对应）'))->options([5000 => 5000, 3000 => 3000, 2000 => 2000, 1000 => 1000, 900 => 900, 800 => 800, 700 => 700, 600 => 600, 500 => 500, 300 => 300, 200 => 200, 100 => 100, 50 => 50]);
+        $this->datetime('apply_time', ___('Apply time'))->default(date('Y-m-d H:i:s'))->required();
+        $this->datetime('end_time', ___('End time'))->default(date('Y-m-d H:i:s', time() + 7 * 24 * 60 * 60))->required();
+        $this->text('game_id', ___('Game id'))->default(1)->required();
+        $this->text('apply_cost', ___('Apply cost'))->required();
+        $this->text('open_num', ___('Open num'))->required();
+        $this->text('differ_hour', ___('Differ hour'))->required();
+        $this->multipleSelect('award1', ___('ranking'))->options(['1,1' => _i('第一名'), '2,2' => _i('第二名'), '3,3' => _i('第三名'), '4,4' => _i('第四名'), '5,5' => _i('第五名'), '6,6' => _i('第六名'), '7,7' => _i('第七名'), '8,8' => _i('第八名'), '9,9' => _i('第九名'), '10,10' => _i('第五名'), '4,5' => _i('第四到五名'), '6,10' => _i('第六到十名'), '3,50' => _i('第三到五十'), '4,50' => _i('第四到五十'), '5,50' => _i('第五到五十')])->required();
+        $this->multipleSelect('award2', ___('Award') . _i('（与名次对应）'))->options([5000 => 5000, 3000 => 3000, 2000 => 2000, 1000 => 1000, 900 => 900, 800 => 800, 700 => 700, 600 => 600, 500 => 500, 300 => 300, 200 => 200, 100 => 100, 50 => 50])->required();
 //        $this->text('award', _i('{"x,x":"奖励一"}','{"x,x":"奖励二"}...'));
-        $this->text('charge', ___('Charge'));
+        $this->text('charge', ___('Charge'))->required();
     }
 
     public function html()

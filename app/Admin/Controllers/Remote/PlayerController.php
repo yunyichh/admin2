@@ -19,6 +19,8 @@ class PlayerController extends AdminController
      */
     protected $title = 'App\Remote\Player';
 
+    public static $base_uri = 'http://127.0.0.1:8001/';
+
     protected function title()
     {
         return _i('会员列表');
@@ -32,15 +34,22 @@ class PlayerController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Player());
+        $grid->disableColumnSelector();
+        $grid->disableBatchActions();
         $grid->filter(function ($filter) {
-            $filter->like('accountId', ___('AccountId'));
+//            $filter->like('accountId', ___('AccountId'));
             $filter->like('starNO', ___('StarNO'));
             $filter->like('accountName', ___('AccountName'));
             $filter->like('', ___('regSource'));
             $filter->where(function ($query) {
-                $time = strtotime($this->input) * 1000 ;
-                $query->where('createTime', '>', $time)->where('createTime', '<', (($time) + (24 * 60 * 60) * 1000));
-            }, ___('CreateTime'))->date();
+                $time = strtotime($this->input) * 1000;
+                $query->where('createTime', '>', $time);
+            }, ___('CreateStartTime'))->datetime();
+
+            $filter->where(function ($query) {
+                $time = strtotime($this->input) * 1000;
+                $query->where('createTime', '<', $time);
+            }, ___('CreateEndTime'))->datetime();
             $filter->like('recommended', ___('Recommended'));
         });
         $grid->actions(function ($actions) {
@@ -52,7 +61,7 @@ class PlayerController extends AdminController
         });
         $grid->disableCreateButton();
         $grid->model()->where('robotFlag', 0);
-        $grid->column('accountId', ___('AccountId'));
+        $grid->column('accountId', ___('AccountId'))->hide();
         $grid->column('starNO', ___('StarNO'));
         $grid->column('accountName', ___('AccountName'));
         $grid->column('nickName', ___('NickName'));
@@ -78,7 +87,7 @@ class PlayerController extends AdminController
             return $winLoseToday;
         });
         $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
-            $time = time() * 1000 ;
+            $time = time() * 1000;
             $winLoseToday = $this->gameLog2()->sum('money');
             return $winLoseToday;
         });
@@ -89,10 +98,10 @@ class PlayerController extends AdminController
 //        $grid->column('robotFlag', ___('RobotFlag'));
 //        $grid->column('serviceGameId', ___('ServiceGameId'));
         $grid->column('createTime', ___('CreateTime'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
         $grid->column('loginTime', ___('LoginTime'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));
@@ -176,7 +185,6 @@ class PlayerController extends AdminController
 //        $form->number('state', ___('State'));
 //        $form->number('track', ___('Track'));
 //        $form->number('matchID', ___('MatchID'));
-
         return $form;
     }
 }

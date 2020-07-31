@@ -12,39 +12,43 @@ class DistributionGold extends RowAction
 
     public function handle(Model $model, Request $request)
     {
-        $playId = $model->starNO;
-        $accountId = $model->accountId;
+        $data['change_type'] = 1;
+        $data['gm_account'] = \Admin::user()->username;
+        $data['account_id'] = $model->accountId;
+        $data['currency_type'] = $request->get('currency_type');
+        $data['num'] = $request->get('num');
 
-        $goldType = $request->get('type');
-        $money = $request->get('money');
-        if ($goldType == 1)
-            $newUrl = "chanageAccountMoney";//修改账号金币
-        if ($goldType == 2)
-            $newUrl = "chanageVaultMoney";//修改金库金币
-
-        if ($goldType == 3)
-            $newUrl = "chanageSafeMoney";//修改保险箱金币
-
-        $url = getValue($newUrl) . ' ' . implode(' ', [$accountId, $money, null]);
+        $url = getUrl('changeMoney') . '?' . http_build_query($data);
+        logTxt($url);
         $client = new \GuzzleHttp\Client();
         $response = $client->request('GET', $url);
         $result = json_decode($response->getBody(), true);
-        if ($result['code'] == 0)
-            return $this->response()->success('操作成功')->refresh();
-        else
-            return $this->response()->error('操作失败'.$response->getBody())->refresh();
+        logTxt($result);
+        //{"res":"","code":0} 这个是修改货币的返回
+        //code  0成功  -1服务器解析错误  -2找不到该账号 -3数量错误，num<=0或者>10000000 -4货币不足
+        $codeMsg = [
+            0 => '发放成功',
+            -1 => '服务器解析错误',
+            -2 => '找不到该账号',
+            -3 => '数量错误',
+            -4 => '货币不足'
+        ];
+        if ($result['code'] == 0) {
+            return $this->response()->success(($codeMsg[$result['code']]))->refresh();
+        } elseif (in_array($result['code'], array_keys($codeMsg))) {
+            return $this->response()->error(($codeMsg[$result['code']]))->refresh();
+        } else {
+            return $this->response()->error(json_encode($result))->refresh();
+        }
     }
 
     public function form()
     {
         $type = [
-            1 => '携带金币',
-            2 => '金库金币',
-            3 => '聚宝盆金币',
+            1 => '金币',
+            2 => '钻石',
         ];
-
-        $this->select('type', '类型')->options($type)->rules('required');
-        $this->text('money', '发放数量')->rules('required');
+        $this->select('currency_type', '类型')->options($type)->rules('required');
+        $this->text('num', '发放数量')->rules('required|int');
     }
-
 }

@@ -19,7 +19,6 @@ class eventManagementController extends AdminController
      * @var string
      */
     protected $title = 'App\eventManagement';
-    public static $base_uri = 'http://121.89.193.124:18001';
 
     function __construct()
     {
@@ -31,7 +30,7 @@ class eventManagementController extends AdminController
             $limit = $per_page;
         }
 
-        $url = self::$base_uri . "/selectGame";
+        $url = getUrl('eventManagementSelect');
         $result = json_decode(getHttpResponseGET($url), true);
         if (!empty($result)) {
             DB::table('event_management')->truncate();
@@ -49,11 +48,13 @@ class eventManagementController extends AdminController
         $grid = new Grid(new eventManagement());
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
+        $grid->disableFilter();
         $grid->disableActions();
 
         $grid->tools(function (Grid\Tools $tools) {
             $tools->append(new eDelete());
             $tools->append(new eAdd());
+
         });
 
         $grid->column('id', ___('gameId'));

@@ -15,7 +15,7 @@ function getValue($key = null)
         #查询密保
         "findSecurity" => "http://121.89.193.124:7890/game_stars/user/binding/get"
     ];
-    $_configs = file_get_contents(dirname(__DIR__) . '/Admin/Conf/url.properties');
+    $_configs = file_get_contents(dirname(__DIR__) . '/Admin/Conf/url2.properties');
     preg_match_all('/[\w]+[=][\w\:\/\.\?\=]+[\.]php[\s\S]+[\n]/U', $_configs, $c);
     $cs = null;
     foreach ($c[0] as $item) {
@@ -26,6 +26,12 @@ function getValue($key = null)
     }
     $cs = array_merge($cs, $array_other);
     return isset($cs[$key]) ? $cs[$key] : false;
+}
+
+function getUrl($key = null)
+{
+    $_configs = require(dirname(__DIR__) . '/Admin/Conf/url2.php');
+    return isset($_configs[$key]) ? $_configs[$key] : false;
 }
 
 //中文翻译
@@ -148,4 +154,9 @@ function getHttpResponsePOST($url, $para = [], $input_charset = '')
     curl_close($curl);
     // echo 1;die;
     return $responseText;
+}
+
+function logTxt($data)
+{
+    file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data)."\r\n",FILE_APPEND);
 }

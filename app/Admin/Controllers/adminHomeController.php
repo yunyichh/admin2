@@ -22,6 +22,16 @@ class adminHomeController extends AdminController
     function __construct()
     {
         $this->title = _i('Ê×Ò³');
+        $data['totalRegister'] = DB::connection('mysql3')->table('accountentity')->where('robotFlag', 0)->count('accountId');
+        $data['increasedToday'] = DB::connection('mysql3')->table('accountentity')->where('robotFlag', 0)->whereBetween('createTime', [
+            strtotime(date("Y-m-d"), time()) * 1000,
+            (strtotime(date("Y-m-d"), time()) + 24 * 60 * 60) * 1000,
+        ])->count('accountId');
+        $data['activeUserToday'] = DB::connection('mysql3')->table('accountentity')->where('robotFlag', 0)->where('loginTime', [
+            strtotime(date("Y-m-d"), time()) * 1000,
+            (strtotime(date("Y-m-d"), time()) + 24 * 60 * 60) * 1000,
+        ])->count('accountId');
+        DB::table('admin_home')->update($data);
     }
 
     /**
@@ -33,9 +43,7 @@ class adminHomeController extends AdminController
     {
 
         $_data = (array)DB::table('admin_home')->find(1);
-
         $data = array_combine(array_keys($_data), array_values($_data));
-
         return view('admin.home', $data);
     }
 
@@ -80,7 +88,6 @@ class adminHomeController extends AdminController
     protected function form()
     {
         $form = new Form(new adminHome());
-
         $form->text('totalRegister', ___('TotalRegister'));
         $form->text('increasedToday', ___('IncreasedToday'));
         $form->text('totalRecharge', ___('TotalRecharge'));
@@ -97,7 +104,6 @@ class adminHomeController extends AdminController
         $form->text('fiveDaysLogin', ___('FiveDaysLogin'));
         $form->text('sixDaysLogin', ___('SixDaysLogin'));
         $form->text('sevenDaysLogin', ___('SevenDaysLogin'));
-
         return $form;
     }
 }

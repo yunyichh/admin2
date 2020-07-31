@@ -35,7 +35,7 @@ class PlayerCheckGradeController extends AdminController
             $filter->disableIdFilter();
             $filter->like('gameId',___('GameId'));
             $filter->like('playId',___('PlayId'));
-            $filter->between('gameTime',___('gameTime'));
+            $filter->between('gameTime',___('gameTime'))->date();
         });
 //        $grid->column('id', ___('Id'));
         $grid->column('accountName', ___('AccountName'));

@@ -6,19 +6,10 @@ use Encore\Admin\Actions\BatchAction;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use App\Admin\Controllers\eventManagementController;
 
 class Delete extends BatchAction
 {
     protected $selector = '.delete';
-
-    protected $base_uri = null;
-
-    function __construct()
-    {
-        parent::__construct();
-        $this->base_uri = eventManagementController::$base_uri;
-    }
 
     function name()
     {
@@ -35,12 +26,34 @@ class Delete extends BatchAction
             $data['game_id'] = (int)$model->game_id;
         }
         $data['only_ids'] = "[" . implode(',', $only_ids) . "]";
-        $url = $this->base_uri . "/removeGame";
+        $data['remove_type'] = 1;
+        $url = getUrl('eventManagementDelete');
+        logTxt($url);
         $result = getHttpResponseGET($url, $data);
-        if ($result == 'succ') {
+        logTxt($result);
+        $codeMsg = [
+            0 => '删除成功',
+            -1 => '没有该周赛',
+            -2 => '有玩家报名，不能删除'
+        ];
+        $res = @$result['res'];
+        $flag = false;
+        $msg = null;
+        if (!empty($res)) {
+            $flag = true;
+            if (is_array($res)) {
+                foreach ($res as $rk => $rv) {
+                    if ($rv != 0) {
+                        $flag = false;
+                    }
+                    $msg[] = $rk . @$codeMsg[$rv];
+                }
+            }
+        }
+        if ($flag) {
             return $this->response()->success('Success')->refresh();
         } else {
-            return $this->response()->error('Fail' . json_encode($result))->refresh();
+            return $this->response()->error((implode(';', $msg)))->refresh();
         }
     }
 

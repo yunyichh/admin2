@@ -35,32 +35,40 @@ class gameLog2Controller extends AdminController
         $grid = new Grid(new gameLog2());
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
+        $grid->disableBatchActions();
         $grid->disableActions();
         $grid->filter(function ($filter) {
-            $filter->like('gameId', ___('gameName'));
+            $filter->like('account.starNO', ___('gameId'));
             $filter->like('account.accountName', ___('accountName'));
             $filter->where(function ($query) {
-                $time = strtotime($this->input) * 1000 ;
+                $time = strtotime($this->input) * 1000;
                 $query->where('time', '>', $time);
             }, ___('gameStartTime'))->datetime();
             $filter->where(function ($query) {
-                $time = strtotime($this->input) * 1000 ;
+                $time = strtotime($this->input) * 1000;
                 $query->where('time', '<', $time);
             }, ___('gameEndTime'))->datetime();
         });
         $grid->disableCreateButton();
-        $grid->actions(function($action){
+        $grid->actions(function ($action) {
             $action->disableEdit();
             $action->disableView();
             $action->disableDelete();
         });
 //        $grid->column('id', ___('Id'));
         $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0);
+        $grid->column('starNO', ___('gameId'))->display(function () {
+            $account = @$this->account['starNO'];
+            return $account;
+        });
         $grid->column('accountName', ___('accountName'))->display(function () {
             $account = @$this->account['accountName'];
             return $account;
         });
-        $grid->column('gameId', ___('gameName'));
+        $grid->column('gameName', ___('gameName'))->display(function () {
+            $gameName = [1 => _i('µÂÖÝÆË¿Ë')];
+            return $gameName[$this->gameId];
+        });
         //{"accountId":281543696188447,"bGamed":true,"winOrLoseMoney":-30,"betMoney":30,"money":138,"integral":0,"cbHandData":"[ºÚÌÒK,ºÚÌÒ2,]","seatId":1,"actState":2}
         $grid->column('oldMoney', ___('scoreBeforeGame'));
 

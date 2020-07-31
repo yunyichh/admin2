@@ -41,7 +41,7 @@ return [
     'gameEndTime' => '游戏结束时间',
 
     'registSource' => '注册来源',
-    'totalRecharge' => '总充值额',
+
     'totalBill' => '总流水',
     'jetton' => '筹码',
     'winLoseToday' => '今日输赢',
@@ -98,10 +98,12 @@ return [
     'changeMoney' => '变化金币',
     'nowMoney' => '变化后金币',
     'oldMoney' => '变化前金币',
-    'source' => '变化原因',
+    'sourceReason' => '变化原因',
     'changeReason' => '变化原因',
     'startTimes' => '开始时间',
     'endTimes' => '结束时间',
+    'createStartTime' => '注册开始时间',
+    'createEndTime' => '注册结束时间',
 
 
     'serverId' => '服务器标识',
