@@ -27,10 +27,10 @@ class adminHomeController extends AdminController
             strtotime(date("Y-m-d"), time()) * 1000,
             (strtotime(date("Y-m-d"), time()) + 24 * 60 * 60) * 1000,
         ])->count('accountId');
-        $data['activeUserToday'] = DB::connection('mysql3')->table('accountentity')->where('robotFlag', 0)->where('loginTime', [
+        $data['activeUserToday'] = DB::connection('mysql3')->table('accountloginlogentity', 'al')->leftJoin('accountentity as ac', 'al.accountId', '=', 'ac.accountId')->where('ac.robotFlag', 0)->whereBetween('al.time', [
             strtotime(date("Y-m-d"), time()) * 1000,
             (strtotime(date("Y-m-d"), time()) + 24 * 60 * 60) * 1000,
-        ])->count('accountId');
+        ])->distinct('al.ip')->count();
         DB::table('admin_home')->update($data);
     }
 

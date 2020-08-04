@@ -13,11 +13,10 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('admin.home');
     $router->get('/index', 'IndexController@index')->name('admin.index');
     $router->resource('site', SiteController::class);
-    $router->resource('advertiser', AdvertiserController::class);
+//    $router->resource('advertiser', AdvertiserController::class);
 //    $router->resource('players', PlayerController::class);
     $router->resource('players', Remote\PlayerController::class);
-
-    $router->resource('vipList', VipListController::class);
+//    $router->resource('vipList', VipListController::class);
     $router->resource('game-logs', Remote\gameLog2Controller::class);
     $router->resource('vault-logs', VaultLogConroller::class);
     $router->resource('lotteries', LotteryConroller::class);
@@ -25,8 +24,6 @@ Route::group([
     $router->resource('player-check-grades', PlayerCheckGradeController::class);
     $router->resource('player-passwords', PlayerPasswordController::class);
     $router->resource('change-gold-records', Remote\changeGoldRecordController::class);
-
-
 
     $router->resource('inventory-configurations', inventoryConfigurationController::class);
     $router->resource('inventory-configuration-steps', inventoryConfigurationStepController::class);
@@ -43,8 +40,7 @@ Route::group([
     $router->resource('control-win-lose-logs', controlWinLoseLogControlller::class);
     $router->resource('championships-configurations', championshipsConfigurationController::class);
     $router->resource('event-managements', eventManagementController::class);
-
-
+    $router->resource('event-management-awards', eventManagementAwardsController::class);
 
     $router->resource('public-managements', publicManagementController::class);
     $router->resource('active-datas', activeDataController::class);

@@ -69,7 +69,20 @@ class changeGoldRecordController extends AdminController
         22 => '周赛报名',
         23 => '给予玩家奖励',
         24 => '签到奖励',
-        25 => '匹配消耗'
+        25 => '匹配消耗',
+        26 => 'gm发放金币',
+        27 => '跟注',
+        28 => '加注',
+        29 => 'all in',
+        30 => '游戏赢',
+        31 => '周赛奖励',
+        32 => '比赛发奖',
+        33 => '进入游戏',
+        34 => '站起',
+        35 => '比赛报名',
+        36 => '退出游戏',
+        37 => '小盲',
+        38 => '大盲',
     ];
 
     protected function title()
@@ -102,7 +115,7 @@ class changeGoldRecordController extends AdminController
                 $query->where('time', '>', $time);
             }, ___('startTimes'))->datetime();
             $filter->where(function ($query) {
-                $time = strtotime($this->input) * 1000 ;
+                $time = strtotime($this->input) * 1000;
                 $query->where('time', '<', $time);
             }, ___('endTimes'))->datetime();
         });
@@ -126,11 +139,19 @@ class changeGoldRecordController extends AdminController
         $grid->column('nowMoney', ___('NowMoney'));
 
         $_this = $this;
-        $grid->column('sourceType', ___('changeReason'))->display(function() use($_this){
-            return @_i($_this->sourceTypes[$this->sourceType]);
+        $grid->column('sourceType', ___('changeReason'))->display(function () use ($_this) {
+            if (in_array($this->sourceType, [32, 35])) {
+                $info = [
+                    401 => '单桌',
+                    402 => '双人'
+                ];
+                return @_i($info[json_decode($this->param, true)[0]]);
+            }else{
+                return @_i($_this->sourceTypes[$this->sourceType]);
+            }
         });
         $grid->column('time', ___('Time'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
 
         return $grid;

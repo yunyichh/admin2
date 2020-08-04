@@ -7,9 +7,11 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Grid\Displayers\Actions;
 use Illuminate\Support\Facades\DB;
 use App\Admin\Actions\Event\Add as eAdd;
 use App\Admin\Actions\Event\Delete as eDelete;
+use App\Admin\Actions\Event\Awards as eAwards;
 
 class eventManagementController extends AdminController
 {
@@ -49,13 +51,19 @@ class eventManagementController extends AdminController
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
         $grid->disableFilter();
-        $grid->disableActions();
-
+        $grid->disableRowSelector();
         $grid->tools(function (Grid\Tools $tools) {
-            $tools->append(new eDelete());
+//            $tools->append(new eDelete());
             $tools->append(new eAdd());
-
+//            $tools->append(new eAwards());
+       });
+        $grid->actions(function($actions){
+            $actions->disableDelete();
+            $actions->disableEdit();
+            $actions->disableView();
+            $actions->add(new eDelete);
         });
+
 
         $grid->column('id', ___('gameId'));
         $grid->column('apply_time', ___('Apply time'))->display(function ($time) {

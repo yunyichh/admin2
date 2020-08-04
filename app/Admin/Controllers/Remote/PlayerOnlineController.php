@@ -43,13 +43,21 @@ class PlayerOnlineController extends AdminController
             $filter->like('starNO', ___('StarNO'));
             $filter->like('accountName', ___('AccountName'));
         });
+
         //track没有实时更新
-        $grid->model()->where('robotFlag', 0)->where('track', '>', 0)->orderBy('loginTime', 'desc');
+        $grid->model()->where('robotFlag', 0)->where('track', '>=', 0)->orderBy('loginTime', 'desc');
         $grid->column('starNO', ___('StarNO'));
 //        $grid->column('accountId', ___('AccountId'));
         $grid->column('accountName', ___('AccountName'));
         $grid->column('nickName', ___('NickName'));
-        $grid->column('regSource', ___('regSource'));
+        $grid->column('track', ___('status'))->display(function () {
+            $track = [
+                -1 => '离线',
+                0 => '大厅',
+                1 => '德州扑克游戏中',
+            ];
+            return @_i($track[$this->track]);
+        });
 //        $grid->column('accountPassword', ___('AccountPassword'));
 //        $grid->column('accountType', ___('AccountType'));
 //        $grid->column('age', ___('Age'));
@@ -59,12 +67,10 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
 
         $grid->column('wLSocreToday', ___('wLSocreToday'))->display(function () {
-            $time = time() * 1000 ;
-            $winLoseToday = $this->gameLog2()->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000))->sum('money');
+            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())))->where('time', '<', ((time()) + (24 * 60 * 60)) * 1000)->sum('money');
             return $winLoseToday;
         });
         $grid->column('wLScore', ___('wLScore'))->display(function () {
-            $time = time() * 1000 ;
             $winLoseToday = $this->gameLog2()->sum('money');
             return $winLoseToday;
         });
@@ -72,6 +78,7 @@ class PlayerOnlineController extends AdminController
             if ($this->track == -1 || $this->track == 0) {
                 return @json_decode($this->wallet, true)['goldMoney'];
             } elseif ($this->track == 1) {
+                //德州扑克游戏中
                 $money = @json_decode($this->player2, true)['money'];
                 if ($money == 0)
                     $money = json_decode($this->wallet, true)['goldMoney'];
@@ -86,7 +93,7 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('serviceGameId', ___('ServiceGameId'));
 
         $grid->column('loginTime', ___('LoginTime'))->display(function ($time) {
-            return date("Y-m-d H:i:s", (int)substr($time, 0, 10) );
+            return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));
