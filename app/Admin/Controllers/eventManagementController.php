@@ -72,10 +72,7 @@ class eventManagementController extends AdminController
         $grid->column('end_time', ___('End time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
-        $grid->column('game_id', ___('Game id'))->display(function(){
-            $gameName = [1 => _i('µÂÖÝÆË¿Ë')];
-            return $gameName[$this->game_id];
-        });
+        $grid->column('game_id', ___('Game id'));
         $grid->column('apply_cost', ___('Apply cost'));
 //        $grid->column('open_num', ___('Open num'));
 //        $grid->column('differ_hour', ___('Differ hour'));
