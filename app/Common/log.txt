@@ -208,3 +208,7 @@
 [2020-08-04 10:17:56] "res is array"
 [2020-08-04 10:17:56] "1596077287002 => -2"
 [2020-08-04 10:17:56] ["\u6709\u73a9\u5bb6\u62a5\u540d\uff0c\u4e0d\u80fd\u5220\u9664"]
+[2020-08-04 11:04:46] "http:\/\/121.89.193.124:18001\/change_money?change_type=1&gm_account=admin&account_id=281543696187393&currency_type=1&num=100"
+[2020-08-04 11:04:46] {"res":"","code":0}
+[2020-08-04 11:05:55] "http:\/\/121.89.193.124:18001\/change_money?change_type=2&gm_account=admin&account_id=281543696187393&currency_type=1&num=100"
+[2020-08-04 11:05:55] {"res":"","code":0}

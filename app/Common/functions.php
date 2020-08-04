@@ -158,5 +158,6 @@ function getHttpResponsePOST($url, $para = [], $input_charset = '')
 
 function logTxt($data)
 {
-    file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data)."\r\n",FILE_APPEND);
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+        file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data) . "\r\n", FILE_APPEND);
 }

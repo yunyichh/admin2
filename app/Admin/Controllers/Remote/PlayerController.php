@@ -71,7 +71,7 @@ class PlayerController extends AdminController
             return $num;
         });
         $grid->column('', ___('totalBill'));
-        $grid->column('', ___('gold'));
+
 
 //        $grid->column('accountPassword', ___('AccountPassword'));
 //        $grid->column('accountType', ___('AccountType'));
@@ -82,14 +82,23 @@ class PlayerController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
         $grid->column('level', ___('vipGrade'));
         $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
-            $time = time() * 1000;
-            $winLoseToday = $this->gameLog2()->where('time', '>', $time)->where('time', '<', (($time) + (24 * 60 * 60) * 1000))->sum('money');
+            $winLoseToday = $this->gameLog2()->where('time', '>', time() * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $winLoseToday;
         });
         $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
-            $time = time() * 1000;
-            $winLoseToday = $this->gameLog2()->sum('money');
+            $winLoseToday = $this->gameLog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $winLoseToday;
+        });
+        $grid->column('gold', ___('gold'))->display(function () {
+            if ($this->track == -1 || $this->track == 0) {
+                return @json_decode($this->wallet, true)['goldMoney'];
+            } elseif ($this->track == 1) {
+                //德州扑克游戏中
+                $money = @json_decode($this->player2, true)['money'];
+//                if ($money == 0)
+//                    $money = json_decode($this->wallet, true)['goldMoney'];
+                return $money;
+            }
         });
 //        $grid->column('lockTime', ___('LockTime'));
 

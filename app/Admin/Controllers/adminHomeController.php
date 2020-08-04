@@ -30,7 +30,7 @@ class adminHomeController extends AdminController
         $data['activeUserToday'] = DB::connection('mysql3')->table('accountloginlogentity', 'al')->leftJoin('accountentity as ac', 'al.accountId', '=', 'ac.accountId')->where('ac.robotFlag', 0)->whereBetween('al.time', [
             strtotime(date("Y-m-d"), time()) * 1000,
             (strtotime(date("Y-m-d"), time()) + 24 * 60 * 60) * 1000,
-        ])->distinct('al.ip')->count();
+        ])->distinct('ac.accountId')->count();
         DB::table('admin_home')->update($data);
     }
 

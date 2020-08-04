@@ -67,11 +67,11 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
 
         $grid->column('wLSocreToday', ___('wLSocreToday'))->display(function () {
-            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', ((time()) + (24 * 60 * 60)) * 1000)->sum('money');
+            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $winLoseToday;
         });
         $grid->column('wLScore', ___('wLScore'))->display(function () {
-            $winLoseToday = $this->gameLog2()->sum('money');
+            $winLoseToday = $this->gameLog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $winLoseToday;
         });
         $grid->column('leftGold', ___('leftGold'))->display(function () {
@@ -80,8 +80,8 @@ class PlayerOnlineController extends AdminController
             } elseif ($this->track == 1) {
                 //德州扑克游戏中
                 $money = @json_decode($this->player2, true)['money'];
-                if ($money == 0)
-                    $money = json_decode($this->wallet, true)['goldMoney'];
+//                if ($money == 0)
+//                    $money = json_decode($this->wallet, true)['goldMoney'];
                 return $money;
             }
         });
