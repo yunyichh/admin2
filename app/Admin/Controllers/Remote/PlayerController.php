@@ -71,7 +71,7 @@ class PlayerController extends AdminController
             return $num;
         });
         $grid->column('', ___('totalBill'));
-        $grid->column('', ___('jetton'));
+        $grid->column('', ___('gold'));
 
 //        $grid->column('accountPassword', ___('AccountPassword'));
 //        $grid->column('accountType', ___('AccountType'));

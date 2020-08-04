@@ -67,7 +67,7 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
 
         $grid->column('wLSocreToday', ___('wLSocreToday'))->display(function () {
-            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())))->where('time', '<', ((time()) + (24 * 60 * 60)) * 1000)->sum('money');
+            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', ((time()) + (24 * 60 * 60)) * 1000)->sum('money');
             return $winLoseToday;
         });
         $grid->column('wLScore', ___('wLScore'))->display(function () {
