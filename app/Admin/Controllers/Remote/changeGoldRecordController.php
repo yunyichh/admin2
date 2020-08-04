@@ -143,9 +143,9 @@ class changeGoldRecordController extends AdminController
             if (in_array($this->sourceType, [32, 35])) {
                 $info = [
                     401 => '单桌',
-                    402 => '双人桌报名'
+                    402 => '双人桌'
                 ];
-                return @_i($info[json_decode($this->param, true)[0]]);
+                return @_i($info[json_decode($this->param, true)[0]].$_this->sourceTypes[$this->sourceType]);
             }else{
                 return @_i($_this->sourceTypes[$this->sourceType]);
             }
