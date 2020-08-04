@@ -212,3 +212,9 @@
 [2020-08-04 11:04:46] {"res":"","code":0}
 [2020-08-04 11:05:55] "http:\/\/121.89.193.124:18001\/change_money?change_type=2&gm_account=admin&account_id=281543696187393&currency_type=1&num=100"
 [2020-08-04 11:05:55] {"res":"","code":0}
+[2020-08-04 12:00:48] "http:\/\/121.89.193.124:18001\/change_money?gm_account=admin&account_id=281543696187393&currency_type=1&num=100"
+[2020-08-04 12:00:48] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-04 12:02:34] "http:\/\/121.89.193.124:18001\/change_money?gm_account=admin&account_id=281543696187393&currency_type=2&num=100"
+[2020-08-04 12:02:34] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-04 12:03:35] "http:\/\/121.89.193.124:18001\/change_money?gm_account=admin&account_id=281543696187393&currency_type=1&num=100&change_type=2"
+[2020-08-04 12:03:35] {"res":"","code":0}

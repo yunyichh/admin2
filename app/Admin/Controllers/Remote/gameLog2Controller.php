@@ -81,9 +81,9 @@ class gameLog2Controller extends AdminController
         $grid->column('scoreWin', ___('scoreWin'))->display(function () {
             return intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
         });
-        $grid->column('scoreLose', ___('scoreLose'))->display(function () {
-            return -intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
-        });
+//        $grid->column('scoreLose', ___('scoreLose'))->display(function () {
+//            return -intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
+//        });
 
         $grid->column('inventory', ___('leftGold2'))->display(function () {
             return intval(getColumnData($this->gamelog, $this->accountId)['money']);

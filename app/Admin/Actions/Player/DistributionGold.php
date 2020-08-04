@@ -12,12 +12,18 @@ class DistributionGold extends RowAction
 
     public function handle(Model $model, Request $request)
     {
-        $data['change_type'] = $request->get('change_type');
+//        $data['change_type'] = $request->get('change_type');
         $data['gm_account'] = \Admin::user()->username;
         $data['account_id'] = $model->accountId;
         $data['currency_type'] = $request->get('currency_type');
         $data['num'] = $request->get('num');
-
+        if ($data['num'] > 0) {
+            $data['change_type'] = 1;
+        }
+        if ($data['num'] < 0) {
+            $data['change_type'] = 2;
+        }
+        $data['num'] = abs($data['num']);
         $url = getUrl('changeMoney') . '?' . http_build_query($data);
         logTxt($url);
         $client = new \GuzzleHttp\Client();
@@ -44,9 +50,8 @@ class DistributionGold extends RowAction
 
     public function form()
     {
-
-        $this->select('change_type', '修改类型')->options([1 => '添加', 2 => '减少'])->default(1)->rules('required');
+//        $this->select('change_type', '修改类型')->options([1 => '添加', 2 => '减少'])->default(1)->rules('required');
         $this->select('currency_type', '类型')->options([1 => '金币', 2 => '钻石'])->default(1)->rules('required');
-        $this->text('num', '发放数量')->rules('required|int');
+        $this->text('num', '数量')->rules('required|int');
     }
 }
