@@ -47,7 +47,6 @@ class gamblingQuery extends AdminController
             return trim($this->tableCards, '[],');
         });
 //        $grid->column('tableId', ___('TableId'));
-
         $tableSeatStr = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
         foreach ($tableSeatStr as $item) {
             $strItem = (string)$item;
@@ -57,13 +56,12 @@ class gamblingQuery extends AdminController
                 $text = null;
 //                $card = ['∫ÏÃ“'=>'?','∫⁄Ã“'=>'?','√∑ª®'=>'?','∑ΩøÈ'=>'?'];
                 if (!empty($seat['winOrLoseMoney']))
-                    $text = "<span>" . _i(' ‰”Æ≥Ô¬Î:') . $seat['winOrLoseMoney'] . "</span><br>";
+                    $text = _i(' ‰”Æ≥Ô¬Î:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
                 if (!empty($seat['cbHandData']))
-                    $text .= "<span>" . _i('  ÷≈∆:') . trim($seat['cbHandData'],'[],') . "</span>";
+                    $text .= _i('  ÷≈∆:') . "<span>" . trim($seat['cbHandData'], '[],') . "</span>";
                 return $text;
             });
         }
-
 
         $grid->column('time', ___('Time'))->display(function () {
             return date('Y-m-d H:i:s', ($this->time) / 1000);
