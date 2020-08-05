@@ -36,7 +36,7 @@ class eventManagementController extends AdminController
         logTxt($url);
         $result = json_decode(getHttpResponseGET($url), true);
         foreach ($result as $k => $v) {
-            $result[$k]['award'] = serialize($v['award']);
+            @$result[$k]['award'] = serialize($v['award']);
         }
         logTxt($result);
         if (!empty($result)) {

@@ -54,7 +54,7 @@ class gamblingQuery extends AdminController
                 //{"accountId":281543696188492,"bGamed":true,"winOrLoseMoney":20,"betMoney":50,"money":5819,"integral":0,"cbHandData":"[√∑ª®5,∫⁄Ã“2,]","seatId":1,"actState":4}
                 $seat = json_decode($this->{(string)$strItem}, true);
                 $text = null;
-//                $card = ['∫ÏÃ“'=>'?','∫⁄Ã“'=>'?','√∑ª®'=>'?','∑ΩøÈ'=>'?'];
+//                $card = ['∫ÏÃ“' => "?", '∫⁄Ã“' => '?', '√∑ª®' => '?', '∑ΩøÈ' => '?'];
                 if (!empty($seat['winOrLoseMoney']))
                     $text = _i(' ‰”Æ≥Ô¬Î:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
                 if (!empty($seat['cbHandData']))
