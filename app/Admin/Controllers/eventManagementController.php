@@ -33,7 +33,12 @@ class eventManagementController extends AdminController
         }
 
         $url = getUrl('eventManagementSelect');
+        logTxt($url);
         $result = json_decode(getHttpResponseGET($url), true);
+        foreach ($result as $k => $v) {
+            $result[$k]['award'] = serialize($v['award']);
+        }
+        logTxt($result);
         if (!empty($result)) {
             DB::table('event_management')->truncate();
             DB::table('event_management')->insert($result);
@@ -73,6 +78,16 @@ class eventManagementController extends AdminController
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
         $grid->column('game_id', ___('Game id'));
+        $grid->column('apply_size', ___('apply size'));
+        $grid->column('join_size', ___('join size'));
+        $grid->column('award', ___('Award'))->display(function () {
+            $award = unserialize($this->award);
+            $textAward = null;
+            foreach ($award as $item) {
+                $textAward .= _i('第' .  $item['rank'][0] . '名' . (( $item['rank'][0] !=  $item['rank'][1]) ? ('到第' .  $item['rank'][1] . "名") : "") . ':' . $item['award'] ). "<br>";
+            }
+            return $textAward;
+        });
         $grid->column('apply_cost', ___('Apply cost'));
 //        $grid->column('open_num', ___('Open num'));
 //        $grid->column('differ_hour', ___('Differ hour'));

@@ -6,6 +6,31 @@
  * Time: 17:21
  */
 return [
+
+    'totalRegister' => '总注册人数',
+    'increasedToday' => '当日新增人数',
+    'totalRecharge' => '总充值金额',
+    'rechargeToday' => '当日充值金额',
+    'totalRechargeNum' => '总充值数',
+    'rechargeNumToday' => '当日新增充值数',
+    'activeUserToday' => '当日活跃用户',
+    'totalWinLoseRatio' => '总输赢比',
+    'winLoseRatioToday' => '当日输赢比',
+    'firstDownloadNum' => '当日下载',
+    'nextDayLogin' => '次日登录',
+    'threeDaysLogin' => '三日登录',
+    'fourDaysLogin' => '四日登录',
+    'fiveDaysLogin' => '五日登录',
+    'sixDaysLogin' => '六日登录',
+    'sevenDaysLogin' => '七日登录',
+
+    'wCode' => '洗码',
+    'channel' => '渠道',
+    'channelIn' => '带入筹码量总数',
+    'channelOut' => '带出筹码量总数',
+    'direct' => '直推',
+
+
     'id' => 'ID',
     'accountId' => '账号',
     'accountName' => '账户名',
@@ -69,6 +94,7 @@ return [
 
     'playId' => '明星号',
     'winOrlose' => '输赢金币',
+    'winOrloseScore' => '输赢分数',
     'time' => '时间',
     'multiple' => '倍数',
     'gameId' => '游戏ID',
@@ -221,6 +247,19 @@ return [
     'differ_hour' => '间隔时间',
     'award' => '奖励',
     'charge' => '手续费',
+    'apply_size' => '报名人数',
+    'join_size' => '参加人数',
+
+
+    'onlyId' => '房间号',
+    'tableCards' => '公牌',
+    'tableSeat1Str1' => '游戏人员1',
+    'tableSeat1Str2' => '游戏人员2',
+    'tableSeat1Str3' => '游戏人员3',
+    'tableSeat1Str4' => '游戏人员4',
+    'tableSeat1Str5' => '游戏人员5',
+    'tableSeat1Str6' => '游戏人员6',
+    'tableSeat1Str7' => '游戏人员7',
 
 
     'totalWin' => '累计下注',
@@ -273,22 +312,6 @@ return [
     'inverse' => '反水',
     'discount' => '优惠',
 
-    'totalRegister' => '总注册人数',
-    'increasedToday' => '当日新增人数',
-    'totalRecharge' => '总充值金额',
-    'rechargeToday' => '当日充值金额',
-    'totalRechargeNum' => '总充值数',
-    'rechargeNumToday' => '当日新增充值数',
-    'activeUserToday' => '当日活跃用户',
-    'totalWinLoseRatio' => '总输赢比',
-    'winLoseRatioToday' => '当日输赢比',
-    'firstDownloadNum' => '当日下载',
-    'nextDayLogin' => '次日登录',
-    'threeDaysLogin' => '三日登录',
-    'fourDaysLogin' => '四日登录',
-    'fiveDaysLogin' => '五日登录',
-    'sixDaysLogin' => '六日登录',
-    'sevenDaysLogin' => '七日登录',
 
     'rechargeNum' => '充值数量',
     'rechargeAt' => '充值时间',

@@ -56,7 +56,7 @@ class gameLog2Controller extends AdminController
             $action->disableDelete();
         });
 //        $grid->column('id', ___('Id'));
-        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0)->orderBy('time','desc');
+        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0)->orderBy('time', 'desc');
         $grid->column('starNO', ___('gameId'))->display(function () {
             $account = @$this->account['starNO'];
             return $account;
@@ -70,24 +70,39 @@ class gameLog2Controller extends AdminController
             return $gameName[$this->gameId];
         });
         //{"accountId":281543696188447,"bGamed":true,"winOrLoseMoney":-30,"betMoney":30,"money":138,"integral":0,"cbHandData":"[黑桃K,黑桃2,]","seatId":1,"actState":2}
-        $grid->column('oldMoney', ___('scoreBeforeGame'));
 
-        $grid->column('scoreAfterGame', ___('scoreAfterGame'))->display(function () {
+        $grid->column('tableCfgIf', ___('status'))->display(function () {
+            $status = [
+                401 => '单桌',
+                402 => '双人桌',
+                403 => '周赛',
+                'other' => '自由桌'
+            ];
+            if (in_array($this->tableCfgId, array_keys($status))) {
+                return _i($status[$this->tableCfgId]);
+            } else {
+                return _i($status['other']);
+            }
+        });
+        $grid->column('scoreAfterGame', ___('leftGold2'))->display(function () {
             return intval(getColumnData($this->gamelog, $this->accountId)['money']);
         });
+
+        $grid->column('oldMoney', ___('oldMoney'));
+
         $grid->column('scoreBet', ___('scoreBet'))->display(function () {
             return intval(getColumnData($this->gamelog, $this->accountId)['betMoney']);
         });
-        $grid->column('scoreWin', ___('scoreWin'))->display(function () {
+        $grid->column('scoreWin', ___('winOrloseScore'))->display(function () {
             return intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
         });
 //        $grid->column('scoreLose', ___('scoreLose'))->display(function () {
 //            return -intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
 //        });
-
-        $grid->column('inventory', ___('leftGold2'))->display(function () {
-            return intval(getColumnData($this->gamelog, $this->accountId)['money']);
-        });
+//
+//        $grid->column('inventory', ___('leftGold2'))->display(function () {
+//            return intval(getColumnData($this->gamelog, $this->accountId)['money']);
+//        });
         $grid->column('time', ___('Time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();

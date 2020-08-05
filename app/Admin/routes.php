@@ -41,6 +41,8 @@ Route::group([
     $router->resource('championships-configurations', championshipsConfigurationController::class);
     $router->resource('event-managements', eventManagementController::class);
     $router->resource('event-management-awards', eventManagementAwardsController::class);
+    $router->resource('gambling-query', Remote\gamblingQuery::class);//ÅÆ¾Ö
+
 
     $router->resource('public-managements', publicManagementController::class);
     $router->resource('active-datas', activeDataController::class);

@@ -31,6 +31,14 @@ class adminHomeController extends AdminController
             strtotime(date("Y-m-d"), time()) * 1000,
             (strtotime(date("Y-m-d"), time()) + 24 * 60 * 60) * 1000,
         ])->distinct('ac.accountId')->count();
+        $data['wCode'] = DB::connection('mysql3')->table('changegoldrecordentity')->whereNotIn('sourceType', [27, 28, 29])->sum('changeMoney');
+        $channelIn = DB::connection('mysql3')->table('agentaccountloginlogentity')->sum('money');
+        $channelOut = 0;
+        $chan = DB::connection('mysql3')->table('agentoperationlogentity')->where('operationType', 'low_score')->pluck('param');
+        foreach ($chan as $value) {
+            $channelOut += @explode('|', $value)[1];
+        }
+        $data['channel'] = $channelIn . ',' . $channelOut;
         DB::table('admin_home')->update($data);
     }
 
@@ -41,7 +49,6 @@ class adminHomeController extends AdminController
      */
     protected function grid()
     {
-
         $_data = (array)DB::table('admin_home')->find(1);
         $data = array_combine(array_keys($_data), array_values($_data));
         return view('admin.home', $data);

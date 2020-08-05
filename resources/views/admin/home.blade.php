@@ -47,16 +47,19 @@
         <div class="board-column">{{ ___('totalRegister') }}:{{ $totalRegister }}</div>
         <div class="board-column">{{ ___('rechargeToday') }}:{{ $rechargeToday }}</div>
         <div class="board-column">{{ ___('activeUserToday') }}:{{ $activeUserToday }}</div>
+        <div class="board-column">{{ ___('wCode') }}:{{ $wCode }}</div>
     </div>
     <div class="board-row">
         <div class="board-column">{{ ___('increasedToday') }}:{{ $increasedToday }}</div>
         <div class="board-column">{{ ___('totalRechargeNum') }}:{{ $totalRechargeNum }}</div>
         <div class="board-column">{{ ___('totalWinLoseRatio') }}:{{ $totalWinLoseRatio }}</div>
+        <div class="board-column">{{ ___('channel') }}:{{ $channel }}</div>
     </div>
     <div class="board-row">
         <div class="board-column">{{ ___('totalRecharge') }}:{{ $totalRecharge }}</div>
         <div class="board-column">{{ ___('rechargeNumToday') }}:{{ $rechargeNumToday }}</div>
         <div class="board-column">{{ ___('winLoseRatioToday') }}:{{ $winLoseRatioToday }}</div>
+        <div class="board-column">{{ ___('direct') }}:{{ $direct }}</div>
     </div>
 
 </div>
