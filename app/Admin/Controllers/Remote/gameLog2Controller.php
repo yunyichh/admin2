@@ -56,7 +56,7 @@ class gameLog2Controller extends AdminController
             $action->disableDelete();
         });
 //        $grid->column('id', ___('Id'));
-        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0);
+        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0)->orderBy('time','desc');
         $grid->column('starNO', ___('gameId'))->display(function () {
             $account = @$this->account['starNO'];
             return $account;
