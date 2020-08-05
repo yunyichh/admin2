@@ -9,6 +9,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Admin\Actions\Player\DistributionGold;
 use App\Admin\Actions\Player\EditPhone;
+use Encore\Admin\Auth\Permission;
 
 class PlayerController extends AdminController
 {
@@ -18,8 +19,6 @@ class PlayerController extends AdminController
      * @var string
      */
     protected $title = 'App\Remote\Player';
-
-    public static $base_uri = 'http://127.0.0.1:8001/';
 
     protected function title()
     {

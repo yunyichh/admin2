@@ -56,14 +56,14 @@ class eventManagementController extends AdminController
 //            $tools->append(new eDelete());
             $tools->append(new eAdd());
 //            $tools->append(new eAwards());
-       });
-        $grid->actions(function($actions){
+        });
+        $grid->actions(function ($actions) {
             $actions->disableDelete();
             $actions->disableEdit();
             $actions->disableView();
             $actions->add(new eDelete);
         });
-
+        $grid->model()->orderBy('apply_time', 'desc');
 
         $grid->column('id', ___('gameId'));
         $grid->column('apply_time', ___('Apply time'))->display(function ($time) {

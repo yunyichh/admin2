@@ -62,7 +62,7 @@ return [
 
         'namespace' => 'App\\Admin\\Controllers',
 
-        'middleware' => ['web', 'admin'],
+        'middleware' => ['web', 'admin','admin.permission:allow,agent,administrator'],
     ],
 
     /*
@@ -154,7 +154,7 @@ return [
     'upload' => [
 
         // Disk in `config/filesystem.php`.
-        'disk' => 'admin',
+        'disk' => 'local',
 
         // Image and file upload path under the disk above.
         'directory' => [

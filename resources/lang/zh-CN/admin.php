@@ -103,4 +103,11 @@ return [
     'prev' => '上一步',
     'next' => '下一步',
     'quick_create' => '快速创建',
+
+    'admin' => [
+        'money' => '金币',
+        'aesKey' => 'aesKey',
+        'agentId' => '代理id',
+        'md5Key' => 'md5Key',
+    ]
 ];

@@ -5,6 +5,7 @@ namespace Encore\Admin\Controllers;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 
 class UserController extends AdminController
 {
@@ -31,6 +32,10 @@ class UserController extends AdminController
         $grid->column('username', trans('admin.username'));
         $grid->column('name', trans('admin.name'));
         $grid->column('roles', trans('admin.roles'))->pluck('name')->label();
+        $grid->column('money', ___('money'))->rules('required');
+        $grid->column('aesKey', ___('aesKey'))->rules('required');
+        $grid->column('agentId', ___('agentId'))->rules('required');
+        $grid->column('md5Key', ___('md5Key'))->rules('required');
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -93,6 +98,15 @@ class UserController extends AdminController
         $userTable = config('admin.database.users_table');
         $connection = config('admin.database.connection');
 
+        $id  = function (Request $request){
+          return $request->url();
+        };
+        dump($id);die;
+
+        $form->text('money', ___('money'))->rules('required');
+        $form->text('aesKey', ___('aesKey'))->rules('required');
+        $form->text('agentId', ___('agentId'))->rules('required');
+        $form->text('md5Key', ___('md5Key'))->rules('required');
         $form->display('id', 'ID');
         $form->text('username', trans('admin.username'))
             ->creationRules(['required', "unique:{$connection}.{$userTable}"])

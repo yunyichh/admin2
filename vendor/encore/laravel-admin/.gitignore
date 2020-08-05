@@ -1,6 +1,7 @@
 .DS_Store
 phpunit.phar
 /vendor
+!/vendor/encore/laravel-admin/src
 composer.phar
 composer.lock
 *.project

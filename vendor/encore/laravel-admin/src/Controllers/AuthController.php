@@ -127,8 +127,6 @@ class AuthController extends Controller
         $class = config('admin.database.users_model');
 
         $form = new Form(new $class());
-
-        $form->display('username', trans('admin.username'));
         $form->text('name', trans('admin.name'))->rules('required');
         $form->image('avatar', trans('admin.avatar'));
         $form->password('password', trans('admin.password'))->rules('confirmed|required');

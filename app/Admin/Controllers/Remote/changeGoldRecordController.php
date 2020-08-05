@@ -123,7 +123,7 @@ class changeGoldRecordController extends AdminController
 
 //        $grid->column('id', ___('Id'));
 
-        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'changegoldrecordentity.accountId')->where('accountentity.robotFlag', 0);
+        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'changegoldrecordentity.accountId')->where('accountentity.robotFlag', 0)->whereNotIn('changegoldrecordentity.sourceType', [33, 36])->orderBy('changegoldrecordentity.time','desc');
 
         $grid->column('starNO', ___('gameId'))->display(function () {
             $account = @$this->account['starNO'];
@@ -145,8 +145,8 @@ class changeGoldRecordController extends AdminController
                     401 => 'µ¥×À',
                     402 => 'Ë«ÈË×À'
                 ];
-                return @_i($info[json_decode($this->param, true)[0]].$_this->sourceTypes[$this->sourceType]);
-            }else{
+                return @_i($info[json_decode($this->param, true)[0]] . $_this->sourceTypes[$this->sourceType]);
+            } else {
                 return @_i($_this->sourceTypes[$this->sourceType]);
             }
         });

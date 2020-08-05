@@ -328,5 +328,10 @@ return [
 
     'completeTime' => '完成时间',
 
+    'money' => '金币',
+    'aesKey' => 'aesKey',
+    'agentId' => '代理id',
+    'md5Key' => 'md5Key',
+
 
 ];
