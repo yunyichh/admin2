@@ -6,6 +6,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Http\Request;
+use Encore\Admin\Actions\Action;
 
 class UserController extends AdminController
 {
@@ -32,10 +33,10 @@ class UserController extends AdminController
         $grid->column('username', trans('admin.username'));
         $grid->column('name', trans('admin.name'));
         $grid->column('roles', trans('admin.roles'))->pluck('name')->label();
-        $grid->column('money', ___('money'))->rules('required');
-        $grid->column('aesKey', ___('aesKey'))->rules('required');
-        $grid->column('agentId', ___('agentId'))->rules('required');
-        $grid->column('md5Key', ___('md5Key'))->rules('required');
+        $grid->column('money', ___('money'));
+        $grid->column('aesKey', ___('aesKey'));
+        $grid->column('agentId', ___('agentId'));
+        $grid->column('md5Key', ___('md5Key'));
         $grid->column('created_at', trans('admin.created_at'));
         $grid->column('updated_at', trans('admin.updated_at'));
 
@@ -98,15 +99,12 @@ class UserController extends AdminController
         $userTable = config('admin.database.users_table');
         $connection = config('admin.database.connection');
 
-        $id  = function (Request $request){
-          return $request->url();
-        };
-        dump($id);die;
+        $agent = $this->createAgent();
+        $form->text('money', ___('money'))->default(@$agent['money'])->rules('required');
+        $form->text('aesKey', ___('aesKey'))->default(@$agent['aesKey'])->rules('required');
+        $form->text('agentId', ___('agentId'))->default(@$agent['id'])->rules('required');
+        $form->text('md5Key', ___('md5Key'))->default(@$agent['md5Key'])->rules('required');
 
-        $form->text('money', ___('money'))->rules('required');
-        $form->text('aesKey', ___('aesKey'))->rules('required');
-        $form->text('agentId', ___('agentId'))->rules('required');
-        $form->text('md5Key', ___('md5Key'))->rules('required');
         $form->display('id', 'ID');
         $form->text('username', trans('admin.username'))
             ->creationRules(['required', "unique:{$connection}.{$userTable}"])
@@ -135,5 +133,26 @@ class UserController extends AdminController
         });
 
         return $form;
+    }
+
+    function createAgent()
+    {
+        $url = getUrl('create_agent');
+        logTxt($url);
+        $result = getHttpResponseGET($url);
+        $result = json_decode($result, true);
+        logTxt($result);
+        $codeMsg = [
+            0 => '成功',
+            -1 => '服务器生成id错误',
+            -2 => '服务器创建账号错误'
+        ];
+        if ($result['code'] == 0) {
+            return $result['res'];
+        } else {
+            return function (Action $action) use ($codeMsg, $result) {
+                $action->response()->error(@$codeMsg[$result['code']])->refresh();
+            };
+        }
     }
 }

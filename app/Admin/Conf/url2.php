@@ -12,8 +12,8 @@ return [
     //获取赛事
     'eventManagementSelect' => 'http://121.89.193.124:18001/selectGame',
 
-    'create_agent' => 'http://127.0.0.1:8001/create_agent',
-    'select_agent' => 'http://127.0.0.1:8001/select_agent',
-    'change_agent_money' => 'http://127.0.0.1:8001/change_agent_money',
+    'create_agent' => 'http://192.168.1.23:8001/create_agent',
+    'select_agent' => 'http://192.168.1.23:8001/select_agent',
+    'change_agent_money' => 'http://192.168.1.23:8001/change_agent_money',
     
 ];
