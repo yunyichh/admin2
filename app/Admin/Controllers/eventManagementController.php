@@ -83,9 +83,10 @@ class eventManagementController extends AdminController
         $grid->column('award', ___('Award'))->display(function () {
             $award = unserialize($this->award);
             $textAward = null;
-            foreach ($award as $item) {
-                $textAward .= _i('第' .  $item['rank'][0] . '名' . (( $item['rank'][0] !=  $item['rank'][1]) ? ('到第' .  $item['rank'][1] . "名") : "") . ':' . $item['award'] ). "<br>";
-            }
+            if (!empty($award))
+                foreach ($award as $item) {
+                    $textAward .= _i('第' . $item['rank'][0] . '名' . (($item['rank'][0] != $item['rank'][1]) ? ('到第' . $item['rank'][1] . "名") : "") . ':' . $item['award']) . "<br>";
+                }
             return $textAward;
         });
         $grid->column('apply_cost', ___('Apply cost'));
