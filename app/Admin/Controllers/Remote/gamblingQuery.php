@@ -62,10 +62,9 @@ class gamblingQuery extends AdminController
                 if (!empty($seat['accountId'])) {
                     //                    $text .= _i(' 账号ID:') . "<br><span>" . number_format($seat['accountId'],0,'','') . "</span><br>";
                     //不合理的sql
-
-                    $starNO = DB::connection('mysql3')->table('accountentity')->where('accountId', $seat['accountId'])->value('starNO');
-                    $href = url('admin/players') . '?&starNO=' . $starNO;
-                    $text .= _i(' 游戏ID:') . "<a href='$href'>" . $starNO . "</a><br>";
+                    $account = DB::connection('mysql3')->table('accountentity')->where('accountId', $seat['accountId'])->get(['robotFlag', 'starNO'])->toArray();
+                    $href = url('admin/players') . '?&starNO=' . $account[0]->starNO;
+                    $text .= _i(' 游戏ID:') . (($account[0]->robotFlag == 0) ? ("<a href='$href'>" . $account[0]->starNO . "</a><br>") : ("<span>" . $account[0]->starNO . "</span><br>"));
                 }
                 if (!empty($seat['winOrLoseMoney']) || (isset($seat['winOrLoseMoney']) && $seat['winOrLoseMoney'] == 0))
                     $text .= _i('输赢筹码:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
