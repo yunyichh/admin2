@@ -32,8 +32,8 @@ class robotManagementController extends AdminController
         $url = getUrl('get_robot_data');
         logTxt($url);
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', $url);
-        $result = json_decode($response->getBody(), true);
+        @$response = $client->request('GET', $url);
+        $result = @json_decode($response->getBody(), true);
         logTxt($result);
         if ($result['code'] == 0) {
             DB::table('robot_management')->truncate();
