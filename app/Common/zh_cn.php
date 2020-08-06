@@ -261,6 +261,11 @@ return [
     'tableSeat1Str6' => '游戏人员6',
     'tableSeat1Str7' => '游戏人员7',
 
+    'ming' => '明牌机器人',
+    'an' => '暗牌机器人',
+    'ai_type' => '明暗牌机器人比例',
+    'join_num' => '房间机器人数限制',
+
 
     'totalWin' => '累计下注',
     'totalLose' => '累计输钱',

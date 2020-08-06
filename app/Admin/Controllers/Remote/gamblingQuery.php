@@ -7,6 +7,8 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Widgets\Table;
+use Illuminate\Support\Facades\DB;
 
 class gamblingQuery extends AdminController
 {
@@ -48,17 +50,27 @@ class gamblingQuery extends AdminController
         });
 //        $grid->column('tableId', ___('TableId'));
         $tableSeatStr = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
+
         foreach ($tableSeatStr as $item) {
+            $strItem = null;
             $strItem = (string)$item;
             $grid->column($strItem, ___($strItem))->display(function () use ($strItem) {
                 //{"accountId":281543696188492,"bGamed":true,"winOrLoseMoney":20,"betMoney":50,"money":5819,"integral":0,"cbHandData":"[√∑ª®5,∫⁄Ã“2,]","seatId":1,"actState":4}
                 $seat = json_decode($this->{(string)$strItem}, true);
                 $text = null;
-//                $card = ['∫ÏÃ“' => "?", '∫⁄Ã“' => '?', '√∑ª®' => '?', '∑ΩøÈ' => '?'];
-                if (!empty($seat['winOrLoseMoney']))
-                    $text = _i(' ‰”Æ≥Ô¬Î:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
+                if (!empty($seat['accountId'])) {
+                    //                    $text .= _i(' ’À∫≈ID:') . "<br><span>" . number_format($seat['accountId'],0,'','') . "</span><br>";
+                    //≤ª∫œ¿Ìµƒsql
+                    $starNO = DB::connection('mysql3')->table('accountentity')->where('accountId', $seat['accountId'])->value('starNO');
+                    $text .= _i(' ”Œœ∑ID:') . "<span>" . $starNO . "</span><br>";
+                }
+                if (!empty($seat['winOrLoseMoney']) || (isset($seat['winOrLoseMoney']) && $seat['winOrLoseMoney'] == 0))
+                    $text .= _i(' ‰”Æ≥Ô¬Î:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
                 if (!empty($seat['cbHandData']))
                     $text .= _i('  ÷≈∆:') . "<span>" . trim($seat['cbHandData'], '[],') . "</span>";
+                if (empty($seat)) {
+                    $text .= _i('');
+                }
                 return $text;
             });
         }
