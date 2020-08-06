@@ -32,12 +32,12 @@ class robotManagementController extends AdminController
         logTxt($url);
 
         $result = getHttpResponseGET($url);
-        if(strpos($result,404)!==false){
+        if (strpos($result, 404) !== false) {
             exit('ÇëÇó½Ó¿ÚÊ§°Ü');
         }
         $result = @json_decode($result, true);
         logTxt($result);
-        if ($result['code'] == 0) {
+        if (isset($result['code']) && $result['code'] == 0) {
             DB::table('robot_management')->truncate();
             DB::table('robot_management')->updateOrInsert($result['res']);
         }
