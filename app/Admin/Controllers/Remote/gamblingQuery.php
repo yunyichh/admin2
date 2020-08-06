@@ -48,7 +48,8 @@ class gamblingQuery extends AdminController
         $grid->column('tableCards', ___('TableCards'))->display(function () {
             return trim($this->tableCards, '[],');
         });
-//        $grid->column('tableId', ___('TableId'));
+//        $grid->column('tableId', ___('TableId'
+
         $tableSeatStr = ['tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
 
         foreach ($tableSeatStr as $item) {
@@ -61,8 +62,10 @@ class gamblingQuery extends AdminController
                 if (!empty($seat['accountId'])) {
                     //                    $text .= _i(' 账号ID:') . "<br><span>" . number_format($seat['accountId'],0,'','') . "</span><br>";
                     //不合理的sql
+
                     $starNO = DB::connection('mysql3')->table('accountentity')->where('accountId', $seat['accountId'])->value('starNO');
-                    $text .= _i(' 游戏ID:') . "<span>" . $starNO . "</span><br>";
+                    $href = url('admin/players') . '?&starNO=' . $starNO;
+                    $text .= _i(' 游戏ID:') . "<a href='$href'>" . $starNO . "</a><br>";
                 }
                 if (!empty($seat['winOrLoseMoney']) || (isset($seat['winOrLoseMoney']) && $seat['winOrLoseMoney'] == 0))
                     $text .= _i('输赢筹码:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
