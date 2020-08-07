@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers\Remote;
 
+use App\Admin\Actions\Player\ChangeMoneyLog;
 use App\Remote\Player;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -57,6 +58,7 @@ class PlayerController extends AdminController
             $actions->disableDelete();
             $actions->add(new DistributionGold());
             $actions->add(new EditPhone());
+            $actions->add(new ChangeMoneyLog());
         });
         $grid->disableCreateButton();
         $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');

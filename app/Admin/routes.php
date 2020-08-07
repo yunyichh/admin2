@@ -16,6 +16,8 @@ Route::group([
 //    $router->resource('advertiser', AdvertiserController::class);
 //    $router->resource('players', PlayerController::class);
     $router->resource('players', Remote\PlayerController::class);
+    $router->resource('change-money-logs', changeMoneyLogController::class);
+
 //    $router->resource('vipList', VipListController::class);
     $router->resource('game-logs', Remote\gameLog2Controller::class);
     $router->resource('vault-logs', VaultLogConroller::class);

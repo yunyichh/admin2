@@ -38,6 +38,7 @@ class adminHomeController extends AdminController
         foreach ($chan as $value) {
             $channelOut += @explode('|', $value)[1];
         }
+        $data['channel'] = _i('带入筹码量') . $channelIn . ',' . _i('带出筹码量') . $channelOut;
         $data['channel'] = $channelIn . ',' . $channelOut;
         DB::table('admin_home')->update($data);
     }
