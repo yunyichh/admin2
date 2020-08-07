@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Facades\Admin;
 
 class PlayerOnlineController extends AdminController
 {
@@ -46,6 +47,9 @@ class PlayerOnlineController extends AdminController
 
         //track没有实时更新
         $grid->model()->where('robotFlag', 0)->where('track', '>=', 0)->orderBy('loginTime', 'desc');
+        if (Admin::user()->inRoles(['agent'])) {
+            $grid->model()->where('recommended', Admin::user()->agentId);
+        }
         $grid->column('starNO', ___('StarNO'));
 //        $grid->column('accountId', ___('AccountId'));
         $grid->column('accountName', ___('AccountName'));

@@ -10,7 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Admin\Actions\Player\DistributionGold;
 use App\Admin\Actions\Player\EditPhone;
-use Encore\Admin\Auth\Permission;
+use Encore\Admin\Facades\Admin;
 
 class PlayerController extends AdminController
 {
@@ -62,6 +62,10 @@ class PlayerController extends AdminController
         });
         $grid->disableCreateButton();
         $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');
+
+        if (Admin::user()->inRoles(['agent'])) {
+            $grid->model()->where('recommended', Admin::user()->agentId);
+        }
         $grid->column('accountId', ___('AccountId'))->hide();
         $grid->column('starNO', ___('StarNO'));
         $grid->column('accountName', ___('AccountName'));

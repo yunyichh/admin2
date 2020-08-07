@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Facades\Admin;
 
 class changeGoldRecordController extends AdminController
 {
@@ -123,8 +124,10 @@ class changeGoldRecordController extends AdminController
 
 //        $grid->column('id', ___('Id'));
 
-        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'changegoldrecordentity.accountId')->where('accountentity.robotFlag', 0)->whereNotIn('changegoldrecordentity.sourceType', [33, 36])->orderBy('changegoldrecordentity.time','desc');
-
+        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'changegoldrecordentity.accountId')->where('accountentity.robotFlag', 0)->whereNotIn('changegoldrecordentity.sourceType', [33, 36])->orderBy('changegoldrecordentity.time', 'desc');
+        if (Admin::user()->inRoles(['agent'])) {
+            $grid->model()->where('accountentity.recommended', Admin::user()->agentId);
+        }
         $grid->column('starNO', ___('gameId'))->display(function () {
             $account = @$this->account['starNO'];
             return $account;

@@ -179,17 +179,18 @@ class PlayerController extends AdminController
         $grid->column('recommended', ___('recommended'));
 //        $grid->column('loginTime', ___('loginTime'));
 //        $grid->column('createTime', ___('createTime'));
-////        $grid->column('password', ___('Password'));
+//        $grid->column('password', ___('Password'));
 //        $grid->column('level', ___('Level'));
 //        $grid->column('nickName', ___('NickName'));
+
 //
 //        $grid->column('phone', ___('Phone'));
-////        $grid->column('headImg', ___('HeadImg'));
-////        $grid->column('customHeadImg', ___('CustomHeadImg'));
+//        $grid->column('headImg', ___('HeadImg'));
+//        $grid->column('customHeadImg', ___('CustomHeadImg'));
 //        $grid->column('state', ___('State'))->display(function ($state) {
 //            return $state == 0 ? '<span style="color: darkgreen">' . _i('正常') . '</span>' : "<span style='color: darkred'>" . _i('冻结/') . date("Y-m-d H:i:s", (int)substr($this->lockTime, 0, 10) + 8 * 60 * 60) . "</span>";
 //        });
-////        $grid->column('lockTime', ___('LockTime'));
+//        $grid->column('lockTime', ___('LockTime'));
 //        $grid->column('accountMoney', ___('AccountMoney'));//当前金币 携带金币 账号金币
 //        $grid->column('bankMoney', ___('BankMoney'));//常规金库 金库金币
 //

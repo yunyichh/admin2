@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Facades\Admin;
 
 class gameLog2Controller extends AdminController
 {
@@ -57,6 +58,9 @@ class gameLog2Controller extends AdminController
         });
 //        $grid->column('id', ___('Id'));
         $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0)->orderBy('time', 'desc');
+        if (Admin::user()->inRoles(['agent'])) {
+            $grid->model()->where('accountentity.recommended', Admin::user()->agentId);
+        }
         $grid->column('starNO', ___('gameId'))->display(function () {
             $account = @$this->account['starNO'];
             return $account;
