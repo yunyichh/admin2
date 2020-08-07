@@ -166,7 +166,7 @@ class PlayerController extends AdminController
 //        'recommended' => 'inviterId',
 //        'loginTime' => 'lastLoginTime',
 //        'createTime' => 'createTime'
-
+        $grid->model()->orderBy('lastLoginTime','desc');
         $grid->column('starNO', ___('StarNO'));
         $grid->column('accountId', ___('AccountId'))->style('display:none');
         $grid->column('accountName', ___('AccountName'));

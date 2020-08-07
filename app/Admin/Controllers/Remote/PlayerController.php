@@ -59,7 +59,7 @@ class PlayerController extends AdminController
             $actions->add(new EditPhone());
         });
         $grid->disableCreateButton();
-        $grid->model()->where('robotFlag', 0);
+        $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');
         $grid->column('accountId', ___('AccountId'))->hide();
         $grid->column('starNO', ___('StarNO'));
         $grid->column('accountName', ___('AccountName'));
