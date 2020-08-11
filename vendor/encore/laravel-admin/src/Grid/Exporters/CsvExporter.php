@@ -14,11 +14,11 @@ class CsvExporter extends AbstractExporter
      */
     public function export()
     {
-        $filename = $this->getTable().'.csv';
+        $filename = $this->getTable() . '.csv';
 
         $headers = [
-            'Content-Encoding'    => 'UTF-8',
-            'Content-Type'        => 'text/csv;charset=UTF-8',
+            'Content-Encoding' => 'UTF-8',
+            'Content-Type' => 'text/csv;charset=UTF-8',
             'Content-Disposition' => "attachment; filename=\"$filename\"",
         ];
 
@@ -30,13 +30,19 @@ class CsvExporter extends AbstractExporter
             $this->chunk(function ($records) use ($handle, &$titles) {
                 if (empty($titles)) {
                     $titles = $this->getHeaderRowFromRecords($records);
-
+                    foreach ($titles as $tk => $tv) {
+                        $titles[$tk] = iconv('utf-8', 'gbk', $tv);
+                    }
                     // Add CSV headers
                     fputcsv($handle, $titles);
                 }
 
                 foreach ($records as $record) {
-                    fputcsv($handle, $this->getFormattedRecord($record));
+                    $record = $this->getFormattedRecord($record);
+                    array_walk($record, function ($rv, $rk) {
+                        $record[$rk] = iconv('utf-8', 'gbk', $rv);
+                    });
+                    fputcsv($handle, $record);
                 }
             });
 

@@ -35,12 +35,12 @@ function getUrl($key = null)
 }
 
 //ÖĞÎÄ·­Òë
-function ___($key)
+function ___($key, $in_charset = 'gbk', $out_charset = 'utf-8')
 {
     $zh_cn = require __DIR__ . '/zh_cn.php';
     if (!empty($key))
         $key = strtolower(substr($key, 0, 1)) . str_replace(' ', '_', substr($key, 1));
-    return isset($zh_cn[$key]) ? iconv('gbk', 'utf-8', $zh_cn[$key]) : $key;
+    return isset($zh_cn[$key]) ? iconv($in_charset, $out_charset, $zh_cn[$key]) : $key;
 }
 
 function _i($text)

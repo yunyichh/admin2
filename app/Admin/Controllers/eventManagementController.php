@@ -90,6 +90,9 @@ class eventManagementController extends AdminController
             return $textAward;
         });
         $grid->column('apply_cost', ___('Apply cost'));
+        $grid->column('apply_cost_total', ___('Apply cost total'))->display(function () {
+            return $this->apply_size * $this->apply_cost;
+        });
 //        $grid->column('open_num', ___('Open num'));
 //        $grid->column('differ_hour', ___('Differ hour'));
 //        $grid->column('award', ___('Award'));

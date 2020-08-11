@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class gameLog2 extends Model
 {
-    protected $connection = 'mysql3';
+    protected $connection = 'mysql3';//qpplatform
     protected $table = 'gamerecordentity';
 
     public function gameLog()

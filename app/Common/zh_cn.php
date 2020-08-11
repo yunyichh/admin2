@@ -29,6 +29,9 @@ return [
     'channelIn' => '带入筹码量总数',
     'channelOut' => '带出筹码量总数',
     'direct' => '直推',
+    'wCodeToday' => '当日洗码',
+    'channelInToday' => '当日带入筹码量总数',
+    'channelOutToday' => '当日带出筹码量总数',
 
 
     'id' => 'ID',
@@ -95,6 +98,7 @@ return [
     'playId' => '明星号',
     'winOrlose' => '输赢金币',
     'winOrloseScore' => '输赢分数',
+    'cbHandData'=>'玩家手牌',
     'time' => '时间',
     'multiple' => '倍数',
     'gameId' => '游戏ID',
@@ -108,6 +112,10 @@ return [
     'faceValue' => '彩票面额',
     'winMoney' => '输赢金额',
     'valueRecord' => '彩票记录',
+
+
+
+
     'gameRecord' => '游戏记录',
     'bankRecord' => '金库记录',
     'regSource' => '注册来源',
@@ -121,6 +129,9 @@ return [
     'jettonBeforeGame' => '游戏前筹码',
     'jettonAfterGame' => '游戏后筹码',
     'amountOfPoints' => '上分数额',
+    'gameDetails' => '对局详情',
+    'winOrLoseMoney' => '输赢分数',
+    'gameDetailsView' => '查看对局详情',
 
 
     'changeMoney' => '变化金币',
@@ -243,6 +254,7 @@ return [
     'end_time' => '截止时间',
     'game_id' => '游戏ID',
     'apply_cost' => '报名费',
+    'apply_cost_total' => '累计报名费',
     'open_num' => '开启次数',
     'differ_hour' => '间隔时间',
     'award' => '奖励',
@@ -251,6 +263,11 @@ return [
     'join_size' => '参加人数',
 
 
+    'applyNum'=>'报名人数',
+    'joinNum'=>'参赛人数',
+    'ranks'=>'获奖排名',
+    'signMoney'=>'报名费',
+    'signMoneyTotal'=>'累计报名费',
     'onlyId' => '房间号',
     'tableCards' => '公牌',
     'tableSeat1Str1' => '游戏人员1',
@@ -263,8 +280,9 @@ return [
 
     'ming' => '明牌机器人',
     'an' => '暗牌机器人',
-    'ai_type' => '明暗牌机器人比例',
+    'ai_type' => '房间明暗牌机器人比例',
     'join_num' => '房间机器人数限制',
+    'startTime2' => '开始时间',
 
 
     'totalWin' => '累计下注',

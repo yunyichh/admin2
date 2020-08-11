@@ -31,15 +31,28 @@ class adminHomeController extends AdminController
             strtotime(date("Y-m-d"), time()) * 1000,
             (strtotime(date("Y-m-d"), time()) + 24 * 60 * 60) * 1000,
         ])->distinct('ac.accountId')->count();
+        //跟注 加注 allin 不要
         $data['wCode'] = DB::connection('mysql3')->table('changegoldrecordentity')->whereNotIn('sourceType', [27, 28, 29])->sum('changeMoney');
+        $data['wCodeToday'] = DB::connection('mysql3')->table('changegoldrecordentity')->whereBetween('time', [strtotime(date('Y-m-d', time())) * 1000, strtotime(date('Y-m-d', time() + 24 * 60 * 60)) * 1000])->whereNotIn('sourceType', [27, 28, 29])->sum('changeMoney');
         $channelIn = DB::connection('mysql3')->table('agentaccountloginlogentity')->sum('money');
+        $channelInToday = DB::connection('mysql3')->table('agentaccountloginlogentity')->whereBetween('time', [strtotime(date('Y-m-d', time())) * 1000, strtotime(date('Y-m-d', time() + 24 * 60 * 60)) * 1000])->sum('money');
         $channelOut = 0;
+        $channelOutToday = 0;
         $chan = DB::connection('mysql3')->table('agentoperationlogentity')->where('operationType', 'low_score')->pluck('param');
+        $chanToday = DB::connection('mysql3')->table('agentoperationlogentity')->where('operationType', 'low_score')->whereBetween('time', [strtotime(date('Y-m-d', time())) * 1000, strtotime(date('Y-m-d', time() + 24 * 60 * 60)) * 1000])->pluck('param');
         foreach ($chan as $value) {
             $channelOut += @explode('|', $value)[1];
         }
-        $data['channel'] = _i('带入筹码量') . $channelIn . '  ' . _i('带出筹码量') . $channelOut;
-        $data['channel'] = $channelIn . '  ' . $channelOut;
+        foreach ($chanToday as $value) {
+            $channelOutToday += @explode('|', $value)[1];
+        }
+        $data['channel'] = _i('带入筹码量') . $channelIn . ',' . _i('带出筹码量') . $channelOut;
+        $data['channelIn'] = $channelIn;
+        $data['channelInToday'] = $channelInToday;
+        $data['channelOut'] = $channelOut;
+        $data['channelOutToday'] = $channelOutToday;
+
+//        $data['channel'] = $channelIn . '  ' . $channelOut;
         DB::table('admin_home')->update($data);
     }
 

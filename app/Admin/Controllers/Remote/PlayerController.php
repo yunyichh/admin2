@@ -11,6 +11,9 @@ use Encore\Admin\Show;
 use App\Admin\Actions\Player\DistributionGold;
 use App\Admin\Actions\Player\EditPhone;
 use Encore\Admin\Facades\Admin;
+use Encore\Admin\Widgets\Table;
+use Facade\FlareClient\Frame;
+use App\Admin\Extensions\showGameLog2;
 
 class PlayerController extends AdminController
 {
@@ -35,7 +38,8 @@ class PlayerController extends AdminController
     {
         $grid = new Grid(new Player());
         $grid->disableColumnSelector();
-        $grid->disableBatchActions();
+//        $grid->disableBatchActions();
+
         $grid->filter(function ($filter) {
 //            $filter->like('accountId', ___('AccountId'));
             $filter->like('starNO', ___('StarNO'));
@@ -60,6 +64,7 @@ class PlayerController extends AdminController
             $actions->add(new EditPhone());
             $actions->add(new ChangeMoneyLog());
         });
+
         $grid->disableCreateButton();
         $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');
 
@@ -117,6 +122,19 @@ class PlayerController extends AdminController
         $grid->column('loginTime', ___('LoginTime'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
+        $grid->column('gameRecord', ___('gameRecord'))->display(function ($time) {
+            $url = "/admin/game-logs?starNO={$this->starNO}&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&7400aa2d4dc1b92a5020208455da3a0e=&5bb823deeeb717f089b8d2fdf9e1133b=";
+            return "<a href='" . url($url) . "'>" . _i('查看游戏记录') . "</a>";
+        });
+//            ->modal( function(){
+//            return (new showGameLog2())->render();
+//        });
+
+        $grid->column('changeMoney', ___('changeMoney'))->display(function ($time) {
+            $url = "/admin/change-gold-records?&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&5fa15899881d341d6f1c374d182f32d3=&a9acc94113d0464afe17ab2c2ee77fbc=";
+            return "<a href='" . url($url) . "'>" . _i('查看金币变化') . "</a>";
+        });
+
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));
 //        $grid->column('state', ___('State'));

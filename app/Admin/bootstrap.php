@@ -22,7 +22,10 @@ Encore\Admin\Form::forget(['map', 'editor']);
 use Encore\Admin\Grid;
 
 Grid::init(function (Grid $grid) {
-    $grid->disableExport();
+//    $grid->disableExport();
+    $grid->batchActions(function($actions){
+       $actions->disableDelete();
+    });
     $grid->filter(function($filter){
        $filter->disableIdFilter();
     });
