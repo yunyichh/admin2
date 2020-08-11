@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Remote;
 
 use App\Admin\Actions\Player\ChangeMoneyLog;
 use App\Remote\Player;
+use App\Remote\gameLog2;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -123,12 +124,14 @@ class PlayerController extends AdminController
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
         $grid->column('gameRecord', ___('gameRecord'))->display(function ($time) {
-            $url = "/admin/game-logs?starNO={$this->starNO}&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&7400aa2d4dc1b92a5020208455da3a0e=&5bb823deeeb717f089b8d2fdf9e1133b=";
-            return "<a href='" . url($url) . "'>" . _i('查看游戏记录') . "</a>";
+//            $url = "/admin/game-logs?starNO={$this->starNO}&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&7400aa2d4dc1b92a5020208455da3a0e=&5bb823deeeb717f089b8d2fdf9e1133b=";
+//            return "<a href='" . url($url) . "'>" . _i('查看游戏记录') . "</a>";
+            return "<a>" . _i('查看游戏记录') . "</a>";
+        })->modal(___('gameRecord'), function () {
+            $gameLog2 = new showGameLog2();
+            $gameLog2->setNO($this->starNO);
+            return $gameLog2->render();
         });
-//            ->modal( function(){
-//            return (new showGameLog2())->render();
-//        });
 
         $grid->column('changeMoney', ___('changeMoney'))->display(function ($time) {
             $url = "/admin/change-gold-records?&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&5fa15899881d341d6f1c374d182f32d3=&a9acc94113d0464afe17ab2c2ee77fbc=";
@@ -143,6 +146,7 @@ class PlayerController extends AdminController
 
         return $grid;
     }
+
 
     /**
      * Make a show builder.
