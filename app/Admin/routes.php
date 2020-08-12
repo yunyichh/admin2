@@ -21,6 +21,8 @@ Route::group([
 
 //    $router->resource('vipList', VipListController::class);
     $router->resource('game-logs', Remote\gameLog2Controller::class);
+    $router->resource('game-logs-frame', Remote\gameLog2FrameController::class);
+    $router->resource('change-gold-records-frame', Remote\changeGoldRecordFrameController::class);
     $router->resource('vault-logs', VaultLogConroller::class);
     $router->resource('lotteries', LotteryConroller::class);
     $router->resource('player-onlines', Remote\PlayerOnlineController::class);

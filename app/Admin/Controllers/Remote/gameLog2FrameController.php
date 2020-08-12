@@ -11,7 +11,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Widgets\Table;
 use App\Admin\Extensions\gameLog2Exporter;
 
-class gameLog2Controller extends AdminController
+class gameLog2FrameController extends AdminController
 {
     /**
      * Title for current resource.
@@ -24,6 +24,7 @@ class gameLog2Controller extends AdminController
     {
         return _i('会员游戏记录');
     }
+
     /**
      * Make a grid builder.
      *
@@ -38,7 +39,9 @@ class gameLog2Controller extends AdminController
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
         $grid->disableActions();
+        $grid->disableFilter();
         $grid->disableBatchActions();
+        $grid->paginate(50);
 
         $grid->filter(function ($filter) {
             $filter->like('account.starNO', ___('gameId'));
@@ -60,7 +63,7 @@ class gameLog2Controller extends AdminController
         });
 //        $grid->column('id', ___('Id'));
         $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId');
-        $grid->model()->limit(30);
+        $grid->model()->limit(50);
         $grid->model()->where('accountentity.robotFlag', 0);
         $grid->model()->orderBy('time', 'desc');
 
@@ -113,93 +116,27 @@ class gameLog2Controller extends AdminController
         $grid->column('cbHandData', ___('cbHandData'))->display(function () {
             return trim(getColumnData($this->gamelog, $this->accountId)['cbHandData'], ',[]');
         });
-//        $_this = $this;
-//        $grid->column('id', ___('gameDetails'))->display(function () use ($_this) {
-//            if (!empty($_this->preSet))
-//                return _i('查看');
-//            return _i('查看对局详情');
-//        })->expand(function ($model) {
-//            $cbHandData = trim(getColumnData($this->gamelog, $this->accountId)['cbHandData'], ',[]');
-//            $gameLog = json_decode($this->gamelog[0], true);
-//            $data = null;
-//            $columns = ['onlyId', 'tableCards', 'tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
-//            foreach ($gameLog as $key => $value) {
-//                if (in_array($key, $columns)) {
-//                    if ($key == 'onlyId') {
-//                        $data[___($key)] = trim($value);
-//                    }
-//                    if ($key == 'tableCards') {
-//                        $data[___($key)] = trim($value, ',[]');
-//                    }
-//                    if (preg_match('/tableSeat1[\w]+/', $key)) {
-//                        $text_value = null;
-//                        $arr_value = json_decode($value, true);
-//                        $style_color = "style = 'color:darkred'";
-//                        if ($cbHandData == trim(@$arr_value['cbHandData'], ',[]')) {
-//                            $text_value .= "<p $style_color>";
-//                            $text_value .= !empty($arr_value) ? (___('winOrLoseMoney') . ':' . @$arr_value['winOrLoseMoney'] . '<br>') : '';
-//                            $text_value .= !empty($arr_value) ? (___('cbHandData') . ':' . trim(@$arr_value['cbHandData'], ',[]') . '<br>') : '';
-//                            $text_value .= "</p>";
-//                        } else {
-//                            $text_value .= !empty($arr_value) ? (___('winOrLoseMoney') . ':' . @$arr_value['winOrLoseMoney'] . '<br>') : '';
-//                            $text_value .= !empty($arr_value) ? (___('cbHandData') . ':' . trim(@$arr_value['cbHandData'], ',[]') . '<br>') : '';
-//                        }
-//                        $data[___($key)] = $text_value;
-//
-//                    }
-//                    if ($key == 'time') {
-//                        $data[___($key)] = date('Y-m-d H:i:s', $value / 1000);
-//                    }
-//                }
-//            }
-////           dump(array_keys($gameLog));
-////           dump(array_values($gameLog));die;
-//            return new Table(array_keys($data), [array_values($data)], ['']);
-//        });
         $grid->column('time', ___('Time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
-        return $grid;
-    }
-
-    /**
-     * Make a show builder.
-     *
-     * @param mixed $id
-     * @return Show
-     */
-    protected function detail($id)
-    {
-        $show = new Show(gameLog2::findOrFail($id));
-
-        $show->field('id', ___('Id'));
-        $show->field('accountId', ___('AccountId'));
-        $show->field('gameId', ___('GameId'));
-        $show->field('money', ___('Money'));
-        $show->field('time', ___('Time'));
-        $show->field('tableId', ___('TableId'));
-        $show->field('oldMoney', ___('OldMoney'));
-
-        return $show;
-    }
-
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
-    protected function form()
-    {
-        $form = new Form(new gameLog2());
-
-        $form->number('accountId', ___('AccountId'));
-        $form->number('gameId', ___('GameId'));
-        $form->number('money', ___('Money'));
-        $form->number('time', ___('Time'));
-        $form->textarea('tableId', ___('TableId'));
-        $form->number('oldMoney', ___('OldMoney'));
-
-        return $form;
+        $links = [
+            "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css",
+            "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css",
+        ];
+        $link_text = null;
+        foreach ($links as $link) {
+            if (strpos($link, 'css') !== false)
+                $link_text .= '<link rel="stylesheet" href="' . $link . '">';
+            else {
+                $link_text .= "<script src='" . $link . "'></script>";
+            }
+        }
+        $style_text = "
+        <style type='text/css'>
+            td{font-size: 12px}
+            th{font-size: 13px}
+        </style>";
+        exit($link_text . $style_text . $grid->render());
     }
 
 }

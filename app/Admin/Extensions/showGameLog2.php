@@ -9,44 +9,41 @@
 namespace App\Admin\Extensions;
 
 use Illuminate\Contracts\Support\Renderable;
-use Encore\Admin\Widgets\Table;
-use Illuminate\Support\Facades\DB;
-use App\Remote\gameLog2;
+use App\Remote\Player;
 use Encore\Admin\Grid;
+use Encore\Admin\Widgets\Table;
+
 
 class showGameLog2 implements Renderable
 {
-    protected static $starNO = null;
-
-    public function setNO($starNO)
+    public function render($key = null)
     {
-        self::$starNO = $starNO;
+        return $this->grid()->render();
     }
 
-    public function render()
-    {
-//        return self::grid2()->render();
-    }
-
-    protected static function grid2()
+    function grid()
     {
         $gameLog = null;
         $account = null;
 
-        $grid = new Grid(new gameLog2());
+        $grid = new Grid(new Player());
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
         $grid->disableActions();
-        $grid->disableFilter();
+
         $grid->disableCreateButton();
-        $grid->disableExport();
         $grid->actions(function ($action) {
             $action->disableEdit();
             $action->disableView();
             $action->disableDelete();
         });
+
 //        $grid->column('id', ___('Id'));
-        $grid->model()->join('accountentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->where('accountentity.robotFlag', 0)->orderBy('time', 'desc');
+        $grid->model()->join('gamerecordentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId', 'left');
+        $grid->model()->limit(30);
+        $grid->model()->where('accountentity.robotFlag', 0);
+//        $grid->model()->where('accountentity.starNO', 0);
+        $grid->model()->orderBy('time', 'desc');
 
         if (\Admin::user()->inRoles(['agent'])) {
             $grid->model()->where('accountentity.recommended', \Admin::user()->agentId);
@@ -93,57 +90,13 @@ class showGameLog2 implements Renderable
 //        $grid->column('scoreLose', ___('scoreLose'))->display(function () {
 //            return -intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
 //        });
-//
         $grid->column('cbHandData', ___('cbHandData'))->display(function () {
             return trim(getColumnData($this->gamelog, $this->accountId)['cbHandData'], ',[]');
         });
-        $grid->column('id', ___('gameDetails'))->display(function () {
-            return _i('查看对局详情');
-        })->expand(function ($model) {
-            $cbHandData = trim(getColumnData($this->gamelog, $this->accountId)['cbHandData'], ',[]');
-            $gameLog = json_decode($this->gamelog[0], true);
-            $data = null;
-            $columns = ['onlyId', 'tableCards', 'tableSeat1Str1', 'tableSeat1Str2', 'tableSeat1Str3', 'tableSeat1Str4', 'tableSeat1Str5', 'tableSeat1Str6', 'tableSeat1Str7'];
-            foreach ($gameLog as $key => $value) {
-                if (in_array($key, $columns)) {
-                    if ($key == 'onlyId') {
-                        $data[___($key)] = trim($value);
-                    }
-                    if ($key == 'tableCards') {
-                        $data[___($key)] = trim($value, ',[]');
-                    }
-                    if (preg_match('/tableSeat1[\w]+/', $key)) {
-                        $text_value = null;
-                        $arr_value = json_decode($value, true);
-                        $style_color = "style = 'color:darkred'";
-                        if ($cbHandData == trim(@$arr_value['cbHandData'], ',[]')) {
-                            $text_value .= "<p $style_color>";
-                            $text_value .= !empty($arr_value) ? (___('winOrLoseMoney') . ':' . @$arr_value['winOrLoseMoney'] . '<br>') : '';
-                            $text_value .= !empty($arr_value) ? (___('cbHandData') . ':' . trim(@$arr_value['cbHandData'], ',[]') . '<br>') : '';
-                            $text_value .= "</p>";
-                        } else {
-                            $text_value .= !empty($arr_value) ? (___('winOrLoseMoney') . ':' . @$arr_value['winOrLoseMoney'] . '<br>') : '';
-                            $text_value .= !empty($arr_value) ? (___('cbHandData') . ':' . trim(@$arr_value['cbHandData'], ',[]') . '<br>') : '';
-                        }
 
-                        $data[___($key)] = $text_value;
-
-                    }
-                    if ($key == 'time') {
-                        $data[___($key)] = date('Y-m-d H:i:s', $value / 1000);
-                    }
-                }
-            }
-
-//           dump(array_keys($gameLog));
-//           dump(array_values($gameLog));die;
-            return new Table(array_keys($data), [array_values($data)], ['']);
-
-        });
         $grid->column('time', ___('Time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
-
 
         return $grid;
     }

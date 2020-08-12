@@ -44,10 +44,11 @@ class matchLogController extends AdminController
         $grid->column('award', ___('Award'))->display(function () {
             $award = json_decode($this->award, true);
             $textAward = null;
-            if (!empty($award))
+            if (!empty($award)){
                 foreach ($award as $item) {
                     $textAward .= _i('第' . $item['rank'][1] . '名' . (($item['rank'][1] != $item['rank'][3]) ? ('到第' . $item['rank'][3] . "名") : "") . ':' . $item['award']) . "<br>";
                 }
+            }
             return $textAward;
         });
         $grid->column('charge', ___('Charge'));
