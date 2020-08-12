@@ -161,3 +161,7 @@ function logTxt($data)
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
         file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data) . "\r\n", FILE_APPEND);
 }
+
+function modal($url){
+    return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
+}

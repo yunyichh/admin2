@@ -83,7 +83,6 @@ class PlayerController extends AdminController
         });
         $grid->column('', ___('totalBill'));
 
-
 //        $grid->column('accountPassword', ___('AccountPassword'));
 //        $grid->column('accountType', ___('AccountType'));
 //        $grid->column('age', ___('Age'));
@@ -126,15 +125,16 @@ class PlayerController extends AdminController
         $grid->column('gameRecord', ___('gameRecord'))->display(function ($time) {
             return "<a>" . _i('查看游戏记录') . "</a>";
         })->modal(___('gameRecord'), function () {
-            $url = "/admin/game-logs-frame?starNO={$this->starNO}&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&7400aa2d4dc1b92a5020208455da3a0e=&5bb823deeeb717f089b8d2fdf9e1133b=";
-            return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
+            $url = "/admin/game-logs?starNO={$this->starNO}&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&7400aa2d4dc1b92a5020208455da3a0e=&5bb823deeeb717f089b8d2fdf9e1133b=&model=1";
+            modal($url);
+
         });
 
         $grid->column('changeMoney', ___('changeMoney'))->display(function ($time) {
             return "<a>" . _i('金币变化记录') . "</a>";
         })->modal(___('changeMoney'), function () {
-            $url = "/admin/change-gold-records-frame?&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&5fa15899881d341d6f1c374d182f32d3=&a9acc94113d0464afe17ab2c2ee77fbc=";
-//            return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
+            $url = "/admin/change-gold-records?&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&5fa15899881d341d6f1c374d182f32d3=&a9acc94113d0464afe17ab2c2ee77fbc=&model=1";
+            modal($url);
         });
 
 //        $grid->column('sex', ___('Sex'));

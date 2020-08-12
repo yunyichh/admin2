@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Facades\Admin;
+use Illuminate\Http\Request;
 
 class changeGoldRecordController extends AdminController
 {
@@ -156,6 +157,36 @@ class changeGoldRecordController extends AdminController
         $grid->column('time', ___('Time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
+
+        if (function (Request $request) {
+            $modal = $request->get('modal', 0);
+            if ($modal)
+                return true;
+            else
+                return false;
+        }) {
+            $grid->disableFilter();
+            $grid->disableBatchActions();
+            $grid->paginate(50);
+            $links = [
+                "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css",
+                "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css",
+            ];
+            $link_text = null;
+            foreach ($links as $link) {
+                if (strpos($link, 'css') !== false)
+                    $link_text .= '<link rel="stylesheet" href="' . $link . '">';
+                else {
+                    $link_text .= "<script src='" . $link . "'></script>";
+                }
+            }
+            $style_text = "
+        <style type='text/css'>
+            td{font-size: 12px}
+            th{font-size: 13px}
+        </style>";
+            exit($link_text . $style_text . $grid->render());
+        }
 
         return $grid;
     }
