@@ -36,7 +36,7 @@ class gamblingQueryFrame extends AdminController
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->disableCreateButton();
-//        $grid->disableFilter();
+        // $grid->disableFilter();
         $grid->paginate(50);
         $grid->filter(function ($filter) use ($grid) {
             $filter->like('onlyId', ___('OnlyId'));
@@ -87,6 +87,7 @@ class gamblingQueryFrame extends AdminController
         $grid->column('time', ___('Time'))->display(function () {
             return date('Y-m-d H:i:s', ($this->time) / 1000);
         })->sortable();
+        // return $grid;
 
         modalNextRender($grid);
     }

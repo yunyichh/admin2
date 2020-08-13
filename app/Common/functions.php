@@ -219,6 +219,25 @@ function modalNextRender($grid)
                      format: 'YYYY-MM-DD hh:mm', 
                      locale: moment.locale('zh-cn') 
                 }); 
+                
+                
+                $('#2097b3485075a0959a95e5111155576d').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+                $('#bca4ec5a364349044c63ecbeebe9ab9d').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+                 $('#4ec4ab235c008a166a19977b15bc8f0a').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+                $('#17deee1f863f66938784244f73f2251f').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+                
             })
         </script>";
 

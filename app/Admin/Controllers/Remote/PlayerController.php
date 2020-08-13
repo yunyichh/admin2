@@ -142,7 +142,8 @@ class PlayerController extends AdminController
             if (substr(strtoupper(PHP_OS), 0, 3) == 'WIN')
                 $url = "/admin/gambling-query-frame?&onlyId=&685b5b6e474c201954aae1c2ff1c6b07={$this->accountId}";
             else
-                $url = "/admin/gambling-query-frame?&onlyId=&ce17e027ea38a1ef40449b1124a3da5f={$this->accountId}";
+                // $url = "/admin/gambling-query-frame?&onlyId=&ce17e027ea38a1ef40449b1124a3da5f={$this->accountId}";
+                $url = "/admin/gambling-query-frame?ce17e027ea38a1ef40449b1124a3da5f={$this->accountId}&onlyId=&a7803e2fd746d313deff4e6d5ec0cb9c={$this->accountId}";
             return modal($url);
         });
 
