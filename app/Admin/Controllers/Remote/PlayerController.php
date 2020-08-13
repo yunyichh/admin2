@@ -136,6 +136,13 @@ class PlayerController extends AdminController
             return modal($url);
         });
 
+        $grid->column('gamblingQuery', ___('gamblingQuery'))->display(function ($time) {
+            return "<a>" . _i('¶Ô¾Ö¼ÇÂ¼') . "</a>";
+        })->modal(___('gamblingQuery'), function () {
+            $url = "/admin/gambling-query-frame?&onlyId=&685b5b6e474c201954aae1c2ff1c6b07={$this->accountId}";
+            return modal($url);
+        });
+
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));
 //        $grid->column('state', ___('State'));

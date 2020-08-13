@@ -39,7 +39,7 @@ class gameLog2FrameController extends AdminController
         $grid->disableCreateButton();
         $grid->disableColumnSelector();
         $grid->disableActions();
-        $grid->disableFilter();
+//        $grid->disableFilter();
         $grid->disableBatchActions();
         $grid->paginate(50);
 
@@ -119,24 +119,9 @@ class gameLog2FrameController extends AdminController
         $grid->column('time', ___('Time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
-        $links = [
-            "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css",
-            "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css",
-        ];
-        $link_text = null;
-        foreach ($links as $link) {
-            if (strpos($link, 'css') !== false)
-                $link_text .= '<link rel="stylesheet" href="' . $link . '">';
-            else {
-                $link_text .= "<script src='" . $link . "'></script>";
-            }
-        }
-        $style_text = "
-        <style type='text/css'>
-            td{font-size: 12px}
-            th{font-size: 13px}
-        </style>";
-        exit($link_text . $style_text . $grid->render());
+        
+        modalNextRender($grid);
     }
+
 
 }

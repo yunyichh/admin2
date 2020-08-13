@@ -165,3 +165,62 @@ function logTxt($data)
 function modal($url){
     return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
 }
+
+function modalNextRender($grid)
+{
+
+    $links = [
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css",
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/font-awesome/css/font-awesome.min.css",
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js",
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css",
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/js/bootstrap.min.js",
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css",
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/moment/min/moment-with-locales.min.js",
+        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+
+    ];
+
+    $link_text = null;
+
+    foreach ($links as $link) {
+        if (strpos($link, 'css') !== false)
+            $link_text .= '<link rel="stylesheet" href="' . $link . '">';
+        else {
+            $link_text .= "<script src='" . $link . "'></script>";
+        }
+    }
+
+    $style_text = "
+        <style type='text/css'>
+            td{font-size: 12px}
+            th{font-size: 13px}
+        </style>
+        <script type='application/javascript'>
+            $(document).ready(function() {
+                $('.box:first>div:first>div:last>div').click(function() {
+                    $('#filter-box').toggle()
+                })
+               $('#filter-box').hide()
+               $('#filter-box > form > div.box-footer > div > div > div.col-md-8 > div:nth-child(2)').hide()
+               $('#c552197dfa24ed90296584c8e1459fc9').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+                $('#a11fe80a13e15879c5adae0d826c6693').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+                 $('#ea7e44593f9b7d7b43aeb804f2b6fcc2').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+                $('#b723659136449eed325046a842f88f9e').datetimepicker({ 
+                     format: 'YYYY-MM-DD hh:mm', 
+                     locale: moment.locale('zh-cn') 
+                }); 
+            })
+        </script>";
+
+    exit($link_text . $style_text . $grid->render());
+}

@@ -33,6 +33,8 @@ return [
     'channelInToday' => '当日带入筹码量总数',
     'channelOutToday' => '当日带出筹码量总数',
 
+    'gamblingQuery' => '对局记录',
+
 
     'id' => 'ID',
     'accountId' => '账号',
@@ -98,7 +100,7 @@ return [
     'playId' => '明星号',
     'winOrlose' => '输赢金币',
     'winOrloseScore' => '输赢分数',
-    'cbHandData'=>'玩家手牌',
+    'cbHandData' => '玩家手牌',
     'time' => '时间',
     'multiple' => '倍数',
     'gameId' => '游戏ID',
@@ -112,8 +114,6 @@ return [
     'faceValue' => '彩票面额',
     'winMoney' => '输赢金额',
     'valueRecord' => '彩票记录',
-
-
 
 
     'gameRecord' => '游戏记录',
@@ -263,11 +263,11 @@ return [
     'join_size' => '参加人数',
 
 
-    'applyNum'=>'报名人数',
-    'joinNum'=>'参赛人数',
-    'ranks'=>'获奖排名',
-    'signMoney'=>'报名费',
-    'signMoneyTotal'=>'累计报名费',
+    'applyNum' => '报名人数',
+    'joinNum' => '参赛人数',
+    'ranks' => '获奖排名',
+    'signMoney' => '报名费',
+    'signMoneyTotal' => '累计报名费',
     'onlyId' => '房间号',
     'tableCards' => '公牌',
     'tableSeat1Str1' => '游戏人员1',

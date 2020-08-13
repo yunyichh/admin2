@@ -38,11 +38,11 @@ class gamblingQuery extends AdminController
         $grid->disableCreateButton();
         $grid->filter(function ($filter) use ($grid) {
             $filter->like('onlyId', ___('OnlyId'));
-//            $input = null;
-//            $filter->where(function ($query) use ($grid) {
-//                $tableIds = DB::connection('mysql3')->table('gamerecordentity')->where('accountId', 'like',$this->input)->pluck('tableId')->toArray();
-//                $query->whereIn('onlyId',$tableIds);
-//            }, ___('accountId'));
+            $input = null;
+            $filter->where(function ($query) use ($grid) {
+                $tableIds = DB::connection('mysql3')->table('gamerecordentity')->where('accountId', 'like', $this->input)->pluck('tableId')->toArray();
+                $query->whereIn('onlyId', $tableIds);
+            }, ___('accountId'));
         });
 
         $grid->model()->orderBy('time', 'desc');

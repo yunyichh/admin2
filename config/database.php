@@ -123,11 +123,11 @@ return [
         'mysql5' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? '192.168.1.23' : '121.89.193.124',
+            'host' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? '121.89.193.124' : '121.89.193.124',
             'port' => env('DB_PORT', '3306'),
             'database' => 'qpgame_dzpk',
             'username' => env('DB_USERNAME', 'root'),
-            'password' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?'':'569QmXio',
+            'password' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?'569QmXio':'569QmXio',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

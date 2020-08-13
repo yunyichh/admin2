@@ -36,17 +36,20 @@ class gamblingQueryFrame extends AdminController
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->disableCreateButton();
+//        $grid->disableFilter();
+        $grid->paginate(50);
         $grid->filter(function ($filter) use ($grid) {
             $filter->like('onlyId', ___('OnlyId'));
-//            $input = null;
-//            $filter->where(function ($query) use ($grid) {
-//                $tableIds = DB::connection('mysql3')->table('gamerecordentity')->where('accountId', 'like',$this->input)->pluck('tableId')->toArray();
-//                $query->whereIn('onlyId',$tableIds);
-//            }, ___('accountId'));
+            $input = null;
+            $filter->where(function ($query) use ($grid) {
+                $tableIds = DB::connection('mysql3')->table('gamerecordentity')->where('accountId', 'like', $this->input)->pluck('tableId')->toArray();
+                $query->whereIn('onlyId', $tableIds);
+            }, ___('accountId'));
         });
 
+
         $grid->model()->orderBy('time', 'desc');
-        $grid->column('onlyId', ___('OnlyId'));
+//        $grid->column('onlyId', ___('OnlyId'));
 //        $grid->column('bigBlindIndex', ___('BigBlindIndex'));
 //        $grid->column('gameNums', ___('GameNums'));
 //        $grid->column('smallBlindIndex', ___('SmallBlindIndex'));
@@ -69,7 +72,7 @@ class gamblingQueryFrame extends AdminController
                     //不合理的sql
                     $account = DB::connection('mysql3')->table('accountentity')->where('accountId', $seat['accountId'])->get(['robotFlag', 'starNO'])->toArray();
                     $href = url('admin/players') . '?&starNO=' . $account[0]->starNO;
-                    $text .= _i(' 游戏ID:') . (($account[0]->robotFlag == 0) ? ("<a href='$href'>" . $account[0]->starNO . "</a><br>") : ("<span>" . $account[0]->starNO . "</span><br>"));
+                    $text .= _i(' 游戏ID:') . ("<span>" . $account[0]->starNO . "</span><br>");
                 }
                 if (!empty($seat['winOrLoseMoney']) || (isset($seat['winOrLoseMoney']) && $seat['winOrLoseMoney'] == 0))
                     $text .= _i('输赢筹码:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
@@ -83,24 +86,8 @@ class gamblingQueryFrame extends AdminController
         }
         $grid->column('time', ___('Time'))->display(function () {
             return date('Y-m-d H:i:s', ($this->time) / 1000);
-        });
-        $links = [
-            "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css",
-            "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css",
-        ];
-        $link_text = null;
-        foreach ($links as $link) {
-            if (strpos($link, 'css') !== false)
-                $link_text .= '<link rel="stylesheet" href="' . $link . '">';
-            else {
-                $link_text .= "<script src='" . $link . "'></script>";
-            }
-        }
-        $style_text = "
-        <style type='text/css'>
-            td{font-size: 12px}
-            th{font-size: 13px}
-        </style>";
-        exit($link_text . $style_text . $grid->render());
+        })->sortable();
+
+        modalNextRender($grid);
     }
 }

@@ -35,9 +35,10 @@ class eventManagementController extends AdminController
         $url = getUrl('eventManagementSelect');
         logTxt($url);
         $result = json_decode(getHttpResponseGET($url), true);
-        foreach ($result as $k => $v) {
-            @$result[$k]['award'] = serialize($v['award']);
-        }
+        if (!empty($result))
+            foreach ($result as $k => $v) {
+                @$result[$k]['award'] = serialize($v['award']);
+            }
         logTxt($result);
         if (!empty($result)) {
             DB::table('event_management')->truncate();

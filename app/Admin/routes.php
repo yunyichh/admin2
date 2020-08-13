@@ -47,6 +47,7 @@ Route::group([
     $router->resource('event-managements', eventManagementController::class);
     $router->resource('event-management-awards', eventManagementAwardsController::class);
     $router->resource('gambling-query', Remote\gamblingQuery::class);//ÅÆ¾Ö
+    $router->resource('gambling-query-frame', Remote\gamblingQueryFrame::class);//ÅÆ¾Ö
     $router->resource('robot-managements', robotManagementController::class);
 
 
