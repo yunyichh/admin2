@@ -49,6 +49,8 @@ Route::group([
     $router->resource('gambling-query', Remote\gamblingQuery::class);//ÅÆ¾Ö
     $router->resource('gambling-query-frame', Remote\gamblingQueryFrame::class);//ÅÆ¾Ö
     $router->resource('robot-managements', robotManagementController::class);
+    $router->resource('controlmaps', Remote\controlMapController::class);
+
 
 
     $router->resource('public-managements', publicManagementController::class);

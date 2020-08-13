@@ -24,6 +24,11 @@ return [
     'sixDaysLogin' => '六日登录',
     'sevenDaysLogin' => '七日登录',
 
+    'mapId' => '挡位',
+    'mapKey' => '键',
+    'mapValue' => '值',
+    'mapExplain' => '描述',
+
     'wCode' => '洗码',
     'channel' => '渠道',
     'channelIn' => '带入筹码量总数',
