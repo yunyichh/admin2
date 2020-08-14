@@ -49,7 +49,9 @@ Route::group([
     $router->resource('gambling-query', Remote\gamblingQuery::class);//牌局
     $router->resource('gambling-query-frame', Remote\gamblingQueryFrame::class);//牌局
     $router->resource('robot-managements', robotManagementController::class);
-    $router->resource('controlmaps', Remote\controlMapController::class);
+    $router->resource('pools', Remote\poolController::class);//水池控制
+    $router->resource('chances', Remote\chanceControlController::class);//几率控制
+
 
 
 

@@ -24,6 +24,20 @@ return [
     'sixDaysLogin' => '六日登录',
     'sevenDaysLogin' => '七日登录',
 
+
+    'dzpk_pool' => '德州水线',
+    'dzpk_pool_conf' => '水池配置',
+    'dzpk_chance_help' => '德州控制固定概率 0 ，有此概率就不执行后面随机概率',
+    'dzpk_award_pool' => '德州放水线',
+    'dzpk_pool_N' => '德州发奖比例',
+    'dzpk_pool_M' => '德州抽水比例',
+    'dzpk_chance' => '概率',
+
+    'id_control' => '挡位',
+    'weight_control' => '控制筹码',
+    'chance_control' => '控制几率',
+    'buffTime_control' => '控制时效',
+
     'mapId' => '挡位',
     'mapKey' => '键',
     'mapValue' => '值',

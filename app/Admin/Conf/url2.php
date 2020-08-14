@@ -20,7 +20,11 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         //机器人管理
         'get_robot_data' => 'http://192.168.1.23:8001/get_robot_data',
         'robot_ai_type' => 'http://192.168.1.23:8001/robot_ai_type',
-        'robot_join_num' => 'http://192.168.1.23:8001/robot_join_num'
+        'robot_join_num' => 'http://192.168.1.23:8001/robot_join_num',
+        //水池挡位点控
+        'pool' => 'http://121.89.193.124:18002/change_dzpk_pool',
+        'gears' => 'http://121.89.193.124:18002/change_dzpk_control',
+        'player_control' => 'http://121.89.193.124:18002/change_dzpk_player_control',
     ];
 } else {
     return [
@@ -41,6 +45,11 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
 
         'get_robot_data' => 'http://121.89.193.124:18002/get_robot_data',
         'robot_ai_type' => 'http://121.89.193.124:18002/robot_ai_type',
-        'robot_join_num' => 'http://121.89.193.124:18002/robot_join_num'
+        'robot_join_num' => 'http://121.89.193.124:18002/robot_join_num',
+
+         //水池挡位点控
+        'pool' => 'http://121.89.193.124:18002/change_dzpk_pool',
+        'gears' => 'http://121.89.193.124:18002/change_dzpk_control',
+        'player_control' => 'http://121.89.193.124:18002/change_dzpk_player_control',
     ];
 }

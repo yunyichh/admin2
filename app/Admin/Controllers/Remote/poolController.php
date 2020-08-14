@@ -2,24 +2,27 @@
 
 namespace App\Admin\Controllers\Remote;
 
-use App\Remote\controlmap;
+use App\Remote\pool;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use App\Admin\Actions\Pool\poolEdit;
+use App\Admin\Actions\Pool\poolRowEdit;
 
-class controlMapController extends AdminController
+
+class poolController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'App\Remote\controlmap';
+    protected $title = 'App\Remote\pool';
 
-    function title()
+    public function title()
     {
-       return _i('³ïÂë¿ØÖÆ');
+        return _i('Ë®³ØÅäÖÃ');
     }
 
     /**
@@ -29,19 +32,25 @@ class controlMapController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new controlmap());
-        $grid->disableFilter();
-        $grid->disableCreateButton();
-        $grid->disableBatchActions();
-        $grid->disablePagination();
+        $grid = new Grid(new pool());
         $grid->disableExport();
         $grid->disableColumnSelector();
-
-        $grid->column('id', ___('mapId'));
-//        $grid->column('mapKey', ___('MapKey'));
-
-        $grid->column('mapExplain', ___('MapExplain'));
+        $grid->disableBatchActions();
+        $grid->disableCreateButton();
+        $grid->disableFilter();
+        $grid->actions(function($acitons){
+            $acitons->disableDelete();
+            $acitons->disableView();
+            $acitons->disableEdit();
+            $acitons->add(new poolRowEdit());
+        });
+//        $grid->tools(function(Grid\Tools $tools){
+//            $tools->append(new poolEdit());
+//        });
+        $grid->column('id', ___('Id'));
+        $grid->column('mapKey', ___('MapKey'));
         $grid->column('mapValue', ___('MapValue'));
+        $grid->column('mapExplain', ___('MapExplain'));
 
         return $grid;
     }
@@ -54,9 +63,9 @@ class controlMapController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(controlmap::findOrFail($id));
+        $show = new Show(pool::findOrFail($id));
 
-        $show->field('id', ___('mapId'));
+        $show->field('id', ___('Id'));
         $show->field('mapKey', ___('MapKey'));
         $show->field('mapValue', ___('MapValue'));
         $show->field('mapExplain', ___('MapExplain'));
@@ -71,7 +80,7 @@ class controlMapController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new controlmap());
+        $form = new Form(new pool());
 
         $form->text('mapKey', ___('MapKey'));
         $form->text('mapValue', ___('MapValue'));
