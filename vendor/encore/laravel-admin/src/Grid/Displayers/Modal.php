@@ -12,7 +12,6 @@ class Modal extends AbstractDisplayer
             $title = $this->trans('title');
         }
 
-
         $callback = $callback->bindTo($this->row);
 
         $html = call_user_func_array($callback, [$this->row]);

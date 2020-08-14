@@ -162,7 +162,8 @@ function logTxt($data)
         file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data) . "\r\n", FILE_APPEND);
 }
 
-function modal($url){
+function modal($url)
+{
     return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
 }
 
@@ -194,50 +195,26 @@ function modalNextRender($grid)
     $style_text = "
         <style type='text/css'>
             td{font-size: 12px}
-            th{font-size: 13px}
+            th{font-size: 13px}            
         </style>
         <script type='application/javascript'>
             $(document).ready(function() {
-                $('.box:first>div:first>div:last>div').click(function() {
+                $('body > div > div:nth-child(1) > div.pull-left > div').click(function() {
                     $('#filter-box').toggle()
-                })
-               $('#filter-box').hide()
-               $('#filter-box > form > div.box-footer > div > div > div.col-md-8 > div:nth-child(2)').hide()
-               $('#c552197dfa24ed90296584c8e1459fc9').datetimepicker({ 
+                })     
+               $('#filter-box').hide()           
+               $('#filter-box').removeClass('hide')           
+               $('#filter-box > form > div.row > div > div > div > div:nth-child(1)').hide()
+               $('#filter-box > form > div.row > div > div > div > div:nth-child(2)').hide()              
+               $('#filter-box > form > div.box-footer > div > div > div.col-md-8 > div:nth-child(2)').hide()              
+               $('#filter-box > form > div.row > div > div > div > div:nth-child(3) > div > div >input').datetimepicker({ 
                      format: 'YYYY-MM-DD hh:mm', 
                      locale: moment.locale('zh-cn') 
                 }); 
-                $('#a11fe80a13e15879c5adae0d826c6693').datetimepicker({ 
+                $('#filter-box > form > div.row > div > div > div > div:nth-child(4) > div > div >input').datetimepicker({ 
                      format: 'YYYY-MM-DD hh:mm', 
                      locale: moment.locale('zh-cn') 
-                }); 
-                 $('#ea7e44593f9b7d7b43aeb804f2b6fcc2').datetimepicker({ 
-                     format: 'YYYY-MM-DD hh:mm', 
-                     locale: moment.locale('zh-cn') 
-                }); 
-                $('#b723659136449eed325046a842f88f9e').datetimepicker({ 
-                     format: 'YYYY-MM-DD hh:mm', 
-                     locale: moment.locale('zh-cn') 
-                }); 
-                
-                
-                $('#2097b3485075a0959a95e5111155576d').datetimepicker({ 
-                     format: 'YYYY-MM-DD hh:mm', 
-                     locale: moment.locale('zh-cn') 
-                }); 
-                $('#bca4ec5a364349044c63ecbeebe9ab9d').datetimepicker({ 
-                     format: 'YYYY-MM-DD hh:mm', 
-                     locale: moment.locale('zh-cn') 
-                }); 
-                 $('#4ec4ab235c008a166a19977b15bc8f0a').datetimepicker({ 
-                     format: 'YYYY-MM-DD hh:mm', 
-                     locale: moment.locale('zh-cn') 
-                }); 
-                $('#17deee1f863f66938784244f73f2251f').datetimepicker({ 
-                     format: 'YYYY-MM-DD hh:mm', 
-                     locale: moment.locale('zh-cn') 
-                }); 
-                
+                });                 
             })
         </script>";
 

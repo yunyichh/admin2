@@ -9,15 +9,23 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Widgets\Table;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class gamblingQueryFrame extends AdminController
 {
+
+    protected $accountId = null;
     /**
      * Title for current resource.
      *
      * @var string
      */
     protected $title = 'App\Remote\gameLog';
+
+    function __construct(Request $request)
+    {
+        $this->accountId = $request->get('accountId');
+    }
 
     function title()
     {
@@ -38,17 +46,22 @@ class gamblingQueryFrame extends AdminController
         $grid->disableCreateButton();
         // $grid->disableFilter();
         $grid->paginate(50);
-        $grid->filter(function ($filter) use ($grid) {
+        $accountId = $this->accountId;
+        $grid->filter(function ($filter) use ($accountId) {
             $filter->like('onlyId', ___('OnlyId'));
-            $input = null;
-            $filter->where(function ($query) use ($grid) {
-                $tableIds = DB::connection('mysql3')->table('gamerecordentity')->where('accountId', 'like', $this->input)->pluck('tableId')->toArray();
-                $query->whereIn('onlyId', $tableIds);
-            }, ___('accountId'));
+            $filter->like('onlyId', ___('accountId'));
+            $filter->where(function ($query) {
+                $time = strtotime($this->input) * 1000;
+                $query->where('time', '>', $time);
+            }, ___('gameStartTime'))->datetime();
+            $filter->where(function ($query) {
+                $time = strtotime($this->input) * 1000;
+                $query->where('time', '<', $time);
+            }, ___('gameEndTime'))->datetime();
         });
+        $tableIds = DB::connection('mysql3')->table('gamerecordentity')->where('accountId', 'like', $accountId)->pluck('tableId')->toArray();
+        $grid->model()->whereIn('onlyId', $tableIds)->orderBy('time', 'desc');
 
-
-        $grid->model()->orderBy('time', 'desc');
 //        $grid->column('onlyId', ___('OnlyId'));
 //        $grid->column('bigBlindIndex', ___('BigBlindIndex'));
 //        $grid->column('gameNums', ___('GameNums'));
@@ -63,10 +76,14 @@ class gamblingQueryFrame extends AdminController
         foreach ($tableSeatStr as $item) {
             $strItem = null;
             $strItem = (string)$item;
-            $grid->column($strItem, ___($strItem))->display(function () use ($strItem) {
+            $grid->column($strItem, ___($strItem))->display(function () use ($strItem, $accountId) {
                 //{"accountId":281543696188492,"bGamed":true,"winOrLoseMoney":20,"betMoney":50,"money":5819,"integral":0,"cbHandData":"[梅花5,黑桃2,]","seatId":1,"actState":4}
                 $seat = json_decode($this->{(string)$strItem}, true);
                 $text = null;
+                if (!empty($seat['accountId']) && $accountId == $seat['accountId']) {
+                    $style_color = "style = 'color:darkred'";
+                    $text .= "<p $style_color>";
+                }
                 if (!empty($seat['accountId'])) {
 //                    $text .= _i(' 账号ID:') . "<br><span>" . number_format($seat['accountId'], 0, '', '') . "</span><br>";
                     //不合理的sql
@@ -78,6 +95,9 @@ class gamblingQueryFrame extends AdminController
                     $text .= _i('输赢筹码:') . "<span>" . $seat['winOrLoseMoney'] . "</span><br>";
                 if (!empty($seat['cbHandData']))
                     $text .= _i(' 手牌:') . "<span>" . trim($seat['cbHandData'], '[],') . "</span>";
+                if (!empty($seat['accountId']) && $accountId == $seat['accountId']) {
+                    $text .= "</p>";
+                }
                 if (empty($seat)) {
                     $text .= _i('');
                 }
