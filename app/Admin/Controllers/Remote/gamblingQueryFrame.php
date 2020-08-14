@@ -24,7 +24,7 @@ class gamblingQueryFrame extends AdminController
 
     function __construct(Request $request)
     {
-        $this->accountId = $request->get('accountId');
+        $this->accountId = $request->get('accountId',0);
     }
 
     function title()
@@ -44,12 +44,12 @@ class gamblingQueryFrame extends AdminController
         $grid->disableRowSelector();
         $grid->disableColumnSelector();
         $grid->disableCreateButton();
-        // $grid->disableFilter();
+//         $grid->disableFilter();
         $grid->paginate(50);
         $accountId = $this->accountId;
         $grid->filter(function ($filter) use ($accountId) {
             $filter->like('onlyId', ___('OnlyId'));
-            $filter->like('onlyId', ___('accountId'));
+            $filter->like('onlyId', ___('onlyId'));
             $filter->where(function ($query) {
                 $time = strtotime($this->input) * 1000;
                 $query->where('time', '>', $time);
@@ -107,7 +107,7 @@ class gamblingQueryFrame extends AdminController
         $grid->column('time', ___('Time'))->display(function () {
             return date('Y-m-d H:i:s', ($this->time) / 1000);
         })->sortable();
-        // return $grid;
+//         return $grid;
 
         modalNextRender($grid);
     }
