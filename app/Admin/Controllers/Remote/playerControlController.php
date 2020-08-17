@@ -54,12 +54,7 @@ class playerControlController extends AdminController
         $grid->column('dzpkAward', ___('DzpkAward'));
         $grid->column('dzpkAwardChance', ___('DzpkAwardChance'));
 //        $grid->column('dzpkAwardTime', ___('DzpkAwardTime'));
-        $grid->column('dzpkTime', ___('DzpkTime'))->display(function () {
-            if (!empty($this->dzpkTime))
-                return date('Y-m-d H:i:s', $this->dzpkTime / 1000);
-            else
-                return $this->dzpkTime;
-        });
+        $grid->column('dzpkTime', ___('DzpkTime'));
 
         return $grid;
     }
