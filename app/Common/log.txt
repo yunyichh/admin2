@@ -964,3 +964,14 @@
 [2020-08-17 18:02:50] null
 [2020-08-17 18:08:02] "http:\/\/192.168.1.23:8001\/get_robot_data"
 [2020-08-17 18:08:02] null
+[2020-08-17 18:12:19] "http:\/\/192.168.1.23:8001\/get_robot_data"
+[2020-08-17 18:12:19] null
+[2020-08-17 18:12:21] "http:\/\/192.168.1.23:8001\/get_robot_data"
+[2020-08-17 18:12:21] null
+[2020-08-17 18:13:46] "http:\/\/121.89.193.124:18002\/change_dzpk_pool"
+[2020-08-17 18:13:46] {"dzpk_pool":null,"dzpk_award_pool":null,"dzpk_pool_N":null,"dzpk_pool_M":null,"dzpk_chance":null}
+[2020-08-17 18:13:46] "{\"res\":\"java.lang.StringIndexOutOfBoundsException: String index out of range: -1\",\"code\":-1}"
+[2020-08-17 18:27:16] "http:\/\/192.168.1.23:8001\/get_robot_data"
+[2020-08-17 18:27:16] null
+[2020-08-17 18:27:20] "http:\/\/121.89.193.124:18002\/selectGame"
+[2020-08-17 18:27:20] []

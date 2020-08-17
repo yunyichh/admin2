@@ -5,6 +5,7 @@ namespace App\Admin\Actions\Pool;
 use Encore\Admin\Actions\Action;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class poolEdit extends Action
 {
@@ -36,11 +37,16 @@ class poolEdit extends Action
 
     public function form()
     {
-        $this->integer('dzpk_pool', ___('dzpk_pool'));
-        $this->integer('dzpk_award_pool', ___('dzpk_award_pool'));
-        $this->integer('dzpk_pool_N', ___('dzpk_pool_N'));
-        $this->integer('dzpk_pool_M', ___('dzpk_pool_M'));
-        $this->integer('dzpk_chance', ___('dzpk_chance'))->help(___('dzpk_chance_help'));
+        $data = DB::connection('mysql3')->table('controlmap')->get(['mapKey', 'mapValue']);
+        $values = null;
+        foreach ($data as $value) {
+            $values[@$value->mapKey] = @$value->mapValue;
+        }
+        $this->integer('dzpk_pool', ___('dzpk_pool'))->default(@$values['dzpk_pool']);
+        $this->integer('dzpk_award_pool', ___('dzpk_award_pool'))->default(@$values['dzpk_award_pool']);
+        $this->integer('dzpk_pool_N', ___('dzpk_pool_N'))->default(@$values['dzpk_pool_N']);
+        $this->integer('dzpk_pool_M', ___('dzpk_pool_M'))->default(@$values['dzpk_pool_M']);
+        $this->integer('dzpk_chance', ___('dzpk_chance'))->default(@$values['dzpk_chance'])->help(___('dzpk_chance_help'));
     }
 
     public function html()
