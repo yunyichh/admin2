@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use App\Admin\Actions\Control\playerControls;
 
 class playerControlController extends AdminController
 {
@@ -17,6 +18,11 @@ class playerControlController extends AdminController
      */
     protected $title = 'App\Remote\playerControl';
 
+    function title()
+    {
+        return _i('µã¿ØÍæ¼Ò');
+    }
+
     /**
      * Make a grid builder.
      *
@@ -26,11 +32,34 @@ class playerControlController extends AdminController
     {
         $grid = new Grid(new playerControl());
 
-        $grid->column('accountId', __('AccountId'));
-        $grid->column('dzpkAward', __('DzpkAward'));
-        $grid->column('dzpkAwardChance', __('DzpkAwardChance'));
-        $grid->column('dzpkAwardTime', __('DzpkAwardTime'));
-        $grid->column('dzpkTime', __('DzpkTime'));
+        $grid->filter(function ($filter) {
+            $filter->like('account.starNO', ___('starNO'));
+        });
+        $grid->disableCreateButton();
+        $grid->disableBatchActions();
+        $grid->disableExport();
+        $grid->disableColumnSelector();
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+            $actions->disableView();
+            $actions->disableEdit();
+            $actions->add(new playerControls());
+
+        });
+
+        $grid->column('starNO', ___('starNO'))->display(function(){
+            return $this->account['starNO'];
+        });
+        $grid->column('accountId', ___('AccountId'));
+        $grid->column('dzpkAward', ___('DzpkAward'));
+        $grid->column('dzpkAwardChance', ___('DzpkAwardChance'));
+//        $grid->column('dzpkAwardTime', ___('DzpkAwardTime'));
+        $grid->column('dzpkTime', ___('DzpkTime'))->display(function () {
+            if (!empty($this->dzpkTime))
+                return date('Y-m-d H:i:s', $this->dzpkTime / 1000);
+            else
+                return $this->dzpkTime;
+        });
 
         return $grid;
     }
@@ -45,11 +74,11 @@ class playerControlController extends AdminController
     {
         $show = new Show(playerControl::findOrFail($id));
 
-        $show->field('accountId', __('AccountId'));
-        $show->field('dzpkAward', __('DzpkAward'));
-        $show->field('dzpkAwardChance', __('DzpkAwardChance'));
-        $show->field('dzpkAwardTime', __('DzpkAwardTime'));
-        $show->field('dzpkTime', __('DzpkTime'));
+        $show->field('accountId', ___('AccountId'));
+        $show->field('dzpkAward', ___('DzpkAward'));
+        $show->field('dzpkAwardChance', ___('DzpkAwardChance'));
+//        $show->field('dzpkAwardTime', ___('DzpkAwardTime'));
+        $show->field('dzpkTime', ___('DzpkTime'));
 
         return $show;
     }
@@ -63,11 +92,11 @@ class playerControlController extends AdminController
     {
         $form = new Form(new playerControl());
 
-        $form->number('accountId', __('AccountId'));
-        $form->number('dzpkAward', __('DzpkAward'));
-        $form->number('dzpkAwardChance', __('DzpkAwardChance'));
-        $form->number('dzpkAwardTime', __('DzpkAwardTime'));
-        $form->number('dzpkTime', __('DzpkTime'));
+        $form->number('accountId', ___('AccountId'));
+        $form->number('dzpkAward', ___('DzpkAward'));
+        $form->number('dzpkAwardChance', ___('DzpkAwardChance'));
+//        $form->number('dzpkAwardTime', ___('DzpkAwardTime'));
+        $form->number('dzpkTime', ___('DzpkTime'));
 
         return $form;
     }

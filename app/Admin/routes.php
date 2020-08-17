@@ -51,7 +51,7 @@ Route::group([
     $router->resource('robot-managements', robotManagementController::class);
     $router->resource('pools', Remote\poolController::class);//水池控制
     $router->resource('chances', Remote\chanceControlController::class);//几率控制
-    $router->resource('player-controls', playerControlController::class);//玩家点控
+    $router->resource('player-controls', Remote\playerControlController::class);//玩家点控
 
 
     $router->resource('public-managements', publicManagementController::class);

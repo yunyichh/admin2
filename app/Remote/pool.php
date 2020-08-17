@@ -8,4 +8,6 @@ class pool extends Model
 {
     protected $connection = 'mysql3';
     protected $table = 'controlmap';
+
+
 }

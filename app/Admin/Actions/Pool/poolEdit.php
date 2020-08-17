@@ -4,6 +4,7 @@ namespace App\Admin\Actions\Pool;
 
 use Encore\Admin\Actions\Action;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class poolEdit extends Action
 {

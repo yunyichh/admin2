@@ -8,4 +8,8 @@ class playerControl extends Model
 {
     protected $connection = 'mysql3';
     protected $table = 'playercontrolentity';
+    public function account()
+    {
+        return $this->belongsTo('App\Remote\Player', 'accountId', 'accountId');
+    }
 }

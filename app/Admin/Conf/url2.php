@@ -25,6 +25,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         'pool' => 'http://121.89.193.124:18002/change_dzpk_pool',
         'gears' => 'http://121.89.193.124:18002/change_dzpk_control',
         'player_control' => 'http://121.89.193.124:18002/change_dzpk_player_control',
+        'dzpk_pool' => 'http://121.89.193.124:18002/get_dzpk_pool',
     ];
 } else {
     return [
@@ -51,5 +52,6 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         'pool' => 'http://121.89.193.124:18002/change_dzpk_pool',
         'gears' => 'http://121.89.193.124:18002/change_dzpk_control',
         'player_control' => 'http://121.89.193.124:18002/change_dzpk_player_control',
+        'dzpk_pool' => 'http://121.89.193.124:18002/get_dzpk_pool',
     ];
 }

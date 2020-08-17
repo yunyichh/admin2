@@ -180,7 +180,6 @@ function modalNextRender($grid)
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/moment/min/moment-with-locales.min.js",
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
     ];
-
     $link_text = null;
     foreach ($links as $link) {
         if (strpos($link, 'css') !== false)
@@ -189,7 +188,6 @@ function modalNextRender($grid)
             $link_text .= "<script src='" . $link . "'></script>";
         }
     }
-
     $style_text = "
         <style type='text/css'>
             td{font-size: 12px}
@@ -215,6 +213,5 @@ function modalNextRender($grid)
                 });              
             })
         </script>";
-    $_link_text = "<script src='http://" . $_SERVER['HTTP_HOST'] . "/vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'></script>";
     exit($link_text . $style_text . $grid->render());
 }

@@ -49,9 +49,10 @@ class chanceControlController extends AdminController
            $actions->add(new Delete());
         });
         $grid->column('id', ___('Id control'));
-        $grid->column('buffTime', ___('BuffTime control'));
+
         $grid->column('chance', ___('Chance control'));
         $grid->column('weight', ___('Weight control'));
+        $grid->column('buffTime', ___('BuffTime control'));
 
         return $grid;
     }

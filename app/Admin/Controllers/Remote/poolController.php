@@ -38,19 +38,27 @@ class poolController extends AdminController
         $grid->disableBatchActions();
         $grid->disableCreateButton();
         $grid->disableFilter();
-        $grid->actions(function($acitons){
+        $grid->actions(function ($acitons) {
             $acitons->disableDelete();
             $acitons->disableView();
             $acitons->disableEdit();
             $acitons->add(new poolRowEdit());
         });
-//        $grid->tools(function(Grid\Tools $tools){
-//            $tools->append(new poolEdit());
-//        });
-        $grid->column('id', ___('Id'));
-        $grid->column('mapKey', ___('MapKey'));
-        $grid->column('mapValue', ___('MapValue'));
+        $grid->tools(function(Grid\Tools $tools){
+            $tools->append(new poolEdit());
+        });
+//        $grid->column('id', ___('Id'));
         $grid->column('mapExplain', ___('MapExplain'));
+//        $grid->column('mapKey', ___('MapKey'));
+        $grid->column('mapValue', ___('MapValue'))->display(function () {
+            if ($this->mapKey == 'dzpk_pool') {
+                $json_value = getHttpResponseGET(getUrl('dzpk_pool'));
+                return json_decode($json_value,true)['res'];
+            } else {
+                return $this->mapValue;
+            }
+        });
+
 
         return $grid;
     }

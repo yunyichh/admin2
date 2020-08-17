@@ -36,8 +36,8 @@ class alter extends RowAction
     public function form(Model $model)
     {
         $this->integer('id', ___('id control'))->default($model->id);
-        $this->integer('weight', ___('weight control'))->default($model->weight);
         $this->integer('chance', ___('chance control'))->default($model->chance);
+        $this->integer('weight', ___('weight control'))->default($model->weight);
         $this->integer('buffTime', ___('buffTime control'))->default($model->buffTime);
     }
 
