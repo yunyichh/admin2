@@ -90,6 +90,7 @@ class PlayerController extends AdminController
 //        $grid->column('exp', ___('Exp'));
 //        $grid->column('expCalculateTime', ___('ExpCalculateTime'));
 //        $grid->column('headImg', ___('HeadImg'));
+
         $grid->column('level', ___('vipGrade'));
         $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
             $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');

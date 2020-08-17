@@ -173,22 +173,20 @@ function modalNextRender($grid)
     $links = [
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/dist/css/AdminLTE.min.css",
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/font-awesome/css/font-awesome.min.css",
-        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js",
+//        "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js",
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/css/bootstrap.min.css",
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/AdminLTE/bootstrap/js/bootstrap.min.js",
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css",
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/moment/min/moment-with-locales.min.js",
         "http://{$_SERVER['HTTP_HOST']}/vendor/laravel-admin/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
-
     ];
 
     $link_text = null;
-
     foreach ($links as $link) {
         if (strpos($link, 'css') !== false)
-            $link_text .= '<link rel="stylesheet" href="' . $link . '">';
+            $link_text .= "<link rel='stylesheet' href='" . $link . "'>";
         else {
-            $link_text .= "<script src='" . $link . "'></script>";
+            $link_text .= "<script src='" . $link . "'><\/script>";
         }
     }
 
@@ -199,6 +197,7 @@ function modalNextRender($grid)
         </style>
         <script type='application/javascript'>
             $(document).ready(function() {
+                 $('head').append(\"" . $link_text . "\")
                 $('body > div > div:nth-child(1) > div.pull-left > div').click(function() {
                     $('#filter-box').toggle()
                 })     
@@ -214,9 +213,9 @@ function modalNextRender($grid)
                 $('#filter-box > form > div.row > div > div > div > div:nth-child(4) > div > div >input').datetimepicker({ 
                      format: 'YYYY-MM-DD hh:mm', 
                      locale: moment.locale('zh-cn') 
-                });                 
+                });              
             })
         </script>";
-
-    exit($link_text . $style_text . $grid->render());
+    $_link_text = "<script src='http://" . $_SERVER['HTTP_HOST'] . "/vendor/laravel-admin/AdminLTE/plugins/jQuery/jQuery-2.1.4.min.js'></script>";
+    exit($_link_text . $style_text . $grid->render());
 }
