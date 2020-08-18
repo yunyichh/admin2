@@ -2,12 +2,12 @@
 
 namespace App\Admin\Controllers\Remote;
 
+use App\Admin\Actions\Control\player;
 use App\Remote\playerControl;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use App\Admin\Actions\Control\playerControls;
 
 class playerControlController extends AdminController
 {
@@ -43,18 +43,21 @@ class playerControlController extends AdminController
             $actions->disableDelete();
             $actions->disableView();
             $actions->disableEdit();
-            $actions->add(new playerControls());
-
+            $actions->add(new player());
         });
 
-        $grid->column('starNO', ___('starNO'))->display(function(){
+        $grid->column('starNO', ___('starNO'))->display(function () {
             return $this->account['starNO'];
         });
-        $grid->column('accountId', ___('AccountId'));
         $grid->column('dzpkAward', ___('DzpkAward'));
         $grid->column('dzpkAwardChance', ___('DzpkAwardChance'));
 //        $grid->column('dzpkAwardTime', ___('DzpkAwardTime'));
-        $grid->column('dzpkTime', ___('DzpkTime'));
+        $grid->column('dzpkTime', ___('DzpkTime'))->display(function () {
+            if (!empty($this->dzpkTime))
+                return date('Y-m-d H:i:s', $this->dzpkTime / 1000);
+            else
+                return $this->dzpkTime;
+        });
 
         return $grid;
     }

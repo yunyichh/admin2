@@ -24,7 +24,7 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         //水池挡位点控
         'pool' => 'http://121.89.193.124:18002/change_dzpk_pool',
         'gears' => 'http://121.89.193.124:18002/change_dzpk_control',
-        'player_control' => 'http://121.89.193.124:18002/change_dzpk_player_control',
+        'player_control' => 'http://192.168.1.20:8002/change_dzpk_player_control',
         'dzpk_pool' => 'http://121.89.193.124:18002/get_dzpk_pool',
     ];
 } else {

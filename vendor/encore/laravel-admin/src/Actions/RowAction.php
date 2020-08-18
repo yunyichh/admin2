@@ -32,7 +32,7 @@ abstract class RowAction extends GridAction
      *
      * @return mixed
      */
-    protected function getKey()
+    public function getKey()
     {
         return $this->row->getKey();
     }

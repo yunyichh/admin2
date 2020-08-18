@@ -215,3 +215,4 @@ function modalNextRender($grid)
         </script>";
     exit($link_text . $style_text . $grid->render());
 }
+

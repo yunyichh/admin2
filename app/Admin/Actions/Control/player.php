@@ -6,7 +6,7 @@ use Encore\Admin\Actions\RowAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class playerControls extends RowAction
+class player extends RowAction
 {
     public $name = '编辑';
 
@@ -37,11 +37,12 @@ class playerControls extends RowAction
         }
     }
 
-    public function form($model)
+    public function form()
     {
-        $this->integer('accountId', ___('AccountId'))->default($model->accountId)->required();
-        $this->integer('dzpkAward', ___('DzpkAward'))->default($model->dzpkAward)->required();
-        $this->integer('dzpkAwardChance', ___('DzpkAwardChance'))->default($model->dzpkAwardChance)->required();
-        $this->integer('dzpkTime', ___('DzpkTime'))->default($model->dzpkTime)->required();
+        $row = $this->getRow();
+        $this->integer('accountId', ' ')->attribute('style','display:none')->default($row['accountId'])->required();
+        $this->integer('dzpkAward', ___('DzpkAward'))->default($row['dzpkAward'])->required();
+        $this->integer('dzpkAwardChance', ___('DzpkAwardChance'))->default($row['dzpkAwardChance'])->required();
+        $this->integer('dzpkTime', ___('dzpkTime2'))->default($row['dzpkTime'])->required();
     }
 }

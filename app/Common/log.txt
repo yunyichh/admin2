@@ -995,3 +995,21 @@
 [2020-08-17 18:31:12] null
 [2020-08-17 18:31:16] "http:\/\/192.168.1.23:8001\/get_robot_data"
 [2020-08-17 18:31:16] null
+[2020-08-18 09:48:56] "http:\/\/121.89.193.124:18002\/selectGame"
+[2020-08-18 09:48:56] []
+[2020-08-18 10:02:34] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?dzpkAward=0&dzpkAwardChance=0&time=20"
+[2020-08-18 10:02:34] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-18 10:06:27] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?dzpkAward=0&dzpkAwardChance=20&time=500"
+[2020-08-18 10:06:27] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-18 10:17:59] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?accountId=281543696187394&dzpkAward=0&dzpkAwardChance=0&time=0"
+[2020-08-18 10:17:59] {"res":"","code":0}
+[2020-08-18 10:41:37] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?accountId=281543696187394&dzpkAward=0&dzpkAwardChance=0&time=0"
+[2020-08-18 10:41:37] {"res":"","code":0}
+[2020-08-18 10:43:38] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?dzpkAward=0&dzpkAwardChance=0&time=0"
+[2020-08-18 10:43:38] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-18 10:46:56] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?accountId=281543696187394&dzpkAward=0&dzpkAwardChance=0&time=0"
+[2020-08-18 10:46:56] {"res":"","code":0}
+[2020-08-18 10:48:21] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?accountId=281543696188393&dzpkAward=0&dzpkAwardChance=0&time=0"
+[2020-08-18 10:48:21] {"res":"","code":0}
+[2020-08-18 10:50:42] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?accountId=281543696187394&dzpkAward=0&dzpkAwardChance=20&time=1000"
+[2020-08-18 10:50:43] {"res":"","code":0}
