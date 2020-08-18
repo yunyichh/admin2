@@ -1031,3 +1031,11 @@
 [2020-08-18 11:21:48] null
 [2020-08-18 11:22:25] "http:\/\/192.168.1.23:8001\/get_robot_data"
 [2020-08-18 11:22:25] null
+[2020-08-18 11:32:31] "http:\/\/192.168.1.20:8002\/change_dzpk_player_control?accountId=281543696187394&dzpkAward=80&dzpkAwardChance=10&time=50"
+[2020-08-18 11:32:31] {"res":"","code":0}
+[2020-08-18 11:37:28] "http:\/\/192.168.1.20:8002\/change_dzpk_pool"
+[2020-08-18 11:37:28] {"dzpk_pool":null,"dzpk_award_pool":null,"dzpk_pool_N":null,"dzpk_pool_M":null,"dzpk_chance":null}
+[2020-08-18 11:40:18] "http:\/\/192.168.1.20:8002\/change_dzpk_pool"
+[2020-08-18 11:40:18] {"dzpk_pool":"943","dzpk_award_pool":"10000","dzpk_pool_N":"10","dzpk_pool_M":"10","dzpk_chance":"0","dzpk_award_time":"2000"}
+[2020-08-18 11:40:40] "http:\/\/192.168.1.20:8002\/change_dzpk_pool"
+[2020-08-18 11:40:40] {"dzpk_award_time":"2000"}
