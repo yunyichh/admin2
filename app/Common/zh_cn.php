@@ -37,7 +37,7 @@ return [
 
     'dzpkAward' => '点控分数',
     'dzpkAwardChance' => '控制几率',
-    'dzpkAwardTime' => '',
+    'dzpkAwardTime' => '截止时间',
     'dzpkTime' => '截止时间',
     'dzpkTime2' => '时效',
     'dzpk_award_time' => '固定时效',

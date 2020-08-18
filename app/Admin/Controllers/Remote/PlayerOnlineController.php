@@ -73,11 +73,11 @@ class PlayerOnlineController extends AdminController
         $grid->column('wLSocreToday', ___('wLSocreToday'))->display(function () {
             $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $winLoseToday;
-        });
+        })->sortable();
         $grid->column('wLScore', ___('wLScore'))->display(function () {
             $winLoseToday = $this->gameLog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $winLoseToday;
-        });
+        })->sortable();
         $grid->column('leftGold', ___('leftGold'))->display(function () {
             if ($this->track == -1 || $this->track == 0) {
                 return @json_decode($this->wallet, true)['goldMoney'];

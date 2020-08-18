@@ -158,12 +158,28 @@ function getHttpResponsePOST($url, $para = [], $input_charset = '')
 
 function logTxt($data)
 {
-    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+//    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
         file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data) . "\r\n", FILE_APPEND);
 }
 
 function modal($url)
 {
+//    $script = <<<'SCRIPT'
+//      <script>
+//    (function(d) {
+//        var iframe = d.body.appendChild(d.createElement('iframe')),
+//        doc = iframe.contentWindow.document;
+//
+//        // style the iframe with some CSS
+//        iframe.style.cssText = "width: 100%;height:500px;border: 0px";
+//
+//        doc.open().write('<body onload="' + 'var d = document;d.getElementsByTagName(\'head\')[0].' + 'appendChild(d.createElement(\'script\')).src' + '=\'{$url}\'">');
+//
+//        doc.close(); //iframe onload event happens
+//    })(document);
+//    </script>
+//SCRIPT;
+//    return $script;
     return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
 }
 

@@ -8,6 +8,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\DB;
 
 class playerControlController extends AdminController
 {
@@ -21,6 +22,19 @@ class playerControlController extends AdminController
     function title()
     {
         return _i('µã¿ØÍæ¼Ò');
+    }
+
+    function __construct()
+    {
+//        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+//        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+//        $dataTotal = json_decode($dataTotal,true);
+//        $dataToday = json_decode($dataToday,true);
+//        DB::table('players_total')->truncate();
+//        DB::table('players_total')->insert($dataTotal);
+//        DB::table('players_today')->truncate();
+//        DB::table('players_today')->insert($dataToday);
+
     }
 
     /**
@@ -46,18 +60,32 @@ class playerControlController extends AdminController
             $actions->add(new player());
         });
 
+        $grid->model()->orderBy('dzpkAward', 'desc');
+        $grid->model()->orderByRaw('ABS(dzpkAward) asc');
         $grid->column('starNO', ___('starNO'))->display(function () {
             return $this->account['starNO'];
         });
-        $grid->column('dzpkAward', ___('DzpkAward'));
+        $grid->column('nickName', ___('nickName'))->display(function () {
+            return $this->account['nickName'];
+        });
+        $grid->column('dzpkAward', ___('DzpkAward'))->sortable();
         $grid->column('dzpkAwardChance', ___('DzpkAwardChance'));
 //        $grid->column('dzpkAwardTime', ___('DzpkAwardTime'));
-        $grid->column('dzpkTime', ___('DzpkTime'))->display(function () {
+        $grid->column('dzpkAwardTime', ___('dzpkAwardTime'))->display(function () {
             if (!empty($this->dzpkAwardTime))
                 return date('Y-m-d H:i:s', $this->dzpkAwardTime / 1000);
             else
                 return $this->dzpkAwardTime;
         });
+        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
+            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+            return $winLoseToday;
+        })->sortable();
+        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
+            $winLoseToday = $this->gameLog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+            return $winLoseToday;
+        })->sortable();
+
 
         return $grid;
     }
