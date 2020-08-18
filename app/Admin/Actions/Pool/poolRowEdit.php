@@ -19,8 +19,8 @@ class poolRowEdit extends RowAction
         $data['dzpk_pool_M'] = $request->get('dzpk_pool_M');
         $data['dzpk_chance'] = $request->get('dzpk_chance');
         $data['dzpk_award_time'] = $request->get('dzpk_award_time');
-        foreach ($data as $key=>$item){
-            if(empty($item)){
+        foreach ($data as $key => $item) {
+            if (empty($item) && $item != 0) {
                 unset($data[$key]);
             }
         }
