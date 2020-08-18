@@ -22,10 +22,10 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         'robot_ai_type' => 'http://192.168.1.23:8001/robot_ai_type',
         'robot_join_num' => 'http://192.168.1.23:8001/robot_join_num',
         //水池挡位点控
-        'pool' => 'http://121.89.193.124:18002/change_dzpk_pool',
-        'gears' => 'http://121.89.193.124:18002/change_dzpk_control',
+        'pool' => 'http://192.168.1.20:8002/change_dzpk_pool',
+        'gears' => 'http://192.168.1.20:8002/change_dzpk_control',
         'player_control' => 'http://192.168.1.20:8002/change_dzpk_player_control',
-        'dzpk_pool' => 'http://121.89.193.124:18002/get_dzpk_pool',
+        'dzpk_pool' => 'http://192.168.1.20:8002/get_dzpk_pool',
     ];
 } else {
     return [

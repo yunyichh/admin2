@@ -32,11 +32,15 @@ return [
     'dzpk_pool_N' => '德州发奖比例',
     'dzpk_pool_M' => '德州抽水比例',
     'dzpk_chance' => '概率',
+    'dzpk_take_player' => '送奖时间范围',
+    'dzpk_rank_num' => '前多少名排序',
+
     'dzpkAward' => '点控分数',
     'dzpkAwardChance' => '控制几率',
     'dzpkAwardTime' => '',
     'dzpkTime' => '截止时间',
     'dzpkTime2' => '时效',
+    'dzpk_award_time' => '固定时效',
 
     'id_control' => '挡位',
     'weight_control' => '控制筹码',

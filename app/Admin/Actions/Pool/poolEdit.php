@@ -19,6 +19,7 @@ class poolEdit extends Action
         $data['dzpk_pool_N'] = $request->get('dzpk_pool_N');
         $data['dzpk_pool_M'] = $request->get('dzpk_pool_M');
         $data['dzpk_chance'] = $request->get('dzpk_chance');
+        $data['dzpk_award_time'] = $request->get('dzpk_award_time');
 
         $url = getUrl('pool');
         logTxt($url);
@@ -47,6 +48,7 @@ class poolEdit extends Action
         $this->integer('dzpk_pool_N', ___('dzpk_pool_N'))->default(@$values['dzpk_pool_N']);
         $this->integer('dzpk_pool_M', ___('dzpk_pool_M'))->default(@$values['dzpk_pool_M']);
         $this->integer('dzpk_chance', ___('dzpk_chance'))->default(@$values['dzpk_chance'])->help(___('dzpk_chance_help'));
+        $this->integer('dzpk_award_time', ___('dzpk_award_time'))->default(@$values['dzpk_award_time']);
     }
 
     public function html()
