@@ -32,7 +32,7 @@ class poolEdit extends Action
         } elseif (isset($result['code']) && $result['code'] < 0) {
             return $this->response()->error($result['res'])->refresh();
         } else {
-            return $this->response()->success('Success')->refresh();
+            return $this->response()->error('500')->refresh();
         }
     }
 
