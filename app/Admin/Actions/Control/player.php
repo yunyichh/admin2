@@ -43,6 +43,6 @@ class player extends RowAction
         $this->integer('accountId', ' ')->attribute('style','display:none')->default($row['accountId'])->required();
         $this->integer('dzpkAward', ___('DzpkAward'))->default($row['dzpkAward'])->required();
         $this->integer('dzpkAwardChance', ___('DzpkAwardChance'))->default($row['dzpkAwardChance'])->required();
-        $this->integer('dzpkTime', ___('dzpkTime2'))->default($row['dzpkTime'])->required();
+        $this->integer('dzpkTime', ___('dzpkTime2'))->default(0)->required();
     }
 }
