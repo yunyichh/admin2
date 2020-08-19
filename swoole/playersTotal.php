@@ -6,6 +6,7 @@
  * Time: 10:12
  */
 
+
 use Illuminate\Support\Facades\DB;
 
 if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
