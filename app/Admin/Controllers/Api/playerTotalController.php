@@ -18,15 +18,18 @@ class playerTotalController extends AdminController
      */
     protected $title = 'App\Remote\Player';
 
-    public function __construct(){
-        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
-        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+    public function __construct()
+    {
+        $dataTotal = DB::connection('mysql3')->table('accountentity')->leftJoin('gamerecordentity', 'accountentity.accountId', '=', 'gamerecordentity.accountId')->select(DB::raw("accountentity.accountId,sum(gamerecordentity.money) as totalAll"))->whereNotIn('gamerecordentity.tableCfgId', [401, 402, 403])->groupBy('accountentity.accountId')->get();
+        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw("accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
         $dataTotal = json_decode($dataTotal, true);
         $dataToday = json_decode($dataToday, true);
         DB::table('players_total')->truncate();
         DB::table('players_total')->insert($dataTotal);
-        DB::table('players_today')->truncate();
-        DB::table('players_today')->insert($dataToday);
+        foreach ($dataToday as $item) {
+            DB::table('players_total')->where('accountId', $item['accountId'])->update(['totalToday' => $item['totalToday']]);
+        }
+
     }
 
     /**

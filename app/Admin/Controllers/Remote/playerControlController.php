@@ -49,7 +49,6 @@ class playerControlController extends AdminController
 
         $grid->model()->orderBy('dzpkAward', 'desc');
         $grid->model()->orderByRaw('ABS(dzpkAward) asc');
-        $grid->model()->leftJoin('htgg.players_today', 'htgg.players_today.accountId', '=', 'qpplatform.playercontrolentity.accountId');
         $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.playercontrolentity.accountId');
         $grid->model()->leftJoin('qpplatform.accountentity', 'qpplatform.accountentity.accountId', '=', 'qpplatform.playercontrolentity.accountId');
         $grid->column('starNO', ___('starNO'))->display(function () {
@@ -67,16 +66,16 @@ class playerControlController extends AdminController
             else
                 return $this->dzpkAwardTime;
         });
-//        $grid->column('totalToday', ___('winLoseToday'))->sortable();
-//        $grid->column('totalAll', ___('totalWinLose'))->sortable();
-        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
-            $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $money;
-        });
-        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
-            $money = $this->gamelog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $money;
-        });
+        $grid->column('totalToday', ___('winLoseToday'))->sortable();
+        $grid->column('totalAll', ___('totalWinLose'))->sortable();
+//        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
+//            $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+//            return $money;
+//        });
+//        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
+//            $money = $this->gamelog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+//            return $money;
+//        });
 
 
         return $grid;
