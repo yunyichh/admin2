@@ -113,7 +113,7 @@ class PlayerController extends AdminController
             return $money;
         });
         $grid->column('totalAll', ___('totalWinLose'))->display(function(){
-            $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+            $money = $this->gamelog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $money;
         });
 
