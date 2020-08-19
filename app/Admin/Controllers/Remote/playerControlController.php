@@ -81,11 +81,11 @@ class playerControlController extends AdminController
         });
 //        $grid->column('totalToday', ___('winLoseToday'))->sortable();
 //        $grid->column('totalAll', ___('totalWinLose'))->sortable();
-        $grid->column('totalToday', ___('winLoseToday'))->display(function () {
+        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
             $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $money;
         });
-        $grid->column('totalAll', ___('totalWinLose'))->display(function () {
+        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
             $money = $this->gamelog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $money;
         });
