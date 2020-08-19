@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model
 {
     protected $connection = 'mysql3';
-    protected $table = 'accountentity';
+    protected $table = 'qpplatform.accountentity';
     protected $primaryKey = 'accountId';
     protected $keyType = 'varchar';
 

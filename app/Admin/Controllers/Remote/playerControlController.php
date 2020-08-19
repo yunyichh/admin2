@@ -26,14 +26,14 @@ class playerControlController extends AdminController
 
     function __construct()
     {
-//        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
-//        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
-//        $dataTotal = json_decode($dataTotal,true);
-//        $dataToday = json_decode($dataToday,true);
-//        DB::table('players_total')->truncate();
-//        DB::table('players_total')->insert($dataTotal);
-//        DB::table('players_today')->truncate();
-//        DB::table('players_today')->insert($dataToday);
+        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+        $dataTotal = json_decode($dataTotal, true);
+        $dataToday = json_decode($dataToday, true);
+        DB::table('players_total')->truncate();
+        DB::table('players_total')->insert($dataTotal);
+        DB::table('players_today')->truncate();
+        DB::table('players_today')->insert($dataToday);
 
     }
 
@@ -62,11 +62,14 @@ class playerControlController extends AdminController
 
         $grid->model()->orderBy('dzpkAward', 'desc');
         $grid->model()->orderByRaw('ABS(dzpkAward) asc');
+        $grid->model()->leftJoin('htgg.players_today', 'htgg.players_today.accountId', '=', 'qpplatform.playercontrolentity.accountId');
+        $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.playercontrolentity.accountId');
+        $grid->model()->leftJoin('qpplatform.accountentity', 'qpplatform.accountentity.accountId', '=', 'qpplatform.playercontrolentity.accountId');
         $grid->column('starNO', ___('starNO'))->display(function () {
-            return $this->account['starNO'];
+            return $this->starNO;
         });
         $grid->column('nickName', ___('nickName'))->display(function () {
-            return $this->account['nickName'];
+            return $this->nickName;
         });
         $grid->column('dzpkAward', ___('DzpkAward'))->sortable();
         $grid->column('dzpkAwardChance', ___('DzpkAwardChance'));
@@ -77,14 +80,8 @@ class playerControlController extends AdminController
             else
                 return $this->dzpkAwardTime;
         });
-        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
-            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $winLoseToday;
-        })->sortable();
-        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
-            $winLoseToday = $this->gameLog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $winLoseToday;
-        })->sortable();
+        $grid->column('totalToday', ___('winLoseToday'))->sortable();
+        $grid->column('totalAll', ___('totalWinLose'))->sortable();
 
 
         return $grid;

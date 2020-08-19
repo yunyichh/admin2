@@ -12,15 +12,16 @@ class poolRowEdit extends RowAction
 
     public function handle(Model $model, Request $request)
     {
-        $data['dzpk_pool'] = $request->get('dzpk_pool');
-        $data['dzpk_award_pool'] = $request->get('dzpk_award_pool');
-        $data['dzpk_award_pool'] = $request->get('dzpk_award_pool');
-        $data['dzpk_pool_N'] = $request->get('dzpk_pool_N');
-        $data['dzpk_pool_M'] = $request->get('dzpk_pool_M');
-        $data['dzpk_chance'] = $request->get('dzpk_chance');
-        $data['dzpk_award_time'] = $request->get('dzpk_award_time');
+        $data['dzpk_pool'] = $request->get('dzpk_pool', null);
+        $data['dzpk_award_pool'] = $request->get('dzpk_award_pool', null);
+        $data['dzpk_pool_N'] = $request->get('dzpk_pool_N', null);
+        $data['dzpk_pool_M'] = $request->get('dzpk_pool_M', null);
+        $data['dzpk_take_player'] = $request->get('dzpk_take_player', null);
+        $data['dzpk_rank_num'] = $request->get('dzpk_rank_num', null);
+        $data['dzpk_chance'] = $request->get('dzpk_chance', null);
+        $data['dzpk_award_time'] = $request->get('dzpk_award_time', null);
         foreach ($data as $key => $item) {
-            if (empty($item) && $item != 0) {
+            if (empty($item) && is_null($item)) {
                 unset($data[$key]);
             }
         }

@@ -47,6 +47,8 @@ class PlayerOnlineController extends AdminController
 
         //track没有实时更新
         $grid->model()->where('robotFlag', 0)->where('track', '>=', 0)->orderBy('loginTime', 'desc');
+        $grid->model()->leftJoin('htgg.players_today', 'htgg.players_today.accountId', '=', 'qpplatform.accountentity.accountId');
+        $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.accountentity.accountId');
         if (Admin::user()->inRoles(['agent'])) {
             $grid->model()->where('recommended', Admin::user()->agentId);
         }
@@ -70,11 +72,8 @@ class PlayerOnlineController extends AdminController
 //        $grid->column('expCalculateTime', ___('ExpCalculateTime'));
 //        $grid->column('headImg', ___('HeadImg'));
 
-        $grid->column('wLSocreToday', ___('wLSocreToday'))->display(function () {
-            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $winLoseToday;
-        })->sortable();
-        $grid->column('wLScore', ___('wLScore'))->display(function () {
+        $grid->column('totalToday', ___('wLSocreToday'))->sortable();
+        $grid->column('totalAll', ___('wLScore'))->display(function () {
             $winLoseToday = $this->gameLog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $winLoseToday;
         })->sortable();

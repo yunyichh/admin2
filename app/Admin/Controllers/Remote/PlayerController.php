@@ -15,6 +15,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Widgets\Table;
 use Facade\FlareClient\Frame;
 use App\Admin\Extensions\showGameLog2;
+use Illuminate\Support\Facades\DB;
 
 class PlayerController extends AdminController
 {
@@ -24,6 +25,19 @@ class PlayerController extends AdminController
      * @var string
      */
     protected $title = 'App\Remote\Player';
+
+    function __construct()
+    {
+        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+        $dataTotal = json_decode($dataTotal, true);
+        $dataToday = json_decode($dataToday, true);
+        DB::table('players_total')->truncate();
+        DB::table('players_total')->insert($dataTotal);
+        DB::table('players_today')->truncate();
+        DB::table('players_today')->insert($dataToday);
+
+    }
 
     protected function title()
     {
@@ -67,7 +81,9 @@ class PlayerController extends AdminController
         });
 
         $grid->disableCreateButton();
-        $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');
+        $grid->model()->select(DB::raw('htgg.players_today.totalToday,htgg.players_total.totalAll,qpplatform.accountentity.*'))->where('robotFlag', 0)->orderBy('loginTime', 'desc');
+        $grid->model()->leftJoin('htgg.players_today', 'htgg.players_today.accountId', '=', 'qpplatform.accountentity.accountId');
+        $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.accountentity.accountId');
 
         if (Admin::user()->inRoles(['agent'])) {
             $grid->model()->where('recommended', Admin::user()->agentId);
@@ -92,14 +108,8 @@ class PlayerController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
 
         $grid->column('level', ___('vipGrade'));
-        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
-            $winLoseToday = $this->gameLog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $winLoseToday;
-        })->sortable();
-        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
-            $winLoseToday = $this->gameLog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $winLoseToday;
-        })->sortable();
+        $grid->column('totalToday', ___('winLoseToday'))->sortable();
+        $grid->column('totalAll', ___('totalWinLose'))->sortable();
         $grid->column('gold', ___('gold'))->display(function () {
             if ($this->track == -1 || $this->track == 0) {
                 return @json_decode($this->wallet, true)['goldMoney'];
