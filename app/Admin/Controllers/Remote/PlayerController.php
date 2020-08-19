@@ -26,18 +26,18 @@ class PlayerController extends AdminController
      */
     protected $title = 'App\Remote\Player';
 
-//    function __construct()
-//    {
-//        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
-//        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
-//        $dataTotal = json_decode($dataTotal, true);
-//        $dataToday = json_decode($dataToday, true);
-//        DB::table('players_total')->truncate();
-//        DB::table('players_total')->insert($dataTotal);
-//        DB::table('players_today')->truncate();
-//        DB::table('players_today')->insert($dataToday);
-//
-//    }
+    function __construct()
+    {
+        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+        $dataTotal = json_decode($dataTotal, true);
+        $dataToday = json_decode($dataToday, true);
+        DB::table('players_total')->truncate();
+        DB::table('players_total')->insert($dataTotal);
+        DB::table('players_today')->truncate();
+        DB::table('players_today')->insert($dataToday);
+
+    }
 
     protected function title()
     {
@@ -152,7 +152,7 @@ class PlayerController extends AdminController
         $grid->column('gamblingQuery', ___('gamblingQuery'))->display(function ($time) {
             return "<a>" . _i('¶Ô¾Ö¼ÇÂ¼') . "</a>";
         })->modal(___('gamblingQuery'), function () {
-            $url = "/admin/gambling-query-frame?&onlyId=&accountId={$this->accountId}";
+            $url = "/admin/gambling-query-frame?&onlyId=&accountId={$this->accountId[0]}";
             return modal($url);
         });
 
