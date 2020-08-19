@@ -32,7 +32,7 @@ class robotManagementController extends AdminController
         logTxt($url);
 
         $result = getHttpResponseGET($url);
-        if (strpos($result, 404) !== false) {
+        if (@strpos($result, 404) !== false) {
             exit('ÇëÇó½Ó¿ÚÊ§°Ü');
         }
         $result = @json_decode($result, true);
