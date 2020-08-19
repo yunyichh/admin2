@@ -68,7 +68,7 @@ class PlayerController extends AdminController
         });
 
         $grid->disableCreateButton();
-        $grid->model()->select(DB::raw('htgg.players_total.players_total,htgg.players_total.totalAll,qpplatform.accountentity.*'))->where('robotFlag', 0)->orderBy('loginTime', 'desc');
+        $grid->model()->select(DB::raw('htgg.players_total.totalToday,htgg.players_total.totalAll,qpplatform.accountentity.*'))->where('robotFlag', 0)->orderBy('loginTime', 'desc');
         $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.accountentity.accountId');
 
 //        $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');
