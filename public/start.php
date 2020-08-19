@@ -7,6 +7,6 @@
  */
 require __DIR__ . '/../vendor/autoload.php';
 
-foreach (glob('/..\/swoole/*.php/') as $file) {
-    require_once $file;
+foreach (glob(dirname(__DIR__)."/swoole/*.php") as $file) {
+   require_once $file;
 }
