@@ -98,28 +98,32 @@ class gameLog2FrameController extends AdminController
             }
         });
         $grid->column('scoreAfterGame', ___('leftGold2'))->display(function () {
-            return intval(getColumnData($this->gamelog, $this->accountId)['money']);
+            $data = getColumnData($this->gamelog, $this->accountId);
+            return intval(isset($data['money']) ? $data['money'] : 0);
         });
 
         $grid->column('oldMoney', ___('oldMoney'));
 
         $grid->column('scoreBet', ___('scoreBet'))->display(function () {
-            return intval(getColumnData($this->gamelog, $this->accountId)['betMoney']);
+            $data = getColumnData($this->gamelog, $this->accountId);
+            return intval(isset($data['betMoney']) ? $data['betMoney'] : 0);
         });
         $grid->column('scoreWin', ___('winOrloseScore'))->display(function () {
-            return intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
+            $data = getColumnData($this->gamelog, $this->accountId);
+            return intval(isset($data['winOrLoseMoney']) ? $data['winOrLoseMoney'] : 0);
         });
 //        $grid->column('scoreLose', ___('scoreLose'))->display(function () {
 //            return -intval(getColumnData($this->gamelog, $this->accountId)['winOrLoseMoney']);
 //        });
 //
         $grid->column('cbHandData', ___('cbHandData'))->display(function () {
-            return trim(getColumnData($this->gamelog, $this->accountId)['cbHandData'], ',[]');
+            $data = getColumnData($this->gamelog, $this->accountId);
+            return trim(isset($data['cbHandData']) ? $data['cbHandData'] : ' ', ',[]');
         });
         $grid->column('time', ___('Time'))->display(function ($time) {
             return date("Y-m-d H:i:s", (int)substr($time, 0, 10));
         })->sortable();
-        
+
         modalNextRender($grid);
     }
 

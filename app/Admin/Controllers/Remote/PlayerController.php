@@ -108,6 +108,7 @@ class PlayerController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
 
         $grid->column('level', ___('vipGrade'));
+        //401µ¥×À 402Ë«ÈË×À
         $grid->column('totalToday', ___('winLoseToday'))->display(function(){
             $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
             return $money;
