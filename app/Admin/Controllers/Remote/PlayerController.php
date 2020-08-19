@@ -160,7 +160,7 @@ class PlayerController extends AdminController
         $grid->column('gamblingQuery', ___('gamblingQuery'))->display(function ($time) {
             return "<a>" . _i('¶Ô¾Ö¼ÇÂ¼') . "</a>";
         })->modal(___('gamblingQuery'), function () {
-            $url = "/admin/gambling-query-frame?&onlyId=&accountId={$this->accountId[0]}";
+            $url = "/admin/gambling-query-frame?&onlyId=&accountId={$this->accountId}";
             return modal($url);
         });
 
