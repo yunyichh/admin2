@@ -68,10 +68,10 @@ class PlayerController extends AdminController
         });
 
         $grid->disableCreateButton();
-//        $grid->model()->select(DB::raw('htgg.players_today.totalToday,htgg.players_total.totalAll,qpplatform.accountentity.*'))->where('robotFlag', 0)->orderBy('loginTime', 'desc');
-//        $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.accountentity.accountId');
+        $grid->model()->select(DB::raw('htgg.players_today.totalToday,htgg.players_total.totalAll,qpplatform.accountentity.*'))->where('robotFlag', 0)->orderBy('loginTime', 'desc');
+        $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.accountentity.accountId');
 
-        $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');
+//        $grid->model()->where('robotFlag', 0)->orderBy('loginTime', 'desc');
 //        $grid->model()->leftJoin('htgg.players_total', 'htgg.players_total.accountId', '=', 'qpplatform.accountentity.accountId');
 
         if (Admin::user()->inRoles(['agent'])) {
@@ -99,17 +99,17 @@ class PlayerController extends AdminController
         $grid->column('level', ___('vipGrade'));
         //401µ¥×À 402Ë«ÈË×À
 
-//        $grid->column('totalToday', ___('winLoseToday'))->sortable();
-//        $grid->column('totalAll', ___('totalWinLose'))->sortable();
+        $grid->column('totalToday', ___('winLoseToday'))->sortable();
+        $grid->column('totalAll', ___('totalWinLose'))->sortable();
 
-        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
-            $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $money;
-        });
-        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
-            $money = $this->gamelog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
-            return $money;
-        });
+//        $grid->column('winLoseToday', ___('winLoseToday'))->display(function () {
+//            $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+//            return $money;
+//        });
+//        $grid->column('totalWinLose', ___('totalWinLose'))->display(function () {
+//            $money = $this->gamelog2()->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+//            return $money;
+//        });
 
 
         $grid->column('gold', ___('gold'))->display(function () {
