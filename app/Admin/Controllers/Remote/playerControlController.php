@@ -34,7 +34,6 @@ class playerControlController extends AdminController
         DB::table('players_total')->insert($dataTotal);
         DB::table('players_today')->truncate();
         DB::table('players_today')->insert($dataToday);
-
     }
 
     /**
