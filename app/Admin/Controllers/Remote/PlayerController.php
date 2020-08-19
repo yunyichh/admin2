@@ -26,18 +26,18 @@ class PlayerController extends AdminController
      */
     protected $title = 'App\Remote\Player';
 
-    function __construct()
-    {
-        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
-        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
-        $dataTotal = json_decode($dataTotal, true);
-        $dataToday = json_decode($dataToday, true);
-        DB::table('players_total')->truncate();
-        DB::table('players_total')->insert($dataTotal);
-        DB::table('players_today')->truncate();
-        DB::table('players_today')->insert($dataToday);
-
-    }
+//    function __construct()
+//    {
+//        $dataTotal = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalAll"))->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+//        $dataToday = DB::connection('mysql3')->table('gamerecordentity')->select(DB::raw(" accountId,sum(money) as totalToday"))->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->groupBy('accountId')->get();
+//        $dataTotal = json_decode($dataTotal, true);
+//        $dataToday = json_decode($dataToday, true);
+//        DB::table('players_total')->truncate();
+//        DB::table('players_total')->insert($dataTotal);
+//        DB::table('players_today')->truncate();
+//        DB::table('players_today')->insert($dataToday);
+//
+//    }
 
     protected function title()
     {
@@ -108,8 +108,16 @@ class PlayerController extends AdminController
 //        $grid->column('headImg', ___('HeadImg'));
 
         $grid->column('level', ___('vipGrade'));
-        $grid->column('totalToday', ___('winLoseToday'))->sortable();
-        $grid->column('totalAll', ___('totalWinLose'))->sortable();
+        $grid->column('totalToday', ___('winLoseToday'))->display(function(){
+            $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+            return $money;
+        });
+        $grid->column('totalAll', ___('totalWinLose'))->display(function(){
+            $money = $this->gamelog2()->where('time', '>', strtotime(date('Y-m-d', time())) * 1000)->where('time', '<', (time() + (24 * 60 * 60)) * 1000)->whereNotIn('tableCfgId', [401, 402, 403])->sum('money');
+            return $money;
+        });
+
+
         $grid->column('gold', ___('gold'))->display(function () {
             if ($this->track == -1 || $this->track == 0) {
                 return @json_decode($this->wallet, true)['goldMoney'];
