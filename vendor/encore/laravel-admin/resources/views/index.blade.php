@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     @if(!is_null($favicon = Admin::favicon()))
-    <link rel="shortcut icon" href="{{$favicon}}">
+        <link rel="shortcut icon" href="{{$favicon}}">
     @endif
 
     {!! Admin::css() !!}
@@ -20,6 +20,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link type="text/css" href="http://{{ $_SERVER['HTTP_HOST'] }}/vendor/layui/css/layui.css">
+    <script src="http://{{ $_SERVER['HTTP_HOST'] }}/vendor/layui/layui.all.js"></script>
+
 
 </head>
 
@@ -40,7 +44,7 @@
     <div class="content-wrapper" id="pjax-container">
         {!! Admin::style() !!}
         <div id="app">
-        @yield('content')
+            @yield('content')
         </div>
         {!! Admin::script() !!}
         {!! Admin::html() !!}
@@ -53,7 +57,9 @@
 <button id="totop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up"></i></button>
 
 <script>
-    function LA() {}
+    function LA() {
+    }
+
     LA.token = "{{ csrf_token() }}";
     LA.user = @json($_user_);
 </script>

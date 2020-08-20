@@ -159,7 +159,7 @@ function getHttpResponsePOST($url, $para = [], $input_charset = '')
 function logTxt($data)
 {
 //    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-        file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data) . "\r\n", FILE_APPEND);
+    file_put_contents(__DIR__ . '/log.txt', "[" . date('Y-m-d H:i:s') . "] " . json_encode($data) . "\r\n", FILE_APPEND);
 }
 
 function modal($url)
@@ -181,6 +181,26 @@ function modal($url)
 //SCRIPT;
 //    return $script;
     return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
+}
+
+function layui_open_a($url, $title, $title_desc)
+{
+    $script = <<<SCRIPT
+(function() {           
+        layer.open({
+            type: 2,
+            title: '{$title}',
+            shadeClose: true,
+            shade: false,
+            maxmin: true,
+            area: ['1200px', '600px'],
+            content:'{$url}'
+        });
+            })()
+SCRIPT;
+
+    $script = '<a onclick="javascript:' . $script . '">' .$title_desc . "</a>";
+    return $script;
 }
 
 function modalNextRender($grid)
@@ -207,7 +227,8 @@ function modalNextRender($grid)
     $style_text = "
         <style type='text/css'>
             td{font-size: 12px}
-            th{font-size: 13px}            
+            th{font-size: 13px}    
+            .box {border-top: 0px;}        
         </style>
         <script type='application/javascript'>
             $(document).ready(function() {
