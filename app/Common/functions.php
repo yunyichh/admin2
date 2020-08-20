@@ -193,7 +193,9 @@ function layui_open_a($url, $title, $title_desc)
             shadeClose: true,
             shade: false,
             maxmin: true,
-            area: ['1200px', '600px'],
+            area: ['900px', '600px'],
+            shadeClose:true,
+            shade: 0.3,
             content:'{$url}'
         });
             })()
