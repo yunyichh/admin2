@@ -43,7 +43,7 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        'mysql' => [
+        'mysql' => [//htgg 本地
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -63,7 +63,7 @@ return [
             ]) : [],
         ],
 
-        'mysql2' => [
+        'mysql2' => [//platform_gm 外网
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => '121.89.193.124',
@@ -82,7 +82,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-        'mysql3' => [
+        'mysql3' => [//qpplatform 本地/外网
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? '127.0.0.1' : '121.89.193.124',
@@ -101,7 +101,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-        'mysql4' => [
+        'mysql4' => [//qpgame_dzpk 本地/外网
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? '127.0.0.1' : '121.89.193.124',
@@ -120,7 +120,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-        'mysql5' => [
+        'mysql5' => [//qpgame_dzpk 外网/外网
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? '121.89.193.124' : '121.89.193.124',
@@ -128,6 +128,25 @@ return [
             'database' => 'qpgame_dzpk',
             'username' => env('DB_USERNAME', 'root'),
             'password' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?'569QmXio':'569QmXio',
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+        'mysql6' => [//qpplatform yz本地/外网
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? '192.168.1.23' : '121.89.193.124',
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'qpplatform',
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?'':'569QmXio',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

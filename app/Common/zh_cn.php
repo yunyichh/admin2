@@ -24,6 +24,17 @@ return [
     'sixDaysLogin' => '六日登录',
     'sevenDaysLogin' => '七日登录',
 
+    'notice_id' => 'ID',
+    'notice_type' => '类型',
+    'level' => '优先级',
+    'start_time' => '开始时间',
+    'end_time2' => '结束时间',
+    'channel' => '渠道',
+    'title2' => '标题',
+    'content2' => '内容',
+    'language' => '语言',
+    'change_time' => '上次修改时间',
+
 
     'dzpk_pool' => '德州水线',
     'dzpk_pool_conf' => '水池配置',

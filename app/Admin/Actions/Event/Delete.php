@@ -3,13 +3,11 @@
 namespace App\Admin\Actions\Event;
 
 use Encore\Admin\Actions\RowAction;
-//use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class Delete extends RowAction
 {
-//    protected $selector = '.delete';
     public $name = ('É¾³ýÈüÊÂ');
 
     function __construct()
@@ -31,7 +29,6 @@ class Delete extends RowAction
             $only_ids[] = $model->id;
             $data['game_id'] = (int)$model->game_id;
         }
-
 
         $data['only_ids'] = "[" . implode(',', $only_ids) . "]";
         $data['remove_type'] = 1;

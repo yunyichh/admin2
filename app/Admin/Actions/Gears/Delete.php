@@ -34,9 +34,9 @@ class Delete extends RowAction
     }
     public function form(Model $model)
     {
-        $this->integer('id', ___('id control'))->default($model->id);
-        $this->integer('weight', ___('weight control'))->default($model->weight);
-        $this->integer('chance', ___('chance control'))->default($model->chance);
-        $this->integer('buffTime', ___('buffTime control'))->default($model->buffTime);
+        $this->integer('id', ___('id control'))->default($model->id)->readonly();
+        $this->integer('weight', ___('weight control'))->default($model->weight)->readonly();
+        $this->integer('chance', ___('chance control'))->default($model->chance)->readonly();
+        $this->integer('buffTime', ___('buffTime control'))->default($model->buffTime)->readonly();
     }
 }

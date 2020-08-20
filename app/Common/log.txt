@@ -1087,3 +1087,70 @@
 [2020-08-20 11:10:57] []
 [2020-08-20 11:10:59] "http:\/\/192.168.1.23:8001\/get_robot_data"
 [2020-08-20 11:10:59] null
+[2020-08-20 11:30:31] "http:\/\/192.168.1.23:8001\/get_robot_data"
+[2020-08-20 11:30:31] null
+[2020-08-20 14:29:42] "http:\/\/121.89.193.124:18002\/selectGame"
+[2020-08-20 14:29:43] []
+[2020-08-20 14:29:47] "http:\/\/192.168.1.23:8001\/get_robot_data"
+[2020-08-20 14:29:47] null
+[2020-08-20 14:55:37] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 14:55:37] {"notice_id":0,"notice_type":"1","level":null,"start_time":0,"end_time":0,"channel":null,"title":"","content":"","operation_type":1,"operation_account":{"id":1,"username":"admin","password":"$2y$10$xj7myfXhspYDI3oNk3FrMerb6kEu7TbZaFqhon.Eh1fY1z\/RZ5Ejm","name":"Administrator","avatar":"http:\/\/www.htgg.com\/vendor\/laravel-admin\/AdminLTE\/dist\/img\/user2-160x160.jpg","remember_token":"EX3OX2toq0UtJvttWWaYnfB3h9qfNWoLRRmYKhP9yKLPh3J9YaDrAuIlc2Hb","created_at":"2020-04-26 03:56:35","updated_at":"2020-04-26 03:56:35","money":null,"aesKey":null,"agentId":null,"md5Key":null},"language":null}
+[2020-08-20 14:55:37] "{\"res\":\"java.lang.NumberFormatException: null\",\"code\":-1}"
+[2020-08-20 14:56:31] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 14:56:31] {"notice_id":0,"notice_type":"1","level":"0","start_time":0,"end_time":0,"channel":null,"title":"","content":"","operation_type":1,"operation_account":{"id":1,"username":"admin","password":"$2y$10$xj7myfXhspYDI3oNk3FrMerb6kEu7TbZaFqhon.Eh1fY1z\/RZ5Ejm","name":"Administrator","avatar":"http:\/\/www.htgg.com\/vendor\/laravel-admin\/AdminLTE\/dist\/img\/user2-160x160.jpg","remember_token":"EX3OX2toq0UtJvttWWaYnfB3h9qfNWoLRRmYKhP9yKLPh3J9YaDrAuIlc2Hb","created_at":"2020-04-26 03:56:35","updated_at":"2020-04-26 03:56:35","money":null,"aesKey":null,"agentId":null,"md5Key":null},"language":null}
+[2020-08-20 14:56:32] "{\"res\":\"java.lang.NumberFormatException: null\",\"code\":-1}"
+[2020-08-20 14:58:51] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 14:58:51] {"notice_id":0,"notice_type":"1","level":"0","start_time":1597906720000,"end_time":1597939200000,"channel":"1","title":"test","content":"11111111","operation_type":1,"operation_account":"admin","language":"1"}
+[2020-08-20 14:58:51] "{\"res\":\"succ\",\"code\":0}"
+[2020-08-20 14:59:43] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 14:59:43] {"notice_id":0,"notice_type":"1","level":"0","start_time":1597906720000,"end_time":1597939200000,"channel":"1","title":"test","content":"22222222","operation_type":1,"operation_account":"admin","language":"1"}
+[2020-08-20 14:59:43] "{\"res\":\"succ\",\"code\":0}"
+[2020-08-20 15:02:53] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 15:02:53] {"notice_id":0,"notice_type":"1","level":"0","start_time":1597906720000,"end_time":1597939200000,"channel":"1","title":"test","content":"33333333","operation_type":1,"operation_account":"admin","language":"1"}
+[2020-08-20 15:03:05] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 15:03:05] {"notice_id":0,"notice_type":"1","level":"0","start_time":1597906720000,"end_time":1597939200000,"channel":"1","title":"test","content":"444444444","operation_type":1,"operation_account":"admin","language":"1"}
+[2020-08-20 15:03:05] {"res":"succ","code":0}
+[2020-08-20 15:37:14] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 15:37:14] {"notice_id":null,"operation_type":3}
+[2020-08-20 15:37:14] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-20 15:51:27] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 15:51:27] {"notice_id":"1597906731381","notice_type":"1","level":"0","start_time":1597888800000,"end_time":1597921200000,"channel":"1","title":"test","content":"11111111","operation_type":2,"operation_account":"admin","language":"1"}
+[2020-08-20 15:51:27] {"res":"succ","code":0}
+[2020-08-20 15:51:34] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 15:51:34] {"notice_id":"1597906731381","notice_type":"1","level":"0","start_time":1597888800000,"end_time":1597921200000,"channel":"1","title":"test1","content":"11111111","operation_type":2,"operation_account":"admin","language":"1"}
+[2020-08-20 15:51:34] {"res":"succ","code":0}
+[2020-08-20 15:51:48] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 15:51:48] {"notice_id":"1597906783553","notice_type":"0","level":"0","start_time":1597888800000,"end_time":1597921200000,"channel":"1","title":"test2","content":"22222222","operation_type":2,"operation_account":"admin","language":"1"}
+[2020-08-20 15:51:48] {"res":"succ","code":0}
+[2020-08-20 15:51:53] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 15:51:53] {"notice_id":null,"operation_type":3}
+[2020-08-20 15:51:53] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-20 16:05:39] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 16:05:39] {"operation_type":3}
+[2020-08-20 16:05:39] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-20 16:31:32] "http:\/\/192.168.1.20:8002\/change_dzpk_control"
+[2020-08-20 16:31:32] {"type":3,"id":"5","weight":"10","chance":"100","buffTime":"3600"}
+[2020-08-20 16:31:32] "{\"res\":\"\",\"code\":0}"
+[2020-08-20 16:39:13] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 16:39:13] {"notice_id":"1597906972895","operation_type":3}
+[2020-08-20 16:39:13] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-20 16:45:09] "http:\/\/192.168.1.23:8001\/get_robot_data"
+[2020-08-20 16:45:09] null
+[2020-08-20 16:45:16] "http:\/\/121.89.193.124:18002\/selectGame"
+[2020-08-20 16:45:17] []
+[2020-08-20 16:55:03] "http:\/\/121.89.193.124:18002\/selectGame"
+[2020-08-20 16:55:03] []
+[2020-08-20 16:55:52] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 16:55:52] {"notice_id":"1597906972895","operation_type":3}
+[2020-08-20 16:55:52] {"res":"java.lang.NumberFormatException: null","code":-1}
+[2020-08-20 16:58:09] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 16:58:09] {"notice_id":"1597906783553","notice_type":"0","level":"0","start_time":1597888800000,"end_time":1597921200000,"channel":"1","title":"test2","content":"22222222","operation_type":3,"operation_account":"admin","language":"1"}
+[2020-08-20 16:58:09] {"res":"succ","code":0}
+[2020-08-20 16:59:09] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 16:59:09] {"notice_id":"1597906731381","notice_type":"1","level":"0","start_time":1597888800000,"end_time":1597921200000,"channel":"1","title":"test1","content":"1111111122222222","operation_type":2,"operation_account":"admin","language":"1"}
+[2020-08-20 16:59:09] {"res":"succ","code":0}
+[2020-08-20 17:20:48] "http:\/\/121.89.193.124:18002\/selectGame"
+[2020-08-20 17:20:48] []
+[2020-08-20 17:37:40] "http:\/\/192.168.1.23:8002\/notice"
+[2020-08-20 17:37:40] {"notice_id":"1597906731381","notice_type":"1","level":"0","start_time":1597888800000,"end_time":1597921200000,"channel":"1","title":"test1","content":"111111","operation_type":2,"operation_account":"admin","language":"1"}
+[2020-08-20 17:37:40] {"res":"succ","code":0}

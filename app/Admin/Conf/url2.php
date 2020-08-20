@@ -26,6 +26,10 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         'gears' => 'http://192.168.1.20:8002/change_dzpk_control',
         'player_control' => 'http://192.168.1.20:8002/change_dzpk_player_control',
         'dzpk_pool' => 'http://192.168.1.20:8002/get_dzpk_pool',
+        //公告
+        'notice' => 'http://192.168.1.23:8002/notice',
+        //关闭服务器
+        'set_stop' => 'http://192.168.1.23:8002/set_stop',
     ];
 } else {
     return [
@@ -53,5 +57,9 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         'gears' => 'http://121.89.193.124:18002/change_dzpk_control',
         'player_control' => 'http://121.89.193.124:18002/change_dzpk_player_control',
         'dzpk_pool' => 'http://121.89.193.124:18002/get_dzpk_pool',
+        //公告
+        'notice' => 'http://121.89.193.124:18002/notice',
+        //关闭服务器
+        'set_stop' => 'http://121.89.193.124:18002/set_stop',
     ];
 }

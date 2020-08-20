@@ -164,22 +164,6 @@ function logTxt($data)
 
 function modal($url)
 {
-//    $script = <<<'SCRIPT'
-//      <script>
-//    (function(d) {
-//        var iframe = d.body.appendChild(d.createElement('iframe')),
-//        doc = iframe.contentWindow.document;
-//
-//        // style the iframe with some CSS
-//        iframe.style.cssText = "width: 100%;height:500px;border: 0px";
-//
-//        doc.open().write('<body onload="' + 'var d = document;d.getElementsByTagName(\'head\')[0].' + 'appendChild(d.createElement(\'script\')).src' + '=\'{$url}\'">');
-//
-//        doc.close(); //iframe onload event happens
-//    })(document);
-//    </script>
-//SCRIPT;
-//    return $script;
     return "<iframe src='$url' style='width: 100%;height:500px;border: 0px'></iframe>";
 }
 
@@ -200,7 +184,6 @@ function layui_open_a($url, $title, $title_desc)
         });
             })()
 SCRIPT;
-
     $script = '<a onclick="javascript:' . $script . '">' .$title_desc . "</a>";
     return $script;
 }

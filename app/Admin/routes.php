@@ -52,7 +52,8 @@ Route::group([
     $router->resource('pools', Remote\poolController::class);//水池控制
     $router->resource('chances', Remote\chanceControlController::class);//几率控制
     $router->resource('player-controls', Remote\playerControlController::class);//玩家点控
-    $router->resource('player-total', Api\playerTotalController::class);
+    $router->resource('player-total', Api\playerTotalController::class);//api统计 玩家输赢
+    $router->resource('notices', noticeController::class);
 
 
 

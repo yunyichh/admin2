@@ -151,31 +151,6 @@ class PlayerController extends AdminController
             return layui_open_a($url, _i('对局记录'), _i('查看对局记录'));
         });
 
-
-//        $grid->column('gameRecord', ___('gameRecord'))->display(function ($time) {
-//            $script = "<a>" . _i('查看游戏记录') . "</a>";
-//            return $script;
-//        })->modal(___('gameRecord'), function () {
-////            $url = "/admin/game-logs-frame?starNO={$this->starNO}&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&7400aa2d4dc1b92a5020208455da3a0e=&5bb823deeeb717f089b8d2fdf9e1133b=&modal=1";
-//            $url = "/admin/game-logs-frame?&account%5BstarNO%5D={$this->starNO}";
-//            return modal($url);
-//        });
-//
-//        $grid->column('changeMoney', ___('changeMoney'))->display(function ($time) {
-//            return "<a>" . _i('金币变化记录') . "</a>";
-//        })->modal(___('changeMoney'), function () {
-////            $url = "/admin/change-gold-records-frame?&account%5BstarNO%5D={$this->starNO}&account%5BaccountName%5D=&5fa15899881d341d6f1c374d182f32d3=&a9acc94113d0464afe17ab2c2ee77fbc=&modal=1";
-//            $url = "/admin/change-gold-records-frame?&account%5BstarNO%5D={$this->starNO}";
-//            return modal($url);
-//        });
-//
-//        $grid->column('gamblingQuery', ___('gamblingQuery'))->display(function ($time) {
-//            return "<a>" . _i('对局记录') . "</a>";
-//        })->modal(___('gamblingQuery'), function () {
-//            $url = "/admin/gambling-query-frame?&onlyId=&accountId={$this->accountId}";
-//            return modal($url);
-//        });
-
 //        $grid->column('sex', ___('Sex'));
 //        $grid->column('sign', ___('Sign'));
 //        $grid->column('state', ___('State'));
