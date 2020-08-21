@@ -39,3 +39,7 @@ go(function () use ($cid,$cid2) {
     co::resume($cid2);
     echo "co 2 end\n";
 });
+
+Co::create(function(){
+    echo "co 3 end\n";
+});
