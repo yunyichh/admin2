@@ -34,9 +34,9 @@ class Delete extends RowAction
             0 => '删除成功',
             -1 => '服务器解析错误',
         ];
-        if ($result['code'] == 0) {
+        if (isset($result['code'])&&$result['code'] == 0) {
             return $this->response()->success(($codeMsg[$result['code']]))->refresh();
-        } elseif (in_array($result['code'], array_keys($codeMsg))) {
+        } elseif (isset($result['code'])&&in_array($result['code'], array_keys($codeMsg))) {
             return $this->response()->error(($codeMsg[$result['code']]))->refresh();
         } else {
             return $this->response()->error(json_encode($result))->refresh();

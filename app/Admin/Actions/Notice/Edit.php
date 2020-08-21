@@ -19,8 +19,8 @@ class Edit extends RowAction
         $data['start_time'] = strtotime($request->get('start_time')) * 1000;
         $data['end_time'] = strtotime($request->get('end_time')) * 1000;
         $data['channel'] = $request->get('channel');
-        $data['title'] = urlencode($request->get('title'));
-        $data['content'] = urlencode($request->get('content'));
+        $data['title'] = ($request->get('title'));
+        $data['content'] = ($request->get('content'));
         $data['operation_type'] = 2;
         $data['operation_account'] = \Admin::user()->username;
         $data['language'] = $request->get('language');
@@ -35,9 +35,9 @@ class Edit extends RowAction
             0 => '修改成功',
             -1 => '服务器解析错误',
         ];
-        if ($result['code'] == 0) {
+        if (isset($result['code'])&&$result['code'] == 0) {
             return $this->response()->success(($codeMsg[$result['code']]))->refresh();
-        } elseif (in_array($result['code'], array_keys($codeMsg))) {
+        } elseif (isset($result['code'])&&in_array($result['code'], array_keys($codeMsg))) {
             return $this->response()->error(($codeMsg[$result['code']]))->refresh();
         } else {
             return $this->response()->error(json_encode($result))->refresh();
