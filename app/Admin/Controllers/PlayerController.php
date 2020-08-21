@@ -37,46 +37,6 @@ class PlayerController extends AdminController
         'createTime' => 'createTime'
     ];
 
-    public function ___construct()
-    {
-        $this->title = _i('会员');
-        $page = @$_GET['page'];
-        $per_page = @$_GET['per_page'];
-        if (!empty($page) && !empty($per_page)) {
-            $start = ($page - 1) * $per_page;
-            $limit = $per_page;
-        }
-        $params = [
-            'queryType' => 2,
-            'start' => (empty($start)) ? 0 : $start,
-            'length' => (empty($limit)) ? 20 : $limit,
-            'sortId' => 1,
-            'sort' => 1,
-            'null' => 'null',
-        ];
-        $url = getValue('findAllUser');
-        $url = $url . ' ' . implode(' ', array_values($params));
-
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET', $url);
-
-        $result = json_decode($response->getBody(), true);
-        $retList = null;
-        if ($result['code'] == 0) {
-            $retList = $result['content']['retList'];
-        } else {
-            exit($result);
-        }
-        dump($retList);
-        exit();
-
-        if (!empty($retList)) {
-            DB::table('players')->truncate();
-            DB::table('players')->insert($retList);
-        }
-
-    }
-
     public function __construct()
     {
         $this->title = _i('会员');
