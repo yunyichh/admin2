@@ -1,3 +1,4 @@
 vendor/*
 !vendor/encore/*
 app/Common/log.txt
+swoole/*
