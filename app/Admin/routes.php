@@ -54,8 +54,7 @@ Route::group([
     $router->resource('player-controls', Remote\playerControlController::class);//玩家点控
     $router->resource('player-total', Api\playerTotalController::class);//api统计 玩家输赢
     $router->resource('notices', noticeController::class);
-
-
+    $router->resource('agent-money-changes', agentMoneyChangeController::class);
 
     $router->resource('public-managements', publicManagementController::class);
     $router->resource('active-datas', activeDataController::class);

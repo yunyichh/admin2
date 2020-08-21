@@ -34,6 +34,7 @@ return [
     'content2' => '内容',
     'language' => '语言',
     'change_time' => '上次修改时间',
+    'change_type' => '变化类型',
 
 
     'dzpk_pool' => '德州水线',
