@@ -44,18 +44,18 @@ class agentMoneyChangeController extends AdminController
         $grid->column('starNo', ___('StarNO'));
 //        $grid->column('uuid', ___('Uuid'));
 //        $grid->column('accountId', ___('AccountId'));
-        $grid->column('source', ___('change_type'));
-//        $grid->column('change_type', ___('change_type'))->display(function () {
-//            $map = [
-//                'user_off_line_change' => 1,
-//                'lobby_game_change' => 2,
-//                'agent_login_change' => 3,
-//                'agent_low_score_change' => 4,
-//                'agent_up_score_change' => 5,
-//                'gm' => 6,
-//            ];
-//            return @$map[$this->changeType];
-//        });
+//        $grid->column('source', ___('change_type'));
+        $grid->column('source', ___('change_type'))->display(function () {
+            $map = [
+                'user_off_line_change' => 1,
+                'lobby_game_change' => 2,
+                'agent_login_change' => '登录',
+                'agent_low_score_change' => '下分',
+                'agent_up_score_change' => '上分',
+                'gm' => '后台修改',
+            ];
+            return @_i($map[$this->source]);
+        });
         $grid->column('changeMoney', ___('ChangeMoney'));
         $grid->column('oldMoney', ___('OldMoney'));
         $grid->column('nowMoney', ___('NowMoney'));
