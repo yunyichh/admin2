@@ -46,7 +46,7 @@ class Edit extends RowAction
 
     public function form()
     {
-        $row = $this->getRow();
+        $row = $this->getRow()->attributesToArray();
         $this->text('notice_id', ___('Notice id'))->default($row['notice_id'])->required();
         $this->select('notice_type', ___('Notice type'))->options([0=>'登录公告', 1=>'游戏公告'])->default($row['notice_type'])->required();
         $this->text('level', ___('Level'))->default($row['level'])->required();

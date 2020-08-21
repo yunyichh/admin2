@@ -7,7 +7,7 @@
 // */
 //
 //
-//use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 //
 //if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
 //    Swoole\Timer::tick(5000, function () {
