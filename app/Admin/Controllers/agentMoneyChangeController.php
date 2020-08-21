@@ -47,8 +47,8 @@ class agentMoneyChangeController extends AdminController
 //        $grid->column('source', ___('change_type'));
         $grid->column('source', ___('change_type'))->display(function () {
             $map = [
-                'user_off_line_change' => 1,
-                'lobby_game_change' => 2,
+                'user_off_line_change' => 'user_off_line_change',
+                'lobby_game_change' => 'lobby_game_change',
                 'agent_login_change' => '登录',
                 'agent_low_score_change' => '下分',
                 'agent_up_score_change' => '上分',

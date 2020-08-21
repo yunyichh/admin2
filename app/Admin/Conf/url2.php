@@ -28,7 +28,8 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         'dzpk_pool' => 'http://192.168.1.20:8002/get_dzpk_pool',
         //公告
         'notice' => 'http://192.168.1.23:8002/notice',
-        //关闭服务器
+        //服务器
+        'stop_data'=>'http://192.168.1.23:8002/stop_data',
         'set_stop' => 'http://192.168.1.23:8002/set_stop',
     ];
 } else {
@@ -59,7 +60,8 @@ if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         'dzpk_pool' => 'http://121.89.193.124:18002/get_dzpk_pool',
         //公告
         'notice' => 'http://121.89.193.124:18002/notice',
-        //关闭服务器
+        //服务器
+        'stop_data'=>'http://121.89.193.124:18002/stop_data',
         'set_stop' => 'http://121.89.193.124:18002/set_stop',
     ];
 }
