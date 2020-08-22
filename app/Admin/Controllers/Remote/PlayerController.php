@@ -125,7 +125,6 @@ class PlayerController extends AdminController
             }
         });
 //        $grid->column('lockTime', ___('LockTime'));
-
 //        $grid->column('phone', ___('Phone'));
         $grid->column('recommended', ___('Recommended'));
 //        $grid->column('robotFlag', ___('RobotFlag'));
