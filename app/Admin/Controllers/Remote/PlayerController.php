@@ -80,8 +80,8 @@ class PlayerController extends AdminController
         }
         $grid->column('accountId', ___('AccountId'))->hide();
         $grid->column('starNO', ___('StarNO'));
-        $grid->column('accountName', ___('AccountName'));
-        $grid->column('nickName', ___('NickName'));
+        $grid->column('accountName', ___('AccountName'))->width(150);
+        $grid->column('nickName', ___('NickName'))->width(150);
         $grid->column('regSource', ___('regSource'));
         $grid->column('totalRecharge', ___('totalRecharge'))->display(function () {
             $num = $this->orderBuy()->where('orderbuyentity.orderState', 2)->where('orderbuyentity.orderAccountId', $this->accountId)->sum('orderbuyentity.orderMoney');
